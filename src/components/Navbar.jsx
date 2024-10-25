@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import Container from "./Container"
+import { FaSearch } from "react-icons/fa";
 
 const Navbar = () => {
 
@@ -20,7 +21,12 @@ const Navbar = () => {
                   <Link to={"/addProduct"} className="transition hover:underline md:text-xl" >Ürün Ekle</Link>
                </div>
 
+
                <div className="flex gap-2 font-semibold">
+               <div className="relative">
+                  <input type="text" placeholder="ürün ara" className="w-60 outline-none p-1 rounded-md" />
+                  <FaSearch className="absolute right-1 top-2"/>
+               </div>
                   <Link to={"/login"}
                      className="border-2 rounded-md w-20 border-zinc-500 grid place-items-center transition hover:bg-slate-900 hover:text-white" >
                      Giriş</Link>
