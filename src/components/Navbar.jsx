@@ -5,8 +5,8 @@ const Navbar = () => {
 
    return (
       <>
-         <Container >
-            <header className="border py-3 flex items-center justify-between border-b-gray-300 border-x-0">
+         <Container stil="bg-zinc-200 fixed left-0 right-0 z-[999] bg-opacity-75" >
+            <header className="py-3 flex items-center justify-between  ">
                <div>
                   <Link to={"/"}>
                      <div className="font-semibold underline text-xl cursor-pointer md:text-2xl hover:scale-105 transition ">retro
@@ -22,10 +22,10 @@ const Navbar = () => {
 
                <div className="flex gap-2 font-semibold">
                   <Link to={"/login"}
-                     className="border rounded-md w-20 border-zinc-500 grid place-items-center transition hover:bg-slate-900 hover:text-white" >
+                     className="border-2 rounded-md w-20 border-zinc-500 grid place-items-center transition hover:bg-slate-900 hover:text-white" >
                      Giriş</Link>
                   <Link to={"/register"}
-                     className="border rounded-md w-20 border-zinc-500 grid place-items-center transition hover:bg-slate-900 hover:text-white">
+                     className="border-2 rounded-md w-20 border-zinc-500 grid place-items-center transition hover:bg-slate-900 hover:text-white">
                      Kayıt Ol</Link>
                </div>
             </header>

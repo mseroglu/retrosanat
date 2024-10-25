@@ -1,8 +1,8 @@
 
 
-const Container = ({ children, stil }) => {
+const Container = ({ children, stil="" }) => {
    return (
-      <div className={`mx-5 md:mx-20 ${stil}`}>
+      <div className={`px-5 pd:mx-20 lg:px-40 ${stil}`}>
          {children}
       </div>
    )
