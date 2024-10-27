@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import Container from "../components/Container"
 import { toast } from 'react-toastify';
+import Loader from "../components/Loader";
 
 const Login = () => {
 
@@ -9,9 +10,9 @@ const Login = () => {
   }, [])
   
   return (
-    <Container>
+    <Container stil="flex-grow mt-20 py-20">
       <div>
-        
+        <Loader />
       </div>
     </Container>
   )

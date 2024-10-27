@@ -32,7 +32,7 @@ const Products = () => {
   ]
   return (
     <Container stil="flex-grow mt-20 py-20">
-      <div className="flex gap-3 flex-wrap justify-center">        
+      <div className="flex gap-4 flex-wrap justify-center">        
         {data.map((item, i) => <ProductCard key={i} product={item} />)}
       </div>
     </Container>

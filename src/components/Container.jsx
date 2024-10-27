@@ -2,7 +2,7 @@
 
 const Container = ({ children, stil="" }) => {
    return (
-      <div className={`px-5 pd:mx-20 lg:px-40 ${stil}`}>
+      <div className={`px-10 md:px-20 ${stil}`}>
          {children}
       </div>
    )
