@@ -1,7 +1,7 @@
 import { useRef, useState } from "react"
 import Container from "../components/Container"
 import { uploadImage } from "../firebase/ImageToFirestore"
-import { addDoc, collection } from "firebase/firestore"
+import { addDoc, collection, serverTimestamp } from "firebase/firestore"
 import { db } from "../firebase/config"
 import { toast } from "react-toastify"
 import Loader from "../components/Loader"
@@ -21,19 +21,23 @@ const SaveProduct = () => {
       try {
          // 2- resim yükle
          setIsLoading(true)
-         //console.log(dataObj.foto)
-         //const fotoUrl = await uploadImage(dataObj.foto)
+         console.log(dataObj.foto)
+         const fotoUrl = await uploadImage(dataObj.foto)
 
-         // 3- yeni ürünü ekle
-         //dataObj["foto"] = fotoUrl
+         // string verileri, numbera çeviriyoruz
+         dataObj["price"] = +dataObj["price"]
+         dataObj["stock"] = +dataObj["stock"]
+         dataObj["foto"] = fotoUrl
          dataObj["created_at"] = serverTimestamp()
+         
+         // 3- yeni ürünü ekle
          await addDoc(productCollection, dataObj)
          toast.success("Ürün başarıyla keydedildi", { position: "bottom-right" })
          // 4- formu sıfırla
          e.target.reset()
 
       } catch (error) {
-         toast.error("Kaydetme işlemi başarısız oldu", { position: "bottom-right" })
+         toast.error("Kaydetme işlemi başarısız oldu. HATA: " + error.code, { position: "bottom-right" })
       }
       setIsLoading(false)
 
@@ -62,7 +66,7 @@ const SaveProduct = () => {
             </div>
             <div className="flex flex-col">
                <label htmlFor="foto">Resim</label>
-               <input id="foto" name="foto" type="file" accept=".jpeg, .jpg, .png, .bmp, "  className="border px-2 py-1 rounded-md"/>
+               <input id="foto" name="foto" type="file" accept=".jpeg, .jpg, .png, .bmp, .webp"  className="border px-2 py-1 rounded-md"/>
             </div>
             <button type="submit" className="font-semibold border-2 px-5 py-1 mt-3 rounded-md hover:bg-slate-800 hover:text-white transition w-fit self-center">Gönder</button>
          </form>

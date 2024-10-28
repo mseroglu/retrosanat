@@ -6,12 +6,12 @@ import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_API_KEY,
-  authDomain: "retro-sanat.firebaseapp.com",
-  projectId: "retro-sanat",
-  storageBucket: "retro-sanat.appspot.com",
-  messagingSenderId: "448079427610",
-  appId: "1:448079427610:web:65b12b6f9ebbc77c6ff9a3",
-  measurementId: "G-QH5D33L17Q"
+  authDomain: "retro-sanat-8171c.firebaseapp.com",
+  projectId: "retro-sanat-8171c",
+  storageBucket: "retro-sanat-8171c.appspot.com",
+  messagingSenderId: "669423857461",
+  appId: import.meta.env.VITE_APP_ID,
+  measurementId: "G-BFXM19FXWD"
 };
 
 // Initialize Firebase

@@ -12,10 +12,6 @@ import { useEffect, useState } from "react";
 const Navbar = () => {
    const [activeUser, setActiveUser] = useState(null)
 
-   useEffect(() => {
-      console.log(auth.currentUser)
-   }, [activeUser])
-
    const handleSignOut = () => {
       signOut(auth)
          .then(res => {
