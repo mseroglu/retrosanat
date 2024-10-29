@@ -5,9 +5,6 @@ import Loader from "../components/Loader"
 
 const MainPage = () => {
 
-  useEffect(() => {
-
-  }, [])
 
   return (
     <Container stil="flex-grow mt-16 ">

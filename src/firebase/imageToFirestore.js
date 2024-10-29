@@ -5,20 +5,6 @@ import { v4 as uuidv4 } from 'uuid';
 import { collection, getDocs, limit, orderBy, query } from "firebase/firestore";
 
 
-export const getData = async ()=> {
-     // collection un referansı
-      const productsColl = collection(db, "products")
-       // sorgu ayarları 
-       const q = query(productsColl, orderBy("created_at", "desc"), limit(3))
-    
-       
-       // tüm ürünleri alma
-      const data = await getDocs(q) 
-      const liste = data.map(item => item.data())   
-      return liste  
-   
-}
-
 export const uploadImage = async (file) => {
    // dosya yoksa veya image değilse durdur
    if (!file?.type.startsWith("image") || !file ) return null
