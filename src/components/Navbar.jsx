@@ -7,7 +7,7 @@ import { BsMenuUp } from "react-icons/bs";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase_/config";
 import { toast } from "react-toastify";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const Navbar = () => {
    const [activeUser, setActiveUser] = useState(null)
