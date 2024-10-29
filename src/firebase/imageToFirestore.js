@@ -45,30 +45,3 @@ export const delImage = async (filePath) => {
       .catch(() => toast.error("Fotoğraf silinemedi.."))
 }
 
-
-const data = [
-   {
-     id: 1,
-     title: "ürün adı 2",
-     description: "ürün açıklaması Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, ipsa.",
-     amount: 10,
-     price: 100,
-     foto: "art-5.jpg"
-   },
-   {
-     id: 2,
-     title: "ürün adı 2",
-     description: "ürün açıklaması Lorem ipsum dolor sit amet.",
-     amount: 10,
-     price: 100,
-     foto: "art-4.jpg"
-   },
-   {
-     id: 3,
-     title: "ürün adı ürün adı ürün adı ürün adı ürün adı 3",
-     description: "ürün açıklaması Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, ipsa.",
-     amount: 110,
-     price: 150,
-     foto: "art-3.jpg"
-   }
- ]
