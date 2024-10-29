@@ -3,7 +3,7 @@ import Container from "../components/Container"
 import { toast } from 'react-toastify';
 import Loader from "../components/Loader";
 import { signInWithPopup, signOut } from "firebase/auth";
-import { auth, provider } from "../firebase_/config";
+import { auth, provider } from "../db-operations/config";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {

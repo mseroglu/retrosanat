@@ -12,13 +12,13 @@ const Footer = () => {
          </div>
          <div className="flex flex-col gap-3 items-center justify-center flex-grow ">
             <div className="flex items-center justify-center gap-3">
-               <Link to="https://www.facebook.com/retrosanat72">
+               <Link to="https://www.facebook.com/retrosanat72" target="_blank" >
                   <FaFacebook className="w-6 h-6 hover:text-blue-500 transition" />
                </Link>
-               <Link to="https://www.instagram.com/retrosanat72">
+               <Link to="https://www.instagram.com/retrosanat72" target="_blank">
                   <FaInstagram className="w-6 h-6 hover:text-orange-400 transition" />
                </Link>
-               <Link to="https://www.youtube.com/retrosanat72">
+               <Link to="https://www.youtube.com/retrosanat72" target="_blank">
                   <FaSquareYoutube className="w-6 h-6 hover:text-red-600 transition" />
                </Link>
             </div>

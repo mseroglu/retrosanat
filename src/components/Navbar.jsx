@@ -5,7 +5,7 @@ import { IoMdExit } from "react-icons/io";
 import { BsMenuUp } from "react-icons/bs";
 
 import { signOut } from "firebase/auth";
-import { auth } from "../firebase_/config";
+import { auth } from "../db-operations/config";
 import { toast } from "react-toastify";
 import { useState } from "react";
 

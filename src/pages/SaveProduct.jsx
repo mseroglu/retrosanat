@@ -1,8 +1,8 @@
 import { useRef, useState } from "react"
 import Container from "../components/Container"
-import { uploadImage } from "../firebase_/imageToFirestore"
+import { uploadImage } from "../db-operations/imageToFirestore"
 import { addDoc, collection, serverTimestamp } from "firebase/firestore"
-import { db } from "../firebase_/config"
+import { db } from "../db-operations/config"
 import { toast } from "react-toastify"
 import Loader from "../components/Loader"
 

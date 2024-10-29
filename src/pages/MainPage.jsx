@@ -1,4 +1,3 @@
-import { useEffect } from "react"
 import Carousel from "../components/Carousel"
 import Container from "../components/Container"
 

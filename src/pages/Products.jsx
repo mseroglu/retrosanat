@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import Container from "../components/Container"
 import ProductCard from "../components/ProductCard"
 import { collection, getDocs, limit, orderBy, query } from "firebase/firestore"
-import { db } from "../firebase_/config"
+import { db } from "../db-operations/config"
 
 
 const Products = () => {
@@ -13,7 +13,7 @@ const Products = () => {
 
   useEffect(() => {
     // sorgu ayarları 
-    const q = query(productsColl, orderBy("created_at", "desc"), limit(5))
+    const q = query(productsColl, orderBy("created_at", "desc"), limit(15))
 
     const temp = []
     // tüm ürünleri alma
