@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import Container from "./Container"
 import { FaSearch } from "react-icons/fa";
 import { IoMdExit } from "react-icons/io";
@@ -11,11 +11,13 @@ import { useEffect, useState } from "react";
 
 const Navbar = () => {
    const [activeUser, setActiveUser] = useState(null)
+   const navigate = useNavigate()
 
    const handleSignOut = () => {
       signOut(auth)
          .then(res => {
             setActiveUser(null)
+            navigate("/")
             toast.info("Oturum kapatıldı..", { position: "bottom-right" })
          })
          .catch(err => toast.error("Oturum kapatılamadı " + err.code, { position: "bottom-right" }))

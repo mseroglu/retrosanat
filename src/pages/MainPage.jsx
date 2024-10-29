@@ -10,7 +10,7 @@ const MainPage = () => {
   }, [])
 
   return (
-    <Container stil="flex-grow mt-16">
+    <Container stil="flex-grow mt-16 ">
       <Carousel />
 
     </Container>

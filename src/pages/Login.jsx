@@ -15,7 +15,7 @@ const Login = () => {
     signInWithPopup(auth, provider)
       .then(res => {
         toast.success("Giriş başarılı..", { position: "bottom-right" })
-        navigate("/")
+        navigate("/addProduct")
       })
       .catch(err => {
         toast.error("Giriş başarısız!" + err.code, { position: "bottom-right" })
@@ -28,6 +28,7 @@ const Login = () => {
     signOut(auth)
     .then(res => {
       toast.info("Oturum kapatıldı..", {position:"bottom-right"})
+      navigate("/")
     })
     .catch(err => {
       toast.error("Oturum kapatılamadı "+err.code, {position: "bottom-right"})

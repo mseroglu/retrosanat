@@ -10,7 +10,7 @@ function ControlledCarousel() {
   };
 
   return (
-    <Carousel activeIndex={index} onSelect={handleSelect} className='my-2'>
+    <Carousel activeIndex={index} onSelect={handleSelect} className='my-2 '>
       <Carousel.Item>
         <CarouselImage path={"art-3.jpg"} text="First slide" />
       </Carousel.Item>
