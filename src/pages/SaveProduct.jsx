@@ -1,6 +1,6 @@
 import { useRef, useState } from "react"
 import Container from "../components/Container"
-import { uploadImage } from "../firebase_/ImageToFirestore"
+import { uploadImage } from "../firebase_/imageToFirestore"
 import { addDoc, collection, serverTimestamp } from "firebase/firestore"
 import { db } from "../firebase_/config"
 import { toast } from "react-toastify"
