@@ -27,8 +27,8 @@ const Navbar = () => {
             <header className="py-3 flex items-center justify-between  ">
                <div>
                   <Link to={"/"}>
-                     <div className="font-semibold underline text-xl cursor-pointer md:text-2xl hover:scale-105 transition ">retro
-                        <span className="text-yellow-400">sanat</span>
+                     <div className="font-semibold underline text-xl cursor-pointer md:text-2xl hover:scale-105 transition logo">retro
+                        <span className="text-yellow-400 logo">sanat</span>
                      </div>
                   </Link>
                </div>
