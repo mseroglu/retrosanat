@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import Container from "../components/Container"
 import ProductCard from "../components/ProductCard"
 import { collection, getDocs, limit, orderBy, query } from "firebase/firestore"
-import { db } from "../firebase/config"
+import { db } from "../firebase_/config"
 
 
 const Products = () => {
