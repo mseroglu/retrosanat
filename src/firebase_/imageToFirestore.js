@@ -1,8 +1,7 @@
 import { deleteObject, getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { db, storage } from "./config";
+import { storage } from "./config";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from 'uuid';
-import { collection, getDocs, limit, orderBy, query } from "firebase/firestore";
 
 
 export const uploadImage = async (file) => {
