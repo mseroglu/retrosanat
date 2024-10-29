@@ -19,7 +19,7 @@ export const uploadImage = async (file) => {
 
 
 export const delImage = async (filePath) => {
-   /* 
+   /* // dosya isminde Türkçe karakter olduğunda
    const lastIndex = filePath?.lastIndexOf("/")
    const index = filePath?.indexOf("?")
    let filename = filePath?.slice(lastIndex + 1, index)
