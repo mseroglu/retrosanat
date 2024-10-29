@@ -18,7 +18,7 @@ const Login = () => {
         navigate("/addProduct")
       })
       .catch(err => {
-        toast.error("Giriş başarısız!" + err.code, { position: "bottom-right" })
+        toast.error("Giriş başarısız!  HATA:" + err.code, { position: "bottom-right" })
       })
     setIsLoading(false)
   }

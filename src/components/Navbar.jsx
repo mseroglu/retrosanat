@@ -7,21 +7,20 @@ import { BsMenuUp } from "react-icons/bs";
 import { signOut } from "firebase/auth";
 import { auth } from "../db-operations/config";
 import { toast } from "react-toastify";
-import { useState } from "react";
 
 const Navbar = () => {
-   const [activeUser, setActiveUser] = useState(null)
    const navigate = useNavigate()
 
    const handleSignOut = () => {
       signOut(auth)
          .then(res => {
-            setActiveUser(null)
             navigate("/")
             toast.info("Oturum kapatıldı..", { position: "bottom-right" })
          })
          .catch(err => toast.error("Oturum kapatılamadı " + err.code, { position: "bottom-right" }))
    }
+
+
    return (
       <>
          <Container stil="bg-zinc-200 fixed left-0 right-0 z-[999] bg-opacity-75" >
@@ -36,7 +35,10 @@ const Navbar = () => {
 
                <div className="flex gap-3 font-semibold text-slate-700">
                   <Link to={"/products"} className="transition hover:underline md:text-xl" >Ürünler</Link>
+                  {
+                  auth.currentUser !== null && 
                   <Link to={"/addProduct"} className="transition hover:underline md:text-xl" >Ürün Ekle</Link>
+                  }
                </div>
 
 
@@ -53,13 +55,13 @@ const Navbar = () => {
                            ? (
                               <Link to={"/"} onClick={handleSignOut}
                                  className="text-sm border-2 rounded-md w-30 border-zinc-500 grid place-items-center transition overflow-hidden group">
-                                 <div className="text-center text-xs w-full whitespace-nowrap overflow-hidden px-1 flex bg-yellow-400 group-hover:bg-slate-900 group-hover:text-yellow-400 transition"> {activeUser?.displayName}
+                                 <div className="text-center text-xs w-full whitespace-nowrap overflow-hidden px-1 flex bg-yellow-400 group-hover:bg-slate-900 group-hover:text-yellow-400 transition"> {auth.currentUser?.displayName}
                                  </div>
                                  <div className="flex w-full items-center justify-center gap-2 ps-2 text-black bg-yellow-400 "> Çıkış <IoMdExit className="text-lg bg-yellow-400 text-black rounded-full group-hover:scale-105 transition" />
                                  </div>
                               </Link>
                            ) : (
-                              <Link to={"/login"} onClick={() => setActiveUser(auth.currentUser)}
+                              <Link to={"/login"}
                                  className="border-2 rounded-md w-20 border-zinc-500 grid place-items-center transition hover:bg-slate-900 hover:text-white" >
                                  Giriş
                               </Link>

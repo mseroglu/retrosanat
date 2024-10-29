@@ -18,9 +18,6 @@ const Footer = () => {
                <Link to="https://www.instagram.com/retrosanat72" target="_blank">
                   <FaInstagram className="w-6 h-6 hover:text-orange-400 transition" />
                </Link>
-               <Link to="https://www.youtube.com/retrosanat72" target="_blank">
-                  <FaSquareYoutube className="w-6 h-6 hover:text-red-600 transition" />
-               </Link>
             </div>
             <div className="flex gap-3 items-center justify-center">
                <Link to={"/"} className="hover:text-yellow-400 transition">Anasayfa</Link>
