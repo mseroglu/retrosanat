@@ -17,6 +17,12 @@
 
 form label {
   padding-left: 5px;
+  font-size: .75em;
+  font-weight: bold;
+}
+
+form input, form textarea{
+  outline-color: #facc15;
 }
 
 .logo{

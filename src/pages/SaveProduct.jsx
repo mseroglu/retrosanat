@@ -33,12 +33,12 @@ const SaveProduct = () => {
          
          // 3- yeni ürünü ekle
          await addDoc(productCollection, dataObj)
-         toast.success("Ürün başarıyla keydedildi", { position: "bottom-right" })
+         toast.success("Ürün başarıyla keydedildi")
          // 4- formu sıfırla
          e.target.reset()
 
       } catch (error) {
-         toast.error("Kaydetme işlemi başarısız oldu. HATA: " + error.code, { position: "bottom-right" })
+         toast.error("Kaydetme işlemi başarısız oldu. HATA: " + error.code)
       }
       setIsLoading(false)
 
@@ -51,11 +51,11 @@ const SaveProduct = () => {
             <h2 className="text-center font-bold">Yeni Ürün</h2>
             <div className="flex flex-col">
                <label htmlFor="title">Ürün Adı</label>
-               <input id="title" name="title" type="text" required className="border px-2 py-1 rounded-md"/>
+               <input id="title" name="title" type="text" required className="border px-2 py-1 rounded-md "/>
             </div>
             <div className="flex flex-col">
                <label htmlFor="categories">Kategoriler</label>
-               <input id="categories" name="categories" placeholder="cam, boya, fırça " className="border px-2 py-1 rounded-md"/>
+               <input id="categories" name="categories" required placeholder="cam, boya, fırça " className="border px-2 py-1 rounded-md "/>
             </div>
             <div className="flex flex-col">
                <label htmlFor="description">Açıklama</label>

@@ -34,7 +34,7 @@ function App() {
             </Route>
           </Routes>
           <Footer />
-          <ToastContainer />
+          <ToastContainer position='bottom-right'/>
         </BrowserRouter>
       </div>
     </>

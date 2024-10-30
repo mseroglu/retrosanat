@@ -7,9 +7,32 @@ import { BsMenuUp } from "react-icons/bs";
 import { signOut } from "firebase/auth";
 import { auth } from "../db-operations/config";
 import { toast } from "react-toastify";
+import { useState } from "react";
 
-const Navbar = () => {
+
+// Debounce fonksiyonu
+function debounce(func, delay) {
+   let timeoutId;
+
+   return function(...args) {
+       if (timeoutId) {
+           clearTimeout(timeoutId);
+       }
+       timeoutId = setTimeout(() => {
+           func.apply(this, args);
+       }, delay);
+   };
+}
+
+const Navbar = () => {   const [searchText, setSearchText] = useState("")
    const navigate = useNavigate()
+
+   const handleSearch = (e) => {
+      // redux yapıldıktan sonra burası yapılacak
+      console.log(e.target.value.trim())
+   }
+
+   const debouncedHandleInput = debounce(handleSearch, 1000);
 
    const handleSignOut = () => {
       signOut(auth)
@@ -19,6 +42,8 @@ const Navbar = () => {
          })
          .catch(err => toast.error("Oturum kapatılamadı " + err.code, { position: "bottom-right" }))
    }
+
+
 
 
    return (
@@ -32,21 +57,23 @@ const Navbar = () => {
                      </div>
                   </Link>
 
-                     <Link to={"/products"} className="transition hover:underline md:text-xl" >Ürünler</Link>
-                     {
-                        auth.currentUser !== null &&
-                        <Link to={"/addProduct"} className="transition hover:underline md:text-xl whitespace-nowrap" >Ürün Ekle</Link>
-                     }
+                  <Link to={"/products"} className="transition hover:underline md:text-xl" >Ürünler</Link>
+                  {
+                     auth.currentUser !== null &&
+                     <Link to={"/addProduct"} className="transition hover:underline md:text-xl whitespace-nowrap" >Ürün Ekle</Link>
+                  }
                   <div className="flex gap-3 font-normal text-slate-700 ">
                   </div>
                </div>
 
 
                <div className="flex gap-2 font-semibold items-center cursor-pointer">
-
+                  {/* menu butonu */}
                   <BsMenuUp className="md:hidden text-xl font-bold" />
+
                   <div className="relative max-md:hidden ">
-                     <input type="text" placeholder="ürün ara" className="max-w-60 outline-none p-1 rounded-md" />
+                     <input type="text" placeholder="ürün ara" onChange={debouncedHandleInput}
+                        className="max-w-60 outline-none p-1 rounded-md" />
                      <FaSearch className="absolute right-1 top-2" />
                   </div>
                   <div className="max-md:hidden">

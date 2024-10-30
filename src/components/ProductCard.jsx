@@ -1,19 +1,19 @@
 import { Link } from "react-router-dom"
 
 const ProductCard = ({ product }) => {
-   const a = ""
+   
    
    return (
       <Link to={"/product/detail/" + product.id}>
          <div className="flex flex-col w-60 md:w-80 rounded-md overflow-hidden border transition hover:scale-105 shadow-md h-full">
             <img src={product.foto} alt="product" className="w-full h-60 object-cover " />
             <div className="flex flex-col flex-grow">
+                  <div className="flex gap-1 bg-yellow-300 justify-center">
+                     {product.categories?.map((item, i) => (<span key={i} className="border-2 text-sm border-gray-600 rounded-full px-2">{item}</span>))}
+                  </div>
                <div className="flex-grow px-2 pt-4 bg-gray-200">
                   <h3 className="font-semibold mb-3 capitalize">{product.title}</h3>
                   <p className="capitalize">{product.description}</p>
-                  <div className="flex gap-1">
-                     {product.categories?.map((item, i) => (<span className="border-2 text-sm border-gray-600 rounded-full px-2">{item}</span>))}
-                  </div>
                </div>
 
                <div className="px-2 pb-2 bg-gray-300">

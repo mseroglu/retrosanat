@@ -52,7 +52,7 @@ const Detail = () => {
               </tr>
             </table>
             <div className="flex gap-1 h-max">
-              {data.categories?.map((item, i) => (<span className="border-2 text-sm border-gray-600 rounded-full px-2 bg-yellow-300 cursor-pointer">{item}</span>))}
+              {data.categories?.map((item, i) => (<span key={i} className="border-2 text-sm border-gray-600 rounded-full px-2 bg-yellow-300 cursor-pointer">{item}</span>))}
             </div>
           </div>
         </div>
