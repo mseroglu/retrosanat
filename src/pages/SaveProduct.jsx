@@ -28,6 +28,7 @@ const SaveProduct = () => {
          dataObj["price"] = +dataObj["price"]
          dataObj["stock"] = +dataObj["stock"]
          dataObj["foto"] = fotoUrl
+         dataObj["categories"] = dataObj["categories"].split(",")
          dataObj["created_at"] = serverTimestamp()
          
          // 3- yeni ürünü ekle
@@ -51,6 +52,10 @@ const SaveProduct = () => {
             <div className="flex flex-col">
                <label htmlFor="title">Ürün Adı</label>
                <input id="title" name="title" type="text" required className="border px-2 py-1 rounded-md"/>
+            </div>
+            <div className="flex flex-col">
+               <label htmlFor="categories">Kategoriler</label>
+               <input id="categories" name="categories" placeholder="cam, boya, fırça " className="border px-2 py-1 rounded-md"/>
             </div>
             <div className="flex flex-col">
                <label htmlFor="description">Açıklama</label>

@@ -6,7 +6,7 @@ const MainPage = () => {
 
 
   return (
-    <Container stil="flex-grow mt-16 ">
+    <Container stil="flex-grow mt-16 md:mt-20 ">
       <Carousel />
 
     </Container>

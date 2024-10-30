@@ -1,32 +1,62 @@
+import { Link, useParams } from "react-router-dom"
 import Container from "../components/Container"
+import { doc, getDoc } from "firebase/firestore"
+import { db } from "../db-operations/config"
+import { toast } from "react-toastify"
+import { useEffect, useState } from "react"
+import Loader from "../components/Loader"
+import { GrFormPrevious } from "react-icons/gr";
 
 
 const Detail = () => {
+  const params = useParams()
+  const [data, setData] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
+
+  const docRef = doc(db, "products", params.id)
+
+  useEffect(() => {
+    setIsLoading(true)
+    getDoc(docRef)
+      .then((res) => setData(res.data()))
+      .catch(err => toast.error("Veri alınamadı! HATA: " + err.code))
+    setIsLoading(false)
+  }, [])
+
 
   return (
-    <Container stil="flex-grow mt-10 py-20 grid place-items-center">
-      <div className="flex gap-4 border-2 rounded-xl w-2/3 p-5 shadow-lg bg-zinc-100">
+    <Container stil="flex-grow mt-10 py-20 grid place-items-center ">
+      {isLoading
+        ? <Loader />
+        : data && (<div className="flex gap-4 max-md:flex-col border-2 rounded-xl max-md:w-fit max-lg:w-full lg:w-2/3 p-2 shadow-lg bg-zinc-100 max-w-[700px] relative">
 
-        <img src="" alt="image" 
-        className="h-[300px] w-[300px] border rounded-lg bg-red-400" />
-        
-        <div className="grid gap-3">
-          <h2 className="font-bold">Başlık</h2>
-          <p>Açıklama</p>
-          <table >
-            <tr>
-              <td>Stok </td>
-              <td className="w-4  text-center"> : </td>
-              <td> 25 Adet</td>
-            </tr>
-            <tr>
-              <td> Fiyat </td>
-              <td className="w-4 text-center"> : </td>
-              <td> 235 ₺</td>
-            </tr>
-          </table>
+          <Link to={-1} className="flex items-center absolute top-[-30px] left-0 ">
+            <GrFormPrevious className="text-3xl" />önceki sayfa
+          </Link>
+          <img src={data.foto} alt="image"
+            className="h-[400px] w-[300px] border rounded-lg object-cover" />
+
+          <div className="grid gap-3 w-full items-center">
+            <h2 className="font-bold text-2xl capitalize">{data.title}</h2>
+            <p className="capitalize">{data.description}</p>
+            <table>
+              <tr>
+                <td>Stok </td>
+                <td className="w-4  text-center"> : </td>
+                <td> {data.stock} Adet</td>
+              </tr>
+              <tr>
+                <td> Fiyat </td>
+                <td className="w-4 text-center"> : </td>
+                <td> {data.price} ₺</td>
+              </tr>
+            </table>
+            <div className="flex gap-1 h-max">
+              {data.categories?.map((item, i) => (<span className="border-2 text-sm border-gray-600 rounded-full px-2 bg-yellow-300 cursor-pointer">{item}</span>))}
+            </div>
+          </div>
         </div>
-      </div>
+        )}
     </Container>
   )
 }

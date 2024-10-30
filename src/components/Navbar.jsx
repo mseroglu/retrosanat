@@ -24,29 +24,29 @@ const Navbar = () => {
    return (
       <>
          <Container stil="bg-zinc-200 fixed left-0 right-0 z-[999] bg-opacity-75" >
-            <header className="py-3 flex items-center justify-between  ">
-               <div>
-                  <Link to={"/"}>
-                     <div className="font-semibold underline text-xl cursor-pointer md:text-2xl hover:scale-105 transition logo">retro
+            <header className="py-3 flex items-center justify-between ">
+               <div className="flex gap-4 items-end">
+                  <Link to={"/"} className="text-xl md:text-3xl">
+                     <div className="font-semibold underline cursor-pointer hover:scale-105 transition logo">retro
                         <span className="text-yellow-400 logo">sanat</span>
                      </div>
                   </Link>
-               </div>
 
-               <div className="flex gap-3 font-semibold text-slate-700">
-                  <Link to={"/products"} className="transition hover:underline md:text-xl" >Ürünler</Link>
-                  {
-                  auth.currentUser !== null && 
-                  <Link to={"/addProduct"} className="transition hover:underline md:text-xl" >Ürün Ekle</Link>
-                  }
+                     <Link to={"/products"} className="transition hover:underline md:text-xl" >Ürünler</Link>
+                     {
+                        auth.currentUser !== null &&
+                        <Link to={"/addProduct"} className="transition hover:underline md:text-xl whitespace-nowrap" >Ürün Ekle</Link>
+                     }
+                  <div className="flex gap-3 font-normal text-slate-700 ">
+                  </div>
                </div>
 
 
                <div className="flex gap-2 font-semibold items-center cursor-pointer">
 
                   <BsMenuUp className="md:hidden text-xl font-bold" />
-                  <div className="relative max-md:hidden">
-                     <input type="text" placeholder="ürün ara" className="w-60 outline-none p-1 rounded-md" />
+                  <div className="relative max-md:hidden ">
+                     <input type="text" placeholder="ürün ara" className="max-w-60 outline-none p-1 rounded-md" />
                      <FaSearch className="absolute right-1 top-2" />
                   </div>
                   <div className="max-md:hidden">
