@@ -1,9 +1,9 @@
 
 
-const Error = () => {
+const Error = ({ err= "Hata işte" }) => {
   return (
     <div>
-      Error
+      Error: {err}
     </div>
   )
 }

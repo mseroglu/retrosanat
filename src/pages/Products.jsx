@@ -1,37 +1,28 @@
 import { useEffect, useState } from "react"
 import Container from "../components/Container"
 import ProductCard from "../components/ProductCard"
-import { collection, getDocs, limit, orderBy, query } from "firebase/firestore"
-import { db } from "../db-operations/config"
+import { useDispatch, useSelector } from "react-redux"
+import ActionTypes from "../redux/ActionTypes"
+import Loader from "../components/Loader"
+import Error from "../components/Error"
 
 
 const Products = () => {
-  const [products, setProducts] = useState([])
-
-  // collection un referansı
-  const productsColl = collection(db, "products")
-
-  useEffect(() => {
-    // sorgu ayarları 
-    const q = query(productsColl, orderBy("created_at", "desc"), limit(15))
-
-    const temp = []
-    // tüm ürünleri alma
-    getDocs(q)
-      .then(res => res.forEach(item => {
-        temp.push({ ...item.data(), id: item.id })
-        setProducts(temp)
-      }))
-      .catch(err => console.log(err))
-
-  }, [])
+  //const [product, setProducts] = useState([])
+  const { isLoading, error, products } = useSelector(store => store)
 
 
   return (
     <Container stil="flex-grow py-20">
 
       <div className="flex gap-4 flex-wrap justify-center mt-5">
-        {products?.map((item, i) => <ProductCard key={i} product={item} />)}
+        {
+          isLoading
+            ? <Loader />
+            : error
+              ? <Error err={error} />
+              : products?.map((item, i) => <ProductCard key={i} product={item} />)
+        }
       </div>
     </Container>
   )

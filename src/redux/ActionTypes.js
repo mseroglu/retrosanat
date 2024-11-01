@@ -1,0 +1,6 @@
+const ActionTypes = {
+   PRODUCTS_LOADING: "PRODUCTS_LOADING",
+   PRODUCTS_ERROR: "PRODUCTS_ERROR",
+   PRODUCTS_SUCCESS: "PRODUCTS_SUCCESS",
+}
+export default ActionTypes

@@ -25,7 +25,8 @@ const SaveProduct = () => {
          for (let a = 0; a < allPhotos.length; a++) {
             const fotoUrl = await uploadImage(allPhotos[a])
             files.push(fotoUrl)
-            if (a === 1) break
+            // 4 resimden fazlası alınmaması için döngü biter
+            if (a === 3) break
          }
 
          // string verileri, numbera çeviriyoruz
@@ -75,13 +76,13 @@ const SaveProduct = () => {
                <input id="price" name="price" type="number" defaultValue={0} className="border px-2 py-1 rounded-md" />
             </div>
             <div className="flex flex-col">
-               <label htmlFor="photos">Resim (Max 2 adet)</label>
+               <label htmlFor="photos">Resim (Max 4 adet)</label>
                <input id="photos" name="photos" type="file" multiple accept=".jpeg, .jpg, .png, .bmp, .webp" className="border px-2 py-1 rounded-md" />
             </div>
             <div className="flex items-center">
                <input id="isShowMainPage" name="isShowMainPage" type="checkbox"
                   className="border px-2 py-1 rounded-md w-5 h-5" />
-               <label htmlFor="isShowMainPage" className="text-[16px] font-normal">Resim anasayfada gösterilsin mi?</label>
+               <label htmlFor="isShowMainPage" className="text-[16px] font-normal">İlk resim anasayfada gösterilsin</label>
             </div>
             <button type="submit" className="font-semibold border-2 px-5 py-1 mt-3 rounded-md hover:bg-slate-800 hover:text-white transition w-fit self-center">Gönder</button>
          </form>

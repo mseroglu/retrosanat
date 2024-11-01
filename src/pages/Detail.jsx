@@ -6,6 +6,7 @@ import { toast } from "react-toastify"
 import { useEffect, useState } from "react"
 import Loader from "../components/Loader"
 import { GrFormPrevious } from "react-icons/gr";
+import { useSelector } from "react-redux"
 
 
 const Detail = () => {
@@ -14,7 +15,7 @@ const Detail = () => {
   const [isLoading, setIsLoading] = useState(false)
 
   const docRef = doc(db, "products", params.id)
-
+  
   useEffect(() => {
     setIsLoading(true)
     getDoc(docRef)
@@ -33,7 +34,9 @@ const Detail = () => {
           <Link to={-1} className="flex items-center absolute top-[-30px] left-0 ">
             <GrFormPrevious className="text-3xl" />önceki sayfa
           </Link>
-          <img src={data.foto} alt="image"
+
+          {/* Burası düzeltilecek */}
+          <img src={data.photos ? data.photos[0]:data.foto} alt="image"
             className="h-[400px] w-[300px] border rounded-lg object-cover" />
 
           <div className="grid gap-3 w-full items-center">
