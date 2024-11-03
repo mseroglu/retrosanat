@@ -1,5 +1,4 @@
-import { Link, useNavigate } from "react-router-dom"
-import Container from "./Container"
+import { Link, useNavigate, useSearchParams } from "react-router-dom"
 import { FaSearch } from "react-icons/fa";
 import { IoMdExit } from "react-icons/io";
 import { BsMenuUp } from "react-icons/bs";
@@ -8,7 +7,7 @@ import { signOut } from "firebase/auth";
 import { auth } from "../db-operations/config";
 import { toast } from "react-toastify";
 import { useState } from "react";
-import categories from "../utils/categories";
+import CATEGORIES from "../utils/categories";
 
 
 // Debounce fonksiyonu
@@ -26,12 +25,24 @@ function debounce(func, delay) {
 }
 
 const Navbar = () => {
-   const [searchText, setSearchText] = useState("")
+   const [searchParams, setSearchParams] = useSearchParams()
+   //const [searchQuery, setSearchQuery] = useState(searchParams.get("word") || "")
+   
    const navigate = useNavigate()
 
    const handleSearch = (e) => {
       // redux yapıldıktan sonra burası yapılacak
-      console.log(e.target.value.trim())
+      const searchText = e.target.value.trim()
+
+      if (searchText == ""){
+         searchParams.delete("ara")
+      }else{
+         searchParams.set("ara", e.target.value.trim())
+      }
+      //setSearchQuery(e.target.value.trim())
+      //navigate("/products")
+      
+      setSearchParams(searchParams)
    }
 
    const debouncedHandleInput = debounce(handleSearch, 1000);
@@ -40,10 +51,12 @@ const Navbar = () => {
       signOut(auth)
          .then(res => {
             navigate("/")
-            toast.info("Oturum kapatıldı..", { position: "bottom-right" })
+            toast.info("Oturum kapatıldı..")
          })
-         .catch(err => toast.error("Oturum kapatılamadı " + err.code, { position: "bottom-right" }))
+         .catch(err => toast.error("Oturum kapatılamadı " + err.code))
    }
+
+
 
    return (
       <div className="fixed w-full z-[999]">
@@ -75,6 +88,7 @@ const Navbar = () => {
                         className="max-w-60 outline-none p-1 rounded-md" />
                      <FaSearch className="absolute right-1 top-2" />
                   </div>
+
                   <div className="max-md:hidden">
                      {
                         auth.currentUser
@@ -97,9 +111,13 @@ const Navbar = () => {
                </div>
             </header>
          </div>
-         <div id="categories" className="flex text-[14px] md:text-[16px] justify-center bg-zinc-300 border-t-[12px] border-yellow-400">
+         <div id="categories" className="flex text-[14px] md:text-[16px] justify-center bg-zinc-300 border-t-4 border-yellow-400">
             {
-               categories.map(item => <button className="font-semibold py-1 px-2 w-40 border-x  hover:bg-zinc-200" key={item}>{item}</button>)
+               CATEGORIES.map(item => {
+                  const [key, value] = Object.entries(item)[0]
+                  return <button key={key}
+                     className="font-semibold py-1 px-2 w-40 border-x  hover:bg-zinc-200" >{value}</button>
+               })
             }
          </div>
       </div>

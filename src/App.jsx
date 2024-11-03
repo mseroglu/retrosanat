@@ -11,6 +11,7 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Protected from './pages/Protected'
+import NotFound from './pages/NotFound'
 
 function App() {
 
@@ -30,8 +31,8 @@ function App() {
             {/** Protected - Giriş yapmadan erişilemez alanlar */}
             <Route element={<Protected />}>
               <Route path='/addProduct' element={<SaveProduct />} />
-
             </Route>
+            <Route path='*' element={<NotFound />} />
           </Routes>
           <Footer />
           <ToastContainer position='bottom-right' theme='colored'/>

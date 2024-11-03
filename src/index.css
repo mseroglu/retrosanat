@@ -21,8 +21,11 @@ form label {
   font-weight: bold;
 }
 
-form input, form textarea{
+form input, form textarea, select{
   outline-color: #facc15;
+}
+option {
+  background-color: #facc15;
 }
 
 .logo{

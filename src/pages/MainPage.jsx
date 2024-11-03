@@ -10,7 +10,8 @@ import ActionTypes from "../redux/ActionTypes";
 
 
 const MainPage = () => {
-  let { isLoading, error, products } = useSelector(store => store)
+  let { isLoading, error, productsCarousel } = useSelector(store => store)
+  console.log(productsCarousel)
   
   const dispatch = useDispatch()
 
@@ -19,7 +20,7 @@ const MainPage = () => {
 
   useEffect(() => {
     // sorgu ayarları 
-    const q = query(productsColl, where("isShowMainPage", "==", true), orderBy("created_at", "desc"), limit(10))
+    const q = query(productsColl, where("indexMainImage", "in", [0,1,2,3,"0","1","2","3"]), orderBy("created_at", "desc"), limit(10))
 
     const result = []
     // tüm ürünleri alma
@@ -28,7 +29,7 @@ const MainPage = () => {
       .then(res => {
         res.forEach(item => { result.push({...item.data(), id:item.id}) })
         //setProducts(result)        
-        dispatch({ type: ActionTypes.PRODUCTS_SUCCESS, payload: result })
+        dispatch({ type: ActionTypes.PRODUCTS_CAROUSEL_SUCCESS, payload: result })
       })
       .catch(err => {
         dispatch({ type: ActionTypes.PRODUCTS_ERROR, payload: err.code })
@@ -36,7 +37,7 @@ const MainPage = () => {
 
   }, [])
 
-  console.log(products)
+
 
   return (
     <Container stil="">
@@ -46,7 +47,7 @@ const MainPage = () => {
             ? <Loader />
             : error
               ? <Error err={error} />
-              : <Carousel products={products}/>
+              : <Carousel products={productsCarousel}/>
         }
       </div>
     </Container>
