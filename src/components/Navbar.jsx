@@ -8,23 +8,25 @@ import { signOut } from "firebase/auth";
 import { auth } from "../db-operations/config";
 import { toast } from "react-toastify";
 import { useState } from "react";
+import categories from "../utils/categories";
 
 
 // Debounce fonksiyonu
 function debounce(func, delay) {
    let timeoutId;
 
-   return function(...args) {
-       if (timeoutId) {
-           clearTimeout(timeoutId);
-       }
-       timeoutId = setTimeout(() => {
-           func.apply(this, args);
-       }, delay);
+   return function (...args) {
+      if (timeoutId) {
+         clearTimeout(timeoutId);
+      }
+      timeoutId = setTimeout(() => {
+         func.apply(this, args);
+      }, delay);
    };
 }
 
-const Navbar = () => {   const [searchText, setSearchText] = useState("")
+const Navbar = () => {
+   const [searchText, setSearchText] = useState("")
    const navigate = useNavigate()
 
    const handleSearch = (e) => {
@@ -43,24 +45,21 @@ const Navbar = () => {   const [searchText, setSearchText] = useState("")
          .catch(err => toast.error("Oturum kapatılamadı " + err.code, { position: "bottom-right" }))
    }
 
-
-
-
    return (
-      <>
-         <Container stil="bg-zinc-200 fixed left-0 right-0 z-[999] bg-opacity-75" >
+      <div className="fixed w-full z-[999]">
+         <div className="bg-zinc-200 w-full bg-opacity-75  px-10 md:px-20" >
             <header className="py-3 flex items-center justify-between ">
-               <div className="flex gap-4 items-end">
+               <div className="flex gap-3 items-end">
                   <Link to={"/"} className="text-xl md:text-3xl">
-                     <div className="font-semibold underline cursor-pointer hover:scale-105 transition logo">retro
-                        <span className="text-yellow-400 logo">sanat</span>
+                     <div className="font-semibold underline cursor-pointer hover:scale-105 transition logo md:text-[32] xl:text-[40px]">retro
+                        <span className="text-yellow-400 logo ">sanat</span>
                      </div>
                   </Link>
 
-                  <Link to={"/products"} className="transition hover:underline md:text-xl" >Ürünler</Link>
+                  <Link to={"/products"} className="text-slate-600 transition hover:underline md:text-[16px] font-semibold" >Ürünler</Link>
                   {
                      auth.currentUser !== null &&
-                     <Link to={"/addProduct"} className="transition hover:underline md:text-xl whitespace-nowrap" >Ürün Ekle</Link>
+                     <Link to={"/addProduct"} className="text-slate-600 transition hover:underline md:text-[16px] font-semibold whitespace-nowrap" >Ürün Ekle</Link>
                   }
                   <div className="flex gap-3 font-normal text-slate-700 ">
                   </div>
@@ -97,8 +96,13 @@ const Navbar = () => {   const [searchText, setSearchText] = useState("")
                   </div>
                </div>
             </header>
-         </Container>
-      </>
+         </div>
+         <div id="categories" className="flex text-[14px] md:text-[16px] justify-center bg-zinc-300 border-t-[12px] border-yellow-400">
+            {
+               categories.map(item => <button className="font-semibold py-1 px-2 w-40 border-x  hover:bg-zinc-200" key={item}>{item}</button>)
+            }
+         </div>
+      </div>
    )
 }
 

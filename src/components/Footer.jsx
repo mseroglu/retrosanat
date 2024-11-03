@@ -5,8 +5,8 @@ import { FaFacebook, FaInstagram, FaSquareYoutube } from "react-icons/fa6";
 
 const Footer = () => {
    return (
-      <Container stil="h-[800px] bg-slate-800 text-white flex flex-col lg:flex-row gap-5 py-10 mt-3">
-         <div className="flex justify-center rounded-3xl overflow-hidden shadow-yellow-400 shadow-xl w-full sm:w-fit m-auto">
+      <Container stil="h-[800px] bg-slate-800 text-white flex flex-col lg:flex-row gap-5 mt-3">
+         <div className="flex justify-center rounded-3xl overflow-hidden shadow-yellow-400 shadow-xl w-full sm:w-fit mx-auto ">
             {/* https://www.google.com/maps/d/edit?mid=1Y01bDsIc5Xz71DQFumLvzvVDr8iLowg&usp=sharing */}
             <iframe src="https://www.google.com/maps/d/embed?mid=1Y01bDsIc5Xz71DQFumLvzvVDr8iLowg&ehbc=2E312F&noprof=1" width="480" height="320"></iframe>
          </div>

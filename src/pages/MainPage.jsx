@@ -19,7 +19,7 @@ const MainPage = () => {
 
   useEffect(() => {
     // sorgu ayarları 
-    const q = query(productsColl,  orderBy("created_at", "desc"), limit(50))
+    const q = query(productsColl, where("isShowMainPage", "==", true), orderBy("created_at", "desc"), limit(10))
 
     const result = []
     // tüm ürünleri alma
@@ -30,15 +30,17 @@ const MainPage = () => {
         //setProducts(result)        
         dispatch({ type: ActionTypes.PRODUCTS_SUCCESS, payload: result })
       })
-      .catch(err => dispatch({ type: ActionTypes.PRODUCTS_ERROR, payload: err.code }))
+      .catch(err => {
+        dispatch({ type: ActionTypes.PRODUCTS_ERROR, payload: err.code })
+      })
 
   }, [])
 
   console.log(products)
 
   return (
-    <Container stil="flex-grow mt-16 md:mt-20 ">
-      <div className="w-full h-screen ">
+    <Container stil="">
+      <div className="w-full h-fit ">
         {
           isLoading
             ? <Loader />

@@ -13,9 +13,9 @@ const Products = () => {
 
 
   return (
-    <Container stil="flex-grow py-20">
+    <Container stil="">
 
-      <div className="flex gap-4 flex-wrap justify-center mt-5">
+      <div className="flex gap-4 flex-wrap justify-center">
         {
           isLoading
             ? <Loader />

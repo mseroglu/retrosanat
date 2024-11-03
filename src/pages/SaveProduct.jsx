@@ -51,7 +51,7 @@ const SaveProduct = () => {
    }
 
    return (
-      <Container stil="flex-grow mt-10 py-20 grid place-items-center">
+      <Container stil="grid place-items-center">
          <form onSubmit={handleSubmit} className="flex flex-col w-5/6 md:w-[400px] gap-3 border-2 rounded-lg shadow-lg p-3 relative">
             {isLoading && <Loader stil="absolute top-20" />}
             <h2 className="text-center font-bold">Yeni Ürün</h2>

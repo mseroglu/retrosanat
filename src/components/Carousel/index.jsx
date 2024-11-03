@@ -4,7 +4,7 @@ import CarouselImage from './CarouselImage';
 import { useSelector } from 'react-redux';
 
 
-function Carousell( {products }) {
+function Carousell({ products }) {
   const [index, setIndex] = useState(0);
   const [data, setData] = useState(products)
 
@@ -19,13 +19,13 @@ function Carousell( {products }) {
   };
 
   return (
-    <Carousel activeIndex={index} onSelect={handleSelect} className='my-2 '>
+    <Carousel activeIndex={index} onSelect={handleSelect} className='my-2'>
       {data?.map(item => (
         <Carousel.Item key={item.id}>
 
           {/* burdaki if ifadesi düzenlenecek */}
-        <CarouselImage path={item.photos ? item.photos[0] : item.foto} text="First slide" />
-      </Carousel.Item>
+          <CarouselImage path={item.photos ? item.photos[0] : item.foto} text="slide-image" />
+        </Carousel.Item>
       ))}
       {/* 
       <Carousel.Item>
