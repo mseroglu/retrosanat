@@ -20,8 +20,7 @@ const SaveProduct = () => {
       const dataObj = Object.fromEntries(data.entries())
       // Fotolar çoklu olunca bu şekilde almak gerekiyor
       const allPhotos = data.getAll("photos")
-      allPhotos.forEach(url => console.log(url))
-
+      
       try {
          // 2- resimleri yükle
          setIsLoading(true)
@@ -37,7 +36,7 @@ const SaveProduct = () => {
          dataObj["stock"] = +dataObj["stock"]
          dataObj["indexMainImage"] = +dataObj["indexMainImage"]
          // storage a eklenen fotoların linklerini ekliyoruz
-         dataObj["photos"] = filesZ
+         dataObj["photos"] = files
          // string olarak gelen tagları Arraya dönüştürüyoruz
          dataObj["tags"] = dataObj["tags"].split(",")
          // oluşturma tarihi ekliyoruz
