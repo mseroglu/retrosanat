@@ -6,10 +6,8 @@ const ProductCard = ({ product }) => {
    return (
       <Link to={"/product/detail/" + product.id}>
          <div className="flex flex-col w-60 md:w-80 rounded-md overflow-hidden border transition hover:scale-105 shadow-md h-full">
-
-
-            {/* Burası düzeltilecek  */}
-            <img src={product.photos ? product.photos[0]: product.foto} alt="product" className="w-full h-60 object-cover " />
+            
+            <img src={product.photos[product.indexMainImage]} alt="product-image" className="w-full h-60 object-cover " />
             <div className="flex flex-col flex-grow">
                   <div className="flex gap-1 bg-yellow-300 justify-center">
                      {product.categories?.map((item, i) => (<span key={i} className="border-2 text-sm border-gray-600 rounded-full px-2">{item}</span>))}
