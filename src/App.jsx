@@ -26,6 +26,7 @@ function App() {
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
             <Route path='/products' element={<Products />} />
+            <Route path='/products/category/:category' element={<Products />} />
             <Route path='/product/detail/:id' element={<Detail />} />
 
             {/** Protected - Giriş yapmadan erişilemez alanlar */}

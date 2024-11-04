@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import CATEGORIES from "../utils/categories"
 
 const ProductCard = ({ product }) => {
 
@@ -15,7 +16,8 @@ const ProductCard = ({ product }) => {
                <div className="flex-grow px-2 pt-4 bg-gray-200">
                   <h3 className="font-semibold mb-3 capitalize ">{product.title}</h3>
                   <p className="first-letter:uppercase">{product.description}</p>
-                  <p className="first-letter:uppercase font-semibold text-sm">Kategori: { product.category }</p>
+                  <p className="first-letter:uppercase font-semibold text-sm">
+                     Kategori: { product.category }</p>
                </div>
 
                <div className="px-2 pb-2 bg-gray-300">

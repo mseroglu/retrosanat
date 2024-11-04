@@ -20,7 +20,7 @@ const MainPage = () => {
 
   useEffect(() => {
     // sorgu ayarları 
-    const q = query(productsColl, where("indexMainImage", "in", [0,1,2,3,"0","1","2","3"]), orderBy("created_at", "desc"), limit(10))
+    const q = query(productsColl, where("indexMainImage", "in", [0,1,2,3]), orderBy("created_at", "desc"), limit(10))
 
     const result = []
     // tüm ürünleri alma

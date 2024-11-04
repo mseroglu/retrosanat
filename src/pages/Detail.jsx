@@ -46,7 +46,7 @@ const Detail = () => {
               </div>
               <div className="flex gap-2 border-2 rounded-lg bg-zinc-200 p-1">
                 {data.photos.map((item, i) =>
-                  <img src={item} alt="product-image" className="w-1/5 h-16 object-center  " onMouseEnter={() => setImageIndex(i)} />
+                  <img key={i} src={item} alt="product-image" className="w-1/5 h-16 object-center " onMouseEnter={() => setImageIndex(i)} />
                 )}
               </div>
 

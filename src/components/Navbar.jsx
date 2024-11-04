@@ -6,8 +6,7 @@ import { BsMenuUp } from "react-icons/bs";
 import { signOut } from "firebase/auth";
 import { auth } from "../db-operations/config";
 import { toast } from "react-toastify";
-import { useState } from "react";
-import CATEGORIES from "../utils/categories";
+import Categories from "./Categories";
 
 
 // Debounce fonksiyonu
@@ -111,15 +110,7 @@ const Navbar = () => {
                </div>
             </header>
          </div>
-         <div id="categories" className="flex text-[14px] md:text-[16px] justify-center bg-zinc-300 border-t-4 border-yellow-400">
-            {
-               CATEGORIES.map(item => {
-                  const [key, value] = Object.entries(item)[0]
-                  return <button key={key}
-                     className="font-semibold py-1 px-2 w-40 border-x  hover:bg-zinc-200" >{value}</button>
-               })
-            }
-         </div>
+         <Categories />
       </div>
    )
 }
