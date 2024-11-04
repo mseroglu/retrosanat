@@ -10,11 +10,12 @@ const ProductCard = ({ product }) => {
             <img src={product.photos[product.indexMainImage]} alt="product-image" className="w-full h-60 object-cover " />
             <div className="flex flex-col flex-grow">
                   <div className="flex gap-1 bg-yellow-300 justify-center">
-                     {product.categories?.map((item, i) => (<span key={i} className="border-2 text-sm border-gray-600 rounded-full px-2">{item}</span>))}
+                     {product.tags?.map((item, i) => (<span key={i} className="border-2 text-sm border-gray-600 rounded-full px-2 z-[99]">{item}</span>))}
                   </div>
                <div className="flex-grow px-2 pt-4 bg-gray-200">
                   <h3 className="font-semibold mb-3 capitalize ">{product.title}</h3>
                   <p className="first-letter:uppercase">{product.description}</p>
+                  <p className="first-letter:uppercase font-semibold text-sm">Kategori: { product.category }</p>
                </div>
 
                <div className="px-2 pb-2 bg-gray-300">

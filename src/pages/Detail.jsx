@@ -33,24 +33,26 @@ const Detail = () => {
       {isLoading
         ? <Loader />
         : data && (
-          <div className="flex gap-4 max-md:flex-col border-2 rounded-xl max-md:w-fit max-lg:w-full lg:w-2/3 p-2 mt-2 shadow-lg bg-zinc-100 max-w-[700px] relative">
+          <div className="grid gap-4 grid-cols-1 md:grid-cols-2 border-2 rounded-xl p-2 mt-2 shadow-lg bg-zinc-100 relative w-5/6 lg:w-2/3 place-items-center">
 
             <Link to={-1} className="flex items-center absolute top-[-30px] left-0 ">
               <GrFormPrevious className="text-3xl" />önceki sayfa
             </Link>
 
-            <div className="flex flex-col gap-3">
-              <img src={data.photos[imageIndex]} alt="image"
-                className="h-[400px] w-[300px] border rounded-lg object-cover" />
-
-              <div className="flex justify-around gap-1">
+            <div className="col-span-1 flex flex-col w-full gap-3 rounded-lg ">
+              <div className="h-[350px] w-full ">
+                <img src={data.photos[imageIndex]} alt="image"
+                  className="col-span-1 h-full w-full transition border rounded-lg object-cover hover:scale-125 bg-zinc-200" />
+              </div>
+              <div className="flex gap-2 border-2 rounded-lg bg-zinc-200 p-1">
                 {data.photos.map((item, i) =>
-                  <img src={item} alt="product-image" className="h-[60px]" onMouseEnter={() => setImageIndex(i)} />
+                  <img src={item} alt="product-image" className="w-1/5 h-16 object-center  " onMouseEnter={() => setImageIndex(i)} />
                 )}
               </div>
+
             </div>
 
-            <div className="grid gap-3 w-full items-center">
+            <div className="grid gap-3 w-full items-center ">
               <h2 className="font-bold text-2xl capitalize">{data.title}</h2>
               <p className="capitalize">{data.description}</p>
               <table>
