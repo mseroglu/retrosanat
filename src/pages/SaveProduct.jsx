@@ -23,13 +23,11 @@ const SaveProduct = () => {
 
       try {
          // 2- resimleri yükle
-         setIsLoading(true)
+         setIsLoading(true)         
          const files = []
          for (let a = 0; a < allPhotos.length; a++) {
             const fotoUrl = await uploadImage(allPhotos[a])
             files.push(fotoUrl)
-            // 4 resimden fazlası alınmaması için döngü biter
-            if (a === 3) break
          }
          // string verileri, numbera çeviriyoruz
          dataObj["price"] = +dataObj["price"]
@@ -56,12 +54,13 @@ const SaveProduct = () => {
 
    const handleImageAdd = (e) => {
       const images = Array.from(e.target.files)
-      const imagesList = []
-      for (let index = 0; index < images.length; index++) {
-         imagesList.push(URL.createObjectURL(images[index]));
-         if (index === 3) break
+      if (images.length > 4) {
+         toast.warn("En fazla 4 dosya seçebilirsiniz!", {position:"bottom-center"})
+         e.target.value = ''
+      } else {
+         const urlList = images.map(item=> URL.createObjectURL(item)) 
+         setImagesUrl(urlList)
       }
-      setImagesUrl(imagesList)
    }
 
    return (
