@@ -20,7 +20,7 @@ const SaveProduct = () => {
       const dataObj = Object.fromEntries(data.entries())
       // Fotolar çoklu olunca bu şekilde almak gerekiyor
       const allPhotos = data.getAll("photos")
-      
+
       try {
          // 2- resimleri yükle
          setIsLoading(true)
@@ -56,7 +56,11 @@ const SaveProduct = () => {
 
    const handleImageAdd = (e) => {
       const images = Array.from(e.target.files)
-      const imagesList = images.map(item => URL.createObjectURL(item))
+      const imagesList = []
+      for (let index = 0; index < images.length; index++) {
+         imagesList.push(URL.createObjectURL(images[index]));
+         if (index === 3) break
+      }
       setImagesUrl(imagesList)
    }
 
@@ -113,16 +117,14 @@ const SaveProduct = () => {
 
             <div className="flex flex-col gap-3">
                {
-                  imagesUrl.length >0 && <label >Anasayfa akışında göstermek için bir resim seçiniz</label>
-               }          
+                  imagesUrl.length > 0 && <label >Anasayfa akışında göstermek için bir resim seçiniz</label>
+               }
                <div className="flex gap-3 w-full h-10">
                   {
-                     imagesUrl.map((url, i) => (
-                        <div key={url} className="flex gap-1">
-                           <input type="radio" name="indexMainImage" value={i} />
-                           <img src={url} alt="image" className="h-full" />
-                        </div>
-                     ))
+                     imagesUrl.map((url, i) => (<div key={url} className="flex gap-1">
+                        <input type="radio" name="indexMainImage" value={i} />
+                        <img src={url} alt="image" className="h-full" />
+                     </div>))
                   }
                </div>
             </div>
