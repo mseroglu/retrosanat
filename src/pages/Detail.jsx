@@ -29,7 +29,7 @@ const Detail = () => {
 
 
   return (
-    <Container stil="grid place-items-center ">
+    <Container className="grid place-items-center ">
       {isLoading
         ? <Loader />
         : data && (

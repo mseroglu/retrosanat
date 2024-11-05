@@ -24,19 +24,21 @@ function App() {
             <Route path='/' element={<MainPage />} />
             <Route path='/home' element={<MainPage />} />
             <Route path='/login' element={<Login />} />
-            <Route path='/register' element={<Register />} />
             <Route path='/products' element={<Products />} />
             <Route path='/products/category/:category' element={<Products />} />
             <Route path='/product/detail/:id' element={<Detail />} />
 
+            {/* Burası protecteda alınacak */}
+            <Route path='/addProduct' element={<SaveProduct />} />
+
             {/** Protected - Giriş yapmadan erişilemez alanlar */}
             <Route element={<Protected />}>
-              <Route path='/addProduct' element={<SaveProduct />} />
+              <Route path='/register' element={<Register />} />
             </Route>
             <Route path='*' element={<NotFound />} />
           </Routes>
           <Footer />
-          <ToastContainer position='bottom-right' theme='colored'/>
+          <ToastContainer position='bottom-right' theme='colored' />
         </BrowserRouter>
       </div>
     </>

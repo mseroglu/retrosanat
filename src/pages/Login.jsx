@@ -41,8 +41,8 @@ const Login = () => {
   }, [auth.currentUser])
 
   return (
-    <Container stil="flex-grow mt-20 py-20">
-      <div className="grid place-items-center">
+    <Container >
+      <div className="grid place-items-center h-[450px]">
         {
           isLoading
             ? <Loader />

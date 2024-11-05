@@ -12,14 +12,14 @@ import { useSearchParams } from "react-router-dom"
 
 const Products = () => {
   let { isLoading, error, products } = useSelector(store => store)
-  const [filter, setFilter] = useState(["created_at", "desc"])
-
+  const [sorting, setSorting] = useState(["created_at", "desc"])
+  console.log(products)
   const dispatch = useDispatch()
 
-  const handleFilter = (e) => {
+  const handleSorting = (e) => {
     let f = e.target.value
     f = f.split("-")
-    setFilter(f)
+    setSorting(f)
   }
 
   // collection un referansı
@@ -27,44 +27,43 @@ const Products = () => {
 
   useEffect(() => {
     // sorgu ayarları 
-    const q = query(productsColl, orderBy(...filter), limit(30))
+    const q = query(productsColl, orderBy(...sorting), limit(30))
 
     const result = []
-    // tüm ürünleri alma
+    // ürünleri alma
     dispatch({ type: ActionTypes.PRODUCTS_LOADING })
     getDocs(q)
       .then(res => {
-        res.forEach(item => { result.push({ ...item.data(), id: item.id }) })
-        //setProducts(result)        
+        res.forEach(item => { result.push({ ...item.data(), id: item.id }) })                
         dispatch({ type: ActionTypes.PRODUCTS_SUCCESS, payload: result })
       })
       .catch(err => {
         dispatch({ type: ActionTypes.PRODUCTS_ERROR, payload: err.code })
       })
 
-  }, [filter])
+  }, [sorting])
 
 
   return (
-    <Container stil="flex flex-col gap-3">
-      <div className="flex gap-5 self-center p-3 rounded-md border">
-        <label htmlFor="filter">Sırala</label>
-        <select onChange={handleFilter} name="filter" id="filter" className="border">
-          <option value="created_at-desc">Son eklenen</option>
-          <option value="price-asc">Ucuzdan pahalıya</option>
-          <option value="price-desc">Pahalıdan ucuza</option>
-          <option value="title-asc">Ürün Adı A&gt;Z</option>
-          <option value="title-desc">Ürün Adı Z&gt;A</option>
-        </select>
-      </div>
-
-      <div className="flex gap-4 flex-wrap justify-center">
+    <Container className="flex flex-col gap-3">
+      <select onChange={handleSorting} name="sorting" id="sorting"
+        className="self-center rounded-md border-2 px-2 py-1">
+        <option value="created_at-desc">Sırala (Varsayılan son eklenen)</option>
+        <option value="price-asc">Ucuzdan pahalıya</option>
+        <option value="price-desc">Pahalıdan ucuza</option>
+        <option value="title-asc">Ürün Adı A &gt; Z</option>
+        <option value="title-desc">Ürün Adı Z &gt; A</option>
+      </select>
+      
+      <div className="flex gap-4 flex-wrap justify-center min-h-[400px]">
         {
           isLoading
             ? <Loader />
             : error
               ? <Error err={error} />
-              : products?.map((item, i) => <ProductCard key={i} product={item} />)
+              : products.length == 0
+                ? <h2 className="mt-20">Ürün bulunamadı..</h2>
+                : products?.map((item, i) => <ProductCard key={i} product={item} />)
         }
       </div>
     </Container>

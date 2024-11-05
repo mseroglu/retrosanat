@@ -4,13 +4,15 @@ const initialState = {
    isLoading: false,
    error: null,
    products: [],
-   productsCarousel: []
+   //productsCarousel: [],
+   
 }
 
 const productReducer = (state = initialState, action) => {
    console.log(action)
 
    switch (action.type) {
+
       case ActionTypes.PRODUCTS_LOADING:
          return { ...state, isLoading: true };
 
@@ -19,9 +21,6 @@ const productReducer = (state = initialState, action) => {
 
       case ActionTypes.PRODUCTS_SUCCESS:
          return { ...state, isLoading: false, error: null, products: action.payload };
-
-      case ActionTypes.PRODUCTS_CAROUSEL_SUCCESS:
-         return { ...state, isLoading: false, error: null, productsCarousel: action.payload };
          
       default:
          return state;

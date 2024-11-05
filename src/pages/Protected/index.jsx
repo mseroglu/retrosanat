@@ -17,7 +17,7 @@ const Protected = () => {
 
    if (isAuth === false) {
       // useNavigate yerine bu bileşeni kullanıyoruz, performans için
-      return <Navigate to="/" />
+      return <Navigate to="/login" />
    }
 
    return (<Outlet />)

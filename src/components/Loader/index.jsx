@@ -1,4 +1,4 @@
-import Container from "../Container"
+
 import "./loader.css"
 
 const Loader = ({ stil="" }) => {

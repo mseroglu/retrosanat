@@ -4,7 +4,7 @@ import Loader from "../components/Loader"
 
 const Register = () => {
   return (
-    <Container stil="flex-grow mt-20 py-20">
+    <Container className="">
       <div>
         <Loader />
       </div>

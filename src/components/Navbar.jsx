@@ -8,7 +8,6 @@ import { auth } from "../db-operations/config";
 import { toast } from "react-toastify";
 import Categories from "./Categories";
 
-
 // Debounce fonksiyonu
 function debounce(func, delay) {
    let timeoutId;
@@ -70,7 +69,8 @@ const Navbar = () => {
 
                   <Link to={"/products"} className="text-slate-600 transition hover:underline md:text-[16px] font-semibold" >Ürünler</Link>
                   {
-                     auth.currentUser !== null &&
+                     // şart devreye alıanacak
+                     // auth.currentUser !== null  &&
                      <Link to={"/addProduct"} className="text-slate-600 transition hover:underline md:text-[16px] font-semibold whitespace-nowrap" >Ürün Ekle</Link>
                   }
                   <div className="flex gap-3 font-normal text-slate-700 ">
