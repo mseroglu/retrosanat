@@ -13,7 +13,7 @@ export const uploadImage = async (file) => {
       await uploadBytes(imageRef, file)
       return getDownloadURL(imageRef)
    } catch (error) {
-      toast.error("Görsel yüklenirken bir hata oluştu!  " + error.code, {position: "bottom-right"})
+      toast.error("Görsel yüklenirken bir hata oluştu!  " + error.code)
    }
 }
 

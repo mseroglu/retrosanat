@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import CATEGORIES from "../utils/categories"
+import CATEGORIES from "../constants/categories"
 
 const ProductCard = ({ product }) => {
 
@@ -21,7 +21,7 @@ const ProductCard = ({ product }) => {
                   <h3 className="font-semibold mb-3 capitalize ">{product.title}</h3>
                   <p className="first-letter:uppercase">{product.description}</p>
                   <p className="first-letter:uppercase font-semibold text-sm">
-                     Kategori: {found.value}</p>
+                     Kategori: {found?.value}</p>
                </div>
 
                <div className="px-2 pb-2 bg-gray-300">

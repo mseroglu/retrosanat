@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import Container from "../components/Container"
 import ProductCard from "../components/ProductCard"
 import { useDispatch, useSelector } from "react-redux"
-import ActionTypes from "../redux/ActionTypes"
+import ActionTypes from "../constants/ActionTypes"
 import Loader from "../components/Loader"
 import Error from "../components/Error"
 import { collection, getDocs, limit, or, orderBy, query, where } from "firebase/firestore"
@@ -34,7 +34,7 @@ const Products = () => {
     dispatch({ type: ActionTypes.PRODUCTS_LOADING })
     getDocs(q)
       .then(res => {
-        res.forEach(item => { result.push({ ...item.data(), id: item.id }) })                
+        res.forEach(item => result.push({ ...item.data(), id: item.id }) )                
         dispatch({ type: ActionTypes.PRODUCTS_SUCCESS, payload: result })
       })
       .catch(err => {

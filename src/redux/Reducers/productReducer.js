@@ -1,11 +1,10 @@
-import ActionTypes from "../ActionTypes";
+import ActionTypes from "../../constants/ActionTypes";
 
 const initialState = {
    isLoading: false,
    error: null,
    products: [],
-   //productsCarousel: [],
-   
+  
 }
 
 const productReducer = (state = initialState, action) => {

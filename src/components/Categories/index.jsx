@@ -1,9 +1,9 @@
 import { collection, getDocs, limit, orderBy, query, where } from "firebase/firestore"
-import CATEGORIES from "../../utils/categories"
+import CATEGORIES from "../../constants/categories"
 import { db } from "../../db-operations/config"
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
-import ActionTypes from "../../redux/ActionTypes"
+import ActionTypes from "../../constants/ActionTypes"
 import { useNavigate } from "react-router-dom"
 
 

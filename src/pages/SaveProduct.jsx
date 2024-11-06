@@ -5,7 +5,7 @@ import { addDoc, collection, serverTimestamp } from "firebase/firestore"
 import { db } from "../db-operations/config"
 import { toast } from "react-toastify"
 import Loader from "../components/Loader"
-import CATEGORIES from "../utils/categories"
+import CATEGORIES from "../constants/categories"
 
 
 const SaveProduct = () => {
@@ -23,7 +23,7 @@ const SaveProduct = () => {
 
       try {
          // 2- resimleri yükle
-         setIsLoading(true)         
+         setIsLoading(true)
          const files = []
          for (let a = 0; a < allPhotos.length; a++) {
             const fotoUrl = await uploadImage(allPhotos[a])
@@ -55,10 +55,10 @@ const SaveProduct = () => {
    const handleImageAdd = (e) => {
       const images = Array.from(e.target.files)
       if (images.length > 4) {
-         toast.warn("En fazla 4 dosya seçebilirsiniz!", {position:"bottom-center"})
+         toast.warn("En fazla 4 dosya seçebilirsiniz!", { position: "bottom-center" })
          e.target.value = ''
       } else {
-         const urlList = images.map(item=> URL.createObjectURL(item)) 
+         const urlList = images.map(item => URL.createObjectURL(item))
          setImagesUrl(urlList)
       }
    }
@@ -81,9 +81,8 @@ const SaveProduct = () => {
                <select name="category" className=" border px-2 py-1 rounded-md">
                   <option value="">Kategori Seçiniz</option>
                   {
-                     CATEGORIES.map((item) => {
-                        const [key, value] = Object.entries(item)[0]
-                        return <option key={key} value={key} > {value} </option>
+                     CATEGORIES.map((item) => {                        
+                        return <option key={item.key} value={item.key} > {item.value} </option>
                      })
                   }
                </select>
@@ -116,17 +115,23 @@ const SaveProduct = () => {
 
             <div className="flex flex-col gap-3">
                {
-                  imagesUrl.length > 0 && <label >Anasayfa akışında göstermek için bir resim seçiniz</label>
+                  imagesUrl.length != 0 && (
+                     <>
+                        <label >Anasayfa akışında göstermek için bir resim seçiniz</label>
+                        <div className="flex gap-3 w-full h-10">
+                           {
+                              imagesUrl.map((url, i) => (
+                                 <div key={url} className="flex gap-1">
+                                    <input type="radio" name="indexMainImage" value={i} />
+                                    <img src={url} alt="image" className="h-full" />
+                                 </div>))
+                           }
+                        </div>
+                     </>)
                }
-               <div className="flex gap-3 w-full h-10">
-                  {
-                     imagesUrl.map((url, i) => (<div key={url} className="flex gap-1">
-                        <input type="radio" name="indexMainImage" value={i} />
-                        <img src={url} alt="image" className="h-full" />
-                     </div>))
-                  }
-               </div>
             </div>
+
+
 
             <button type="submit" className="font-semibold border-2 px-5 py-1 mt-3 rounded-md hover:bg-slate-800 hover:text-white transition w-fit self-center">Gönder</button>
          </form>
