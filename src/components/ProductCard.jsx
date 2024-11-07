@@ -9,7 +9,7 @@ const ProductCard = ({ product }) => {
       <div>
          <div className="flex flex-col w-60 md:w-80 rounded-md overflow-hidden border transition hover:scale-105 shadow-md h-full">
 
-            <img src={product.photos[product.indexMainImage]} alt="product-image" className="w-full h-60 object-cover " />
+            <img src={product.photos[product.indexMainImage ||0]} alt="product-image" className="w-full h-60 object-cover " />
             <div className="flex flex-col flex-grow">
                
                {/* Taglar alanı tıklanır olacak */}

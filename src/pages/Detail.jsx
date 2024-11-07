@@ -10,9 +10,9 @@ import { GrFormPrevious } from "react-icons/gr";
 
 const Detail = () => {
   const [data, setData] = useState(null)
-  const [imageIndex, setImageIndex] = useState()
-  const params = useParams()
+  const [imageIndex, setImageIndex] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
+  const params = useParams()
 
   const docRef = doc(db, "products", params.id)
 
@@ -33,46 +33,54 @@ const Detail = () => {
       {isLoading
         ? <Loader />
         : data && (
-          <div className="grid gap-4 grid-cols-1 md:grid-cols-2 border-2 rounded-xl p-2 mt-2 shadow-lg bg-zinc-100 relative w-5/6 lg:w-2/3 place-items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 mt-2 shadow-md shadow-slate-900 bg-zinc-100 relative w-fit place-items-center">
 
             <Link to={-1} className="flex items-center absolute top-[-30px] left-0 ">
               <GrFormPrevious className="text-3xl" />önceki sayfa
             </Link>
 
-            <div className="col-span-1 flex flex-col w-full gap-3 rounded-lg ">
-              <div className="h-[350px] w-full ">
-                <img src={data.photos[imageIndex]} alt="image"
-                  className="col-span-1 h-full w-full transition border rounded-lg object-cover hover:scale-125 bg-zinc-200" />
+            <div className="col-span-1 flex w-full ">
+              <div className="h-[460px] w-[360px] ">
+                <img src={data.photos[imageIndex || 0]} alt="image"
+                  className="h-full w-full transition object-cover hover:scale-125  bg-zinc-200" />
               </div>
-              <div className="flex gap-2 border-2 rounded-lg bg-zinc-200 p-1">
-                {data.photos.map((item, i) =>
-                  <img key={i} src={item} alt="product-image" className="w-1/5 h-16 object-center " onMouseEnter={() => setImageIndex(i)} />
-                )}
-              </div>
-
             </div>
 
-            <div className="grid gap-3 w-full items-center ">
-              <h2 className="font-bold text-2xl capitalize">{data.title}</h2>
-              <p className="capitalize">{data.description}</p>
-              <table>
-                <tbody>
-                  <tr>
-                    <td>Stok </td>
-                    <td className="w-4  text-center"> : </td>
-                    <td> {data.stock} Adet</td>
-                  </tr>
-                  <tr>
-                    <td> Fiyat </td>
-                    <td className="w-4 text-center"> : </td>
-                    <td> {data.price} ₺</td>
-                  </tr>
-                </tbody>
-              </table>
-              <div className="flex gap-1 h-max">
-                {data.categories?.map((item, i) => (
-                  <span key={i} className="border-2 text-sm border-gray-600 rounded-full px-2 bg-yellow-300 cursor-pointer">{item}</span>
-                ))}
+            <div className="flex flex-col h-full w-full bg-zinc-100">
+              <div className="flex flex-col px-5 pb-3 pt-5 h-full justify-between">
+                <div className="grid gap-3 w-full items-center " >
+                  <h2 className="font-bold text-2xl capitalize">{data.title}</h2>
+                  <p className="capitalize">{data.description}</p>
+                  {/* Fiyat ve miktar düzeni için */}
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td>Stok </td>
+                        <td className="w-4  text-center"> : </td>
+                        <td> {data.stock} Adet</td>
+                      </tr>
+                      <tr>
+                        <td> Fiyat </td>
+                        <td className="w-4 text-center"> : </td>
+                        <td> {data.price} ₺</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                {/* TAGLAR */}
+                <div className="flex gap-1 h-max ">
+                  {data.tags?.map((item, i) => (
+                    <span key={i} className="border-2 text-sm border-gray-600 rounded-full px-2 bg-yellow-300 cursor-pointer">{item}</span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex gap-2 bg-zinc-300 py-3 justify-center">
+                {data.photos.map((item, i) =>
+                  <img key={i} src={item} alt="product-image"
+                    className="w-20 h-20 object-center rounded-full border-4 border-zinc-100" onMouseEnter={() => setImageIndex(i)} />
+                )}
               </div>
             </div>
 
