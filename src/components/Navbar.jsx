@@ -7,6 +7,7 @@ import { signOut } from "firebase/auth";
 import { auth } from "../db-operations/config";
 import { toast } from "react-toastify";
 import Categories from "./Categories";
+import ActionTypes from "../constants/ActionTypes";
 
 // Debounce fonksiyonu
 function debounce(func, delay) {
@@ -67,7 +68,8 @@ const Navbar = () => {
                      </div>
                   </Link>
 
-                  <Link to={"/products"} className="text-slate-600 transition hover:underline md:text-[16px] font-semibold" >Ürünler</Link>
+                  <Link to={"/products"} 
+                  onClick={()=> dispatch({type: ActionTypes.SELECTED_CATEGORY,payload:null})} className="text-slate-600 transition hover:underline md:text-[16px] font-semibold" >Ürünler</Link>
                   {
                      // şart devreye alıanacak
                      // auth.currentUser !== null  &&

@@ -4,7 +4,8 @@ const initialState = {
    isLoading: false,
    error: null,
    products: [],
-  
+   selectedCategory: null
+
 }
 
 const productReducer = (state = initialState, action) => {
@@ -20,7 +21,10 @@ const productReducer = (state = initialState, action) => {
 
       case ActionTypes.PRODUCTS_SUCCESS:
          return { ...state, isLoading: false, error: null, products: action.payload };
-         
+
+      case ActionTypes.SELECTED_CATEGORY:
+         return { ...state, isLoading: false, error: null, selectedCategory: action.payload };
+
       default:
          return state;
    }

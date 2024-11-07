@@ -13,24 +13,17 @@ const Categories = () => {
    const dispatch = useDispatch()
    const navigate = useNavigate()
 
-   const productColl = collection(db, "products")
-   
    const handleClick = (e) => {
       const cat = e.target.getAttribute("data-category")
       setCategory(cat)
-      navigate("/products/category/" + cat)
-      
-      const q = query(productColl, where("category", "==", cat), limit(30))
-      dispatch({ type: ActionTypes.PRODUCTS_LOADING })
-
-      const result = []
-      getDocs(q)
-         .then((resp) => {
-            resp.forEach(item => { result.push({ ...item.data(), id: item.id }) })
-            dispatch({ type: ActionTypes.PRODUCTS_SUCCESS, payload: result })
-         })
-         .catch((err) => dispatch({ type: ActionTypes.PRODUCTS_ERROR, payload: err.code }))
    }
+   
+   useEffect(() => {
+      dispatch({ type: ActionTypes.SELECTED_CATEGORY, payload: category })
+      
+      if (category) navigate("/products/category/" + category)
+
+   }, [category])
 
    return (
       <div id="categories" className="flex text-[14px] md:text-[16px] justify-center bg-zinc-300 border-t-4 border-yellow-400">

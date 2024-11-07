@@ -8,10 +8,11 @@ import Error from "../components/Error"
 import { collection, getDocs, limit, or, orderBy, query, where } from "firebase/firestore"
 import { db } from "../db-operations/config"
 import { useSearchParams } from "react-router-dom"
+import { getProducts } from "../db-operations/getProducts"
 
 
 const Products = () => {
-  let { isLoading, error, products } = useSelector(store => store)
+  let { isLoading, error, products, selectedCategory } = useSelector(store => store)
   const [sorting, setSorting] = useState(["created_at", "desc"])
   console.log(products)
   const dispatch = useDispatch()
@@ -22,26 +23,30 @@ const Products = () => {
     setSorting(f)
   }
 
-  // collection un referansı
-  const productsColl = collection(db, "products")
-
   useEffect(() => {
-    // sorgu ayarları 
-    const q = query(productsColl, orderBy(...sorting), limit(30))
+       // collection un referansı
+   const productsColl = collection(db, "products")
+   // sorgu ayarları
+   let q;
+   if (selectedCategory) {
+      q = query(productsColl, where("category", "==", selectedCategory), orderBy(...sorting), limit(30))
+   } else {
+      q = query(productsColl, orderBy(...sorting), limit(30))
+   }
 
-    const result = []
-    // ürünleri alma
-    dispatch({ type: ActionTypes.PRODUCTS_LOADING })
-    getDocs(q)
+   const result = []
+   // ürünleri alma
+   dispatch({ type: ActionTypes.PRODUCTS_LOADING })
+   getDocs(q)
       .then(res => {
-        res.forEach(item => result.push({ ...item.data(), id: item.id }) )                
-        dispatch({ type: ActionTypes.PRODUCTS_SUCCESS, payload: result })
+         res.forEach(item => result.push({ ...item.data(), id: item.id }))
+         dispatch({ type: ActionTypes.PRODUCTS_SUCCESS, payload: result })
       })
       .catch(err => {
-        dispatch({ type: ActionTypes.PRODUCTS_ERROR, payload: err.code })
+         dispatch({ type: ActionTypes.PRODUCTS_ERROR, payload: err.code })
       })
 
-  }, [sorting])
+  }, [sorting, selectedCategory])
 
 
   return (
