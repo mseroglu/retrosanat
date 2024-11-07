@@ -6,6 +6,7 @@ import { toast } from "react-toastify"
 import { useEffect, useState } from "react"
 import Loader from "../components/Loader"
 import { GrFormPrevious } from "react-icons/gr";
+import Tag from "../components/Tag"
 
 
 const Detail = () => {
@@ -35,9 +36,11 @@ const Detail = () => {
         : data && (
           <div className="grid grid-cols-1 md:grid-cols-2 mt-2 shadow-md shadow-slate-900 bg-zinc-100 relative w-fit place-items-center">
 
-            <Link to={-1} className="flex items-center absolute top-[-30px] left-0 ">
-              <GrFormPrevious className="text-3xl" />önceki sayfa
-            </Link>
+            <div className="absolute top-[-30px] left-0 ">
+              <Link to={-1} className="flex items-center bg-yellow-300 rounded-full pe-3 hover:bg-yellow-400">
+                <GrFormPrevious className="text-3xl" />önceki sayfa
+              </Link>
+            </div>
 
             <div className="col-span-1 flex w-full ">
               <div className="h-[460px] w-[360px] ">
@@ -71,7 +74,7 @@ const Detail = () => {
                 {/* TAGLAR */}
                 <div className="flex gap-1 h-max ">
                   {data.tags?.map((item, i) => (
-                    <span key={i} className="border-2 text-sm border-gray-600 rounded-full px-2 bg-yellow-300 cursor-pointer">{item}</span>
+                    <Tag key={i} item={item} className="border-2 border-gray-600 bg-yellow-300" />
                   ))}
                 </div>
               </div>
@@ -79,7 +82,8 @@ const Detail = () => {
               <div className="flex gap-2 bg-zinc-300 py-3 justify-center">
                 {data.photos.map((item, i) =>
                   <img key={i} src={item} alt="product-image"
-                    className="w-20 h-20 object-center rounded-full border-4 border-zinc-100" onMouseEnter={() => setImageIndex(i)} />
+                    className="w-20 h-20 object-center rounded-full border-4 border-zinc-100"
+                    onMouseEnter={() => setImageIndex(i)} />
                 )}
               </div>
             </div>

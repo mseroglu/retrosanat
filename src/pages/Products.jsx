@@ -9,7 +9,7 @@ import { useSearchParams } from "react-router-dom"
 
 
 const Products = () => {
-  let { isLoading, error, products, selectedCategory } = useSelector(store => store)
+  let { isLoading, error, products, selectedCategory, selectedTag } = useSelector(store => store)
   const [sorting, setSorting] = useState(["created_at", "desc"])
   console.log(products)
   const dispatch = useDispatch()
@@ -21,11 +21,11 @@ const Products = () => {
   }
 
   useEffect(() => {
-    getProducts(sorting, dispatch, selectedCategory)
+    getProducts(sorting, dispatch, selectedCategory, selectedTag)
 
-  }, [sorting, selectedCategory])
+  }, [sorting, selectedCategory, selectedTag])
 
-
+  console.log("Products render oldu")
   return (
     <Container className="flex flex-col gap-3">
       <select onChange={handleSorting} name="sorting" id="sorting"

@@ -20,7 +20,7 @@ const SaveProduct = () => {
       const dataObj = Object.fromEntries(data.entries())
       // Fotolar çoklu olunca bu şekilde almak gerekiyor
       const allPhotos = data.getAll("photos")
-
+      
       try {
          // 2- resimleri yükle
          setIsLoading(true)
@@ -36,7 +36,9 @@ const SaveProduct = () => {
          // storage a eklenen fotoların linklerini ekliyoruz
          dataObj["photos"] = files
          // string olarak gelen tagları Arraya dönüştürüyoruz
-         dataObj["tags"] = dataObj["tags"].split(",")
+         let tags = dataObj["tags"].toLocaleLowerCase().split(",")
+         tags = tags.map(tag=> tag.trim())
+         dataObj["tags"] = tags
          // oluşturma tarihi ekliyoruz
          dataObj["created_at"] = serverTimestamp()
          console.log(dataObj)
