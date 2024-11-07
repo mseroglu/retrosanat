@@ -1,11 +1,9 @@
 import { collection, getDocs, limit, orderBy, query, where } from "firebase/firestore";
 import { db } from "./config";
 import ActionTypes from "../constants/ActionTypes";
-import { useDispatch } from "react-redux";
 
-export const getProducts = (sorting) => {
 
-   const dispatch = useDispatch()
+export const getProducts = (sorting, dispatch, selectedCategory) => {
 
    // collection un referansı
    const productsColl = collection(db, "products")

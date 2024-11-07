@@ -5,6 +5,8 @@ import Error from "../components/Error";
 import { useEffect, useState } from "react";
 import { db } from "../db-operations/config";
 import { collection, getDocs, limit, orderBy, query, where } from "firebase/firestore"
+import { useDispatch } from "react-redux";
+import ActionTypes from "../constants/ActionTypes";
 
 
 const MainPage = () => {
@@ -12,10 +14,13 @@ const MainPage = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
 
+  const dispatch = useDispatch()
+
   // collection un referansı
   const productsColl = collection(db, "products")
 
   useEffect(() => {
+    dispatch({type:ActionTypes.SELECTED_CATEGORY, payload:null})
     // sorgu ayarları 
     const q = query(productsColl, where("indexMainImage", "in", [0, 1, 2, 3]), orderBy("created_at", "desc"), limit(10))
 
