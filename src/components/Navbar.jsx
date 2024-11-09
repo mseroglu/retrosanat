@@ -8,6 +8,7 @@ import { auth } from "../db-operations/config";
 import { toast } from "react-toastify";
 import Categories from "./Categories";
 import ActionTypes from "../constants/ActionTypes";
+import { useDispatch } from "react-redux";
 
 // Debounce fonksiyonu
 function debounce(func, delay) {
@@ -26,21 +27,22 @@ function debounce(func, delay) {
 const Navbar = () => {
    const [searchParams, setSearchParams] = useSearchParams()
    //const [searchQuery, setSearchQuery] = useState(searchParams.get("word") || "")
-   
+
    const navigate = useNavigate()
+   const dispatch = useDispatch()
 
    const handleSearch = (e) => {
       // redux yapıldıktan sonra burası yapılacak
       const searchText = e.target.value.trim()
 
-      if (searchText == ""){
+      if (searchText == "") {
          searchParams.delete("ara")
-      }else{
+      } else {
          searchParams.set("ara", e.target.value.trim())
       }
       //setSearchQuery(e.target.value.trim())
       //navigate("/products")
-      
+
       setSearchParams(searchParams)
    }
 
@@ -68,12 +70,14 @@ const Navbar = () => {
                      </div>
                   </Link>
 
-                  <Link to={"/products"} 
-                  onClick={()=> dispatch({type: ActionTypes.SELECTED_CATEGORY,payload:null})} className="text-slate-600 transition hover:underline md:text-[16px] font-semibold" >Ürünler</Link>
+                  <Link to={"/products"}
+                     onClick={() => dispatch({ type: ActionTypes.SELECTED_CATEGORY, payload: null })} className="text-slate-600 transition hover:underline md:text-[16px] font-semibold" > Ürünler
+                  </Link>
                   {
-                     // şart devreye alıanacak
+                     // şart devreye alınacak
                      // auth.currentUser !== null  &&
-                     <Link to={"/addProduct"} className="text-slate-600 transition hover:underline md:text-[16px] font-semibold whitespace-nowrap" >Ürün Ekle</Link>
+                     <Link to={"/addProduct"} className="text-slate-600 transition hover:underline md:text-[16px] font-semibold whitespace-nowrap" > Ürün Ekle
+                     </Link>
                   }
                   <div className="flex gap-3 font-normal text-slate-700 ">
                   </div>
