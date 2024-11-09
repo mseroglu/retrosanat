@@ -52,9 +52,8 @@ const Navbar = () => {
 
                   <SearchBar className="max-md:hidden" />
 
-                  <div className="max-md:hidden">
-                     <LoginBtn />
-                  </div>
+                  <LoginBtn className="max-md:hidden" />
+
                </div>
             </header>
          </div>

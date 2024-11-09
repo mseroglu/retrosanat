@@ -6,22 +6,23 @@ import { toast } from 'react-toastify'
 import { IoMdExit } from 'react-icons/io'
 
 
-const LoginBtn = () => {
+const LoginBtn = ({className, setIsOpen=()=>{} }) => {
 
    const navigate = useNavigate()
 
-
+   
    const handleSignOut = () => {
       signOut(auth)
          .then(res => {
             navigate("/")
             toast.info("Oturum kapatıldı..")
+            setIsOpen(false)
          })
          .catch(err => toast.error("Oturum kapatılamadı " + err.code))
    }
 
    return (
-      <>
+      <div className={className}>
          {
             auth.currentUser
                ? (
@@ -33,13 +34,13 @@ const LoginBtn = () => {
                      </div>
                   </Link>
                ) : (
-                  <Link to={"/login"}
+                  <Link to={"/login"} onClick={()=> setIsOpen(false)}
                      className="border-2 rounded-md w-20 border-zinc-500 grid place-items-center transition hover:bg-slate-900 hover:text-white" >
                      Giriş
                   </Link>
                )
          }
-      </>
+      </div>
    )
 }
 
