@@ -11,13 +11,10 @@ export const getProducts = (sorting, dispatch, selectedCategory, selectedTag) =>
    let q;
    if (selectedCategory) {
       q = query(productsColl, where("category", "==", selectedCategory), limit(30))
-      console.log("category çalıştı")
    } else if (selectedTag) {
       q = query(productsColl, where("tags", "array-contains", selectedTag.toLocaleLowerCase()), limit(30))
-      console.log("tag çalıştı")
    } else {
       q = query(productsColl, orderBy(...sorting), limit(30))
-      console.log("category ve tag olayınca else çalıştı")
    }
 
    const result = []

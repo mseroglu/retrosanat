@@ -57,7 +57,7 @@ const SaveProduct = () => {
    const handleImageAdd = (e) => {
       const images = Array.from(e.target.files)
       if (images.length > 4) {
-         toast.warn("En fazla 4 dosya seçebilirsiniz!", { position: "bottom-center" })
+         toast.warn("En fazla 4 dosya seçebilirsiniz!")
          e.target.value = ''
       } else {
          const urlList = images.map(item => URL.createObjectURL(item))

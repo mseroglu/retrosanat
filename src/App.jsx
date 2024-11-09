@@ -24,9 +24,9 @@ function App() {
             <Route path='/' element={<MainPage />} />
             <Route path='/home' element={<MainPage />} />
             <Route path='/login' element={<Login />} />
-            <Route path='/products' element={<Products />} />
-            <Route path='/products/category/:category' element={<Products />} />
             <Route path='/products/tag/:tag' element={<Products />} />
+            <Route path='/products/category/:category' element={<Products />} />
+            <Route path='/products' element={<Products />} />
             <Route path='/product/detail/:id' element={<Detail />} />
 
             {/* Burası protecteda alınacak */}

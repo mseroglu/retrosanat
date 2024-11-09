@@ -44,7 +44,7 @@ const Products = () => {
             : error
               ? <Error err={error} />
               : products.length == 0
-                ? <h2 className="mt-20">Ürün bulunamadı..</h2>
+                ? <h2 className="mt-20 font-semibold">Ürün bulunamadı..</h2>
                 : products?.map((item, i) => <ProductCard key={i} product={item} />)
         }
       </div>
