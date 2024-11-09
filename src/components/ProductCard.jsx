@@ -9,10 +9,11 @@ const ProductCard = ({ product }) => {
 
 
    return (
-      <div>
-         <div className="flex flex-col w-60 md:w-80 rounded-md overflow-hidden border transition hover:scale-105 shadow-md h-full">
+      <>
+         <div className="flex flex-col w-60 md:w-80 rounded-md overflow-hidden border transition hover:scale-105 shadow-md h-[200px]">
 
-            <img src={product.photos[product.indexMainImage || 0]} alt="product-image" className="w-full h-60 object-cover " />
+            <img src={product.photos[product.indexMainImage || 0]} alt="product-image" 
+            className="w-full h-60 object-cover " />
             <div className="flex flex-col flex-grow">
 
                <div className="flex-grow px-2 pt-4 bg-gray-200">
@@ -41,7 +42,7 @@ const ProductCard = ({ product }) => {
                </div>
             </Link>
          </div>
-      </div>
+      </>
    )
 }
 

@@ -43,14 +43,14 @@ const Detail = () => {
             </div>
 
             <div className="col-span-1 flex w-full ">
-              <div className="h-[460px] w-[360px] ">
+              <div className="h-320 md:h-[460px] w-[360px] ">
                 <img src={data.photos[imageIndex || 0]} alt="image"
                   className="h-full w-full transition object-cover hover:scale-125  bg-zinc-200" />
               </div>
             </div>
 
-            <div className="flex flex-col h-full w-full bg-zinc-100">
-              <div className="flex flex-col px-5 pb-3 pt-5 h-full justify-between">
+            <div className="flex flex-col-reverse md:flex-col h-full w-full bg-zinc-100">
+              <div className="flex flex-col px-5 pb-3 pt-3 md:pt-5 h-full justify-between">
                 <div className="grid gap-3 w-full items-center " >
                   <h2 className="font-bold text-2xl capitalize">{data.title}</h2>
                   <p className="capitalize">{data.description}</p>
@@ -72,7 +72,7 @@ const Detail = () => {
                 </div>
 
                 {/* TAGLAR */}
-                <div className="flex gap-1 h-max ">
+                <div className="flex gap-1 h-max mt-5">
                   {data.tags?.map((item, i) => (
                     <Tag key={i} item={item} className="border-2 border-gray-600 bg-yellow-300" />
                   ))}
