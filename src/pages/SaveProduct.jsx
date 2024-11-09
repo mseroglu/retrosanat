@@ -29,6 +29,8 @@ const SaveProduct = () => {
             const fotoUrl = await uploadImage(allPhotos[a])
             files.push(fotoUrl)
          }
+         dataObj["title"] = dataObj["title"].toLocaleLowerCase()
+         dataObj["description"] = dataObj["description"].toLocaleLowerCase()
          // string verileri, numbera çeviriyoruz
          dataObj["price"] = +dataObj["price"]
          dataObj["stock"] = +dataObj["stock"]

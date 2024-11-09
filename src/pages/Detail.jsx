@@ -82,7 +82,7 @@ const Detail = () => {
               <div className="flex gap-2 bg-zinc-300 py-3 justify-center">
                 {data.photos.map((item, i) =>
                   <img key={i} src={item} alt="product-image"
-                    className="w-20 h-20 object-center rounded-full border-4 border-zinc-100"
+                    className={`w-20 h-20 object-center rounded-full border-4 ${imageIndex==i ? "border-zinc-100":"border-zinc-400"}`}
                     onMouseEnter={() => setImageIndex(i)} />
                 )}
               </div>

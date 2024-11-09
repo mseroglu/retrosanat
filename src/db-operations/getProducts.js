@@ -10,9 +10,15 @@ export const getProducts = (sorting, dispatch, selectedCategory, selectedTag) =>
    // sorgu ayarları
    let q;
    if (selectedCategory) {
-      q = query(productsColl, where("category", "==", selectedCategory), limit(30))
+      q = query(productsColl, 
+         where("category", "==", selectedCategory), 
+         orderBy(...sorting), 
+         limit(30))
    } else if (selectedTag) {
-      q = query(productsColl, where("tags", "array-contains", selectedTag.toLocaleLowerCase()), limit(30))
+      q = query(productsColl, 
+         where("tags", "array-contains", selectedTag.toLocaleLowerCase()),
+         orderBy(...sorting),
+         limit(30))
    } else {
       q = query(productsColl, orderBy(...sorting), limit(30))
    }
