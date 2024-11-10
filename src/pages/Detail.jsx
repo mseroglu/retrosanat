@@ -43,17 +43,17 @@ const Detail = () => {
             </div>
 
             <div className="col-span-1 flex w-full ">
-              <div className="h-320 md:h-[460px] w-[360px] ">
+              <div className="h-[320px] md:h-[460px] w-[360px] ">
                 <img src={data.photos[imageIndex || 0]} alt="image"
                   className="h-full w-full transition object-cover hover:scale-125  bg-zinc-200" />
               </div>
             </div>
 
-            <div className="flex flex-col-reverse md:flex-col h-full w-full bg-zinc-100">
+            <div className="col-span-1 flex flex-col-reverse md:flex-col h-full w-full bg-zinc-100">
               <div className="flex flex-col px-5 pb-3 pt-3 md:pt-5 h-full justify-between">
                 <div className="grid gap-3 w-full items-center " >
-                  <h2 className="font-bold text-2xl capitalize">{data.title}</h2>
-                  <p className="capitalize">{data.description}</p>
+                  <h2 className="font-bold text-2xl capitalize md:mt-10">{data.title}</h2>
+                  <p className="first-letter:uppercase">{data.description}</p>
                   {/* Fiyat ve miktar düzeni için */}
                   <table>
                     <tbody>
@@ -79,10 +79,11 @@ const Detail = () => {
                 </div>
               </div>
 
+                {/* Mini fotolar */}
               <div className="flex gap-2 bg-zinc-300 py-3 justify-center">
                 {data.photos.map((item, i) =>
                   <img key={i} src={item} alt="product-image"
-                    className={`w-20 h-20 object-center rounded-full border-4 ${imageIndex==i ? "border-zinc-100":"border-zinc-400"}`}
+                    className={`w-20 h-20 object-cover rounded-full border-4 ${imageIndex==i ? "border-zinc-100":"border-zinc-400"}`}
                     onMouseEnter={() => setImageIndex(i)} />
                 )}
               </div>
