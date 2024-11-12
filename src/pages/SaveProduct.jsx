@@ -85,8 +85,7 @@ const SaveProduct = () => {
    }
 
    useEffect(() => {
-      editProduct && setImagesUrl(editProduct.photos)
-      console.log("editProduct: ", editProduct)
+      editProduct && setImagesUrl(editProduct.photos)      
    }, [])
 
    return (
