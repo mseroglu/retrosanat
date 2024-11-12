@@ -16,7 +16,7 @@ const SaveProduct = () => {
    const [imagesUrl, setImagesUrl] = useState([])
 
    const dispatch = useDispatch()
-   
+
 
    const handleSubmit = async (e) => {
       e.preventDefault()
@@ -45,28 +45,27 @@ const SaveProduct = () => {
          // string olarak gelen tagları Arraya dönüştürüyoruz
          let tags = dataObj["tags"].toLocaleLowerCase().split(",")
          tags = tags.map(tag => tag.trim())
-         tags = tags.filter(tag => tag !== "")
-         console.log(tags)
+         tags = tags.filter(tag => tag != "")
+
          dataObj["tags"] = tags
-         
-         if (editProduct){
+
+         if (editProduct) {
             // 3- ürünü güncelle
             dataObj["photos"] = editProduct.photos
             const docRef = doc(db, "products", editProduct.id)
-            updateDoc(docRef, dataObj)
-            e.target.reset()
+            await updateDoc(docRef, dataObj)            
             toast.success("Ürün başarıyla güncellendi..")
-            dispatch({type: ActionTypes.EDIT_PRODUCT, payload:null})
-         }else{
+            dispatch({ type: ActionTypes.EDIT_PRODUCT, payload: null })
+         } else {
             // oluşturma tarihi ekliyoruz
             dataObj["created_at"] = serverTimestamp()
             // 3- yeni ürünü firebase ekle
             const productCollection = collection(db, "products")
             await addDoc(productCollection, dataObj)
             toast.success("Ürün başarıyla kaydedildi.")
-            // 4- formu sıfırla
-            e.target.reset()
          }
+         // 4- formu sıfırla
+         e.target.reset()
 
       } catch (error) {
          toast.error("Kaydetme işlemi başarısız oldu. HATA: " + error.code)
@@ -99,14 +98,14 @@ const SaveProduct = () => {
             <h2 className="text-center font-bold bg-zinc-300 py-1 rounded-t-md">{editProduct ? "Ürün Düzenle" : "Yeni Ürün"} </h2>
             <div className="flex flex-col">
                <label htmlFor="title">Ürün Adı</label>
-               <input id="title" name="title" type="text" defaultValue={editProduct? editProduct.title:""}
+               <input id="title" name="title" type="text" defaultValue={editProduct ? editProduct.title : ""}
                   required className="border px-2 py-1 rounded-md " />
             </div>
 
             <div className="flex flex-col">
                <label htmlFor="categories">Kategori</label>
-               <select name="category" className=" border px-2 py-1 rounded-md" 
-               defaultValue={editProduct ? editProduct.category : ""}>
+               <select name="category" className=" border px-2 py-1 rounded-md"
+                  defaultValue={editProduct ? editProduct.category : ""}>
                   <option value="">Kategori Seçiniz</option>
                   {
                      CATEGORIES.map((item) => {
@@ -118,12 +117,12 @@ const SaveProduct = () => {
 
             <div className="flex flex-col">
                <label htmlFor="tags">Etiketler</label>
-               <input id="tags" name="tags" required placeholder="cam, boya, fırça " className="border px-2 py-1 rounded-md " defaultValue={editProduct? editProduct.tags?.join(", "):""} />
+               <input id="tags" name="tags" required placeholder="cam, boya, fırça " className="border px-2 py-1 rounded-md " defaultValue={editProduct ? editProduct.tags?.join(", ") : ""} />
             </div>
 
             <div className="flex flex-col">
                <label htmlFor="description">Açıklama</label>
-               <textarea id="description" name="description" defaultValue={editProduct? editProduct.description:""}
+               <textarea id="description" name="description" defaultValue={editProduct ? editProduct.description : ""}
                   className="border px-2 py-1 rounded-md" />
             </div>
 

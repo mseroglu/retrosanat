@@ -37,7 +37,9 @@ const Navbar = () => {
                      // şart devreye alınacak
                      // auth.currentUser !== null  &&
                      <>
-                        <Link to={"/addProduct"} className="text-slate-600 transition hover:underline md:text-[16px] font-semibold whitespace-nowrap" > Ürün Ekle
+                        <Link to={"/addProduct"} 
+                        onClick={() => dispatch({ type: ActionTypes.EDIT_PRODUCT, payload: null })}
+                        className="text-slate-600 transition hover:underline md:text-[16px] font-semibold whitespace-nowrap" > Ürün Ekle
                         </Link>
                         <Link to={"/dashboard"} className="text-slate-600 transition hover:underline md:text-[16px] font-semibold whitespace-nowrap" > Dashboard
                         </Link>

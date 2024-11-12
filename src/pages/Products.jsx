@@ -26,6 +26,7 @@ const Products = () => {
   }, [sorting, selectedCategory, selectedTag])
 
   console.log("Products render oldu")
+  
   return (
     <Container className="flex flex-col gap-3">
       <select onChange={handleSorting} name="sorting" id="sorting"
