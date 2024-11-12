@@ -36,8 +36,12 @@ const Navbar = () => {
                   {
                      // şart devreye alınacak
                      // auth.currentUser !== null  &&
-                     <Link to={"/addProduct"} className="text-slate-600 transition hover:underline md:text-[16px] font-semibold whitespace-nowrap" > Ürün Ekle
-                     </Link>
+                     <>
+                        <Link to={"/addProduct"} className="text-slate-600 transition hover:underline md:text-[16px] font-semibold whitespace-nowrap" > Ürün Ekle
+                        </Link>
+                        <Link to={"/dashboard"} className="text-slate-600 transition hover:underline md:text-[16px] font-semibold whitespace-nowrap" > Dashboard
+                        </Link>
+                     </>
                   }
                   <div className="flex gap-3 font-normal text-slate-700 ">
                   </div>

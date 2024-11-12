@@ -9,7 +9,7 @@ import { useSearchParams } from "react-router-dom"
 
 
 const Products = () => {
-  let { isLoading, error, products, selectedCategory, selectedTag } = useSelector(store => store)
+  let { isLoading, error, products, selectedCategory, selectedTag } = useSelector(store => store.products)
   const [sorting, setSorting] = useState(["created_at", "desc"])
   console.log(products)
   const dispatch = useDispatch()

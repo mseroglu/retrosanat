@@ -1,7 +1,5 @@
-import { Link } from "react-router-dom"
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import SearchBar from "../SearchInput";
-import { FaSearch } from "react-icons/fa";
 import LoginBtn from "../LoginBtn";
 
 

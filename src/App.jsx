@@ -12,6 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Protected from './pages/Protected'
 import NotFound from './pages/NotFound'
+import Dashboard from './pages/Dashboard'
 
 function App() {
 
@@ -25,9 +26,11 @@ function App() {
             <Route path='/home' element={<MainPage />} />
             <Route path='/login' element={<Login />} />
             <Route path='/products' element={<Products />} />
+            <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/products/tag/:tag' element={<Products />} />
             <Route path='/products/category/:category' element={<Products />} />
             <Route path='/product/detail/:id' element={<Detail />} />
+            <Route path='/product/edit/:id' element={<SaveProduct />} />
 
             {/* Burası protecteda alınacak */}
             <Route path='/addProduct' element={<SaveProduct />} />

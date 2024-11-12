@@ -1,11 +1,13 @@
-import { createStore } from "redux"
+import { combineReducers, createStore } from "redux"
 import productReducer from "./Reducers/productReducer"
+import editProductReducer from "./Reducers/editProductReducer"
 
-{/*   birden fazla reducer olursa bu şekilde olacak ve abonelikler de değişecek
+
    
    const rootReducer = combineReducers({
-      products: productReducer
+      products: productReducer,
+      editProduct: editProductReducer
    })
-   */}
+   
 
-export default createStore(productReducer)
+export default createStore(rootReducer)
