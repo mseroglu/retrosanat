@@ -16,8 +16,8 @@ const ProductCard = ({ product }) => {
             <div className="flex flex-col flex-grow">
 
                <div className="flex-grow px-2 pt-2 bg-gray-200">
-                  <h3 className="font-semibold mb-2 capitalize ">{product.title}</h3>
-                  <p className="first-letter:uppercase text-[10px]">{product.description}</p>
+                  <h3 className="font-semibold mb-2 capitalize leading-none">{product.title}</h3>
+                  <p className="first-letter:uppercase text-[10px] leading-none">{product.description}</p>
                   <p className="first-letter:uppercase font-semibold text-[11px]">
                      Kategori: {found?.value}</p>
                </div>
@@ -29,7 +29,7 @@ const ProductCard = ({ product }) => {
             </div>
 
             {/* Taglar alanı tıklanır olacak */}
-            <div className="flex gap-1 bg-gray-400 justify-center">
+            <div className="flex flex-wrap gap-1 bg-gray-400 justify-center">
                {product.tags?.map((item, i) => (
                   <Tag key={i} item={item} className="text-white bg-gray-600" />
                   ))}
