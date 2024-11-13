@@ -16,8 +16,8 @@ const ProductCard = ({ product }) => {
             <div className="flex flex-col flex-grow">
 
                <div className="flex-grow px-2 pt-2 bg-gray-200">
-                  <h3 className="font-semibold mb-2 capitalize leading-none">{product.title}</h3>
-                  <p className="first-letter:uppercase text-[10px] leading-none">{product.description}</p>
+                  <h3 className="font-semibold mb-2 capitalize leading-tight">{product.title}</h3>
+                  <p className="first-letter:uppercase text-[10px] leading-tight">{product.description}</p>
                   <p className="first-letter:uppercase font-semibold text-[11px]">
                      Kategori: {found?.value}</p>
                </div>
