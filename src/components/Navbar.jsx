@@ -21,7 +21,7 @@ const Navbar = () => {
    return (
       <div className="fixed w-full z-[999]">
          <div className="bg-zinc-200 w-full bg-opacity-75  px-10 md:px-20" >
-            <header className="py-3 flex items-center justify-between ">
+            <header className="py-2 flex items-center justify-between ">
                <div className="flex gap-3 items-end">
 
                   <Link to={"/"} className="text-xl md:text-3xl">
@@ -31,7 +31,7 @@ const Navbar = () => {
                   </Link>
 
                   <Link to={"/products"}
-                     onClick={() => dispatch({ type: ActionTypes.SELECTED_CATEGORY, payload: null })} className="text-slate-600 transition hover:underline md:text-[16px] font-semibold" > Ürünler
+                     onClick={() => dispatch({ type: ActionTypes.SELECTED_CATEGORY, payload: null })} className="text-slate-600 transition hover:underline text-sm font-semibold" > Ürünler
                   </Link>
                   {
                      // şart devreye alınacak
@@ -39,9 +39,9 @@ const Navbar = () => {
                      <>
                         <Link to={"/addProduct"} 
                         onClick={() => dispatch({ type: ActionTypes.EDIT_PRODUCT, payload: null })}
-                        className="text-slate-600 transition hover:underline md:text-[16px] font-semibold whitespace-nowrap" > Ürün Ekle
+                        className="text-slate-600 transition hover:underline text-sm font-semibold whitespace-nowrap" > Ürün Ekle
                         </Link>
-                        <Link to={"/dashboard"} className="text-slate-600 transition hover:underline md:text-[16px] font-semibold whitespace-nowrap" > Dashboard
+                        <Link to={"/dashboard"} className="text-slate-600 transition hover:underline text-sm font-semibold whitespace-nowrap" > Dashboard
                         </Link>
                      </>
                   }

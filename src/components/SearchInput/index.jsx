@@ -24,8 +24,8 @@ const SearchBar = ({className}) => {
    return (
       <div className={`${className} relative w-full h-full`}>
          <input type="text" placeholder="ürün ara" autoFocus onChange={debouncedHandleInput}
-            className="max-w-60 w-full outline-none p-1 rounded-md" />
-         <FaSearch className="absolute right-1 top-2" />
+            className="max-w-60 w-full outline-none p-1 rounded-sm placeholder:text-sm placeholder:font-normal" />
+         <FaSearch className="absolute right-1 top-2 text-lg " />
       </div>
    )
 }

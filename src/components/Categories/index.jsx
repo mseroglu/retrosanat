@@ -29,7 +29,7 @@ const Categories = () => {
          {
             CATEGORIES.map(item => {
                return <button key={item.key} onClick={handleClick} data-category={item.key}
-                  className={`${selectedCategory == item.key && "bg-zinc-100"} font-semibold py-1 px-2 w-40 border-x hover:bg-zinc-200`} >
+                  className={`${selectedCategory == item.key && "bg-zinc-100"} font-semibold py-1 px-2 w-40 border-x hover:bg-zinc-200 text-sm uppercase`} >
                   {item.value}</button>
             })
          }
