@@ -10,21 +10,21 @@ const ProductCard = ({ product }) => {
 
    return (
       <div>
-         <div className="flex flex-col w-60 md:w-80 rounded-md overflow-hidden border transition hover:scale-105 shadow-md h-full">
+         <div className="flex flex-col w-40 md:w-60 rounded-md overflow-hidden border transition hover:scale-105 shadow-md h-80 text-sm ">
 
-            <img src={product.photos[product.indexMainImage || 0]} alt="product-image" className="w-full h-60 object-cover " />
+            <img src={product.photos[product.indexMainImage || 0]} alt="product-image" className="w-full h-36 object-cover " />
             <div className="flex flex-col flex-grow">
 
-               <div className="flex-grow px-2 pt-4 bg-gray-200">
-                  <h3 className="font-semibold mb-3 capitalize ">{product.title}</h3>
-                  <p className="first-letter:uppercase">{product.description}</p>
-                  <p className="first-letter:uppercase font-semibold text-sm">
+               <div className="flex-grow px-2 pt-2 bg-gray-200">
+                  <h3 className="font-semibold mb-2 capitalize ">{product.title}</h3>
+                  <p className="first-letter:uppercase text-[10px]">{product.description}</p>
+                  <p className="first-letter:uppercase font-semibold text-[11px]">
                      Kategori: {found?.value}</p>
                </div>
 
-               <div className="px-2 pb-2 bg-gray-300">
-                  <p className="mt-3">Stok  : {product.stock} Adet</p>
-                  <p className="font-semibold">Fiyat : {product.price} ₺</p>
+               <div className="px-2 pb-1 bg-gray-300">
+                  <p className="mt-3 text-xs">Stok  : {product.stock} Adet</p>
+                  <p className="font-semibold text-xs">Fiyat : {product.price} ₺</p>
                </div>
             </div>
 

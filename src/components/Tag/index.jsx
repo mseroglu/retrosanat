@@ -15,7 +15,7 @@ const Tag = ({ item, className }) => {
    }
    return (
       <span onClick={handleClickTag}
-         className={`${className} text-sm rounded-full cursor-pointer px-2 z-[99]`}>
+         className={`${className} text-xs rounded-full cursor-pointer px-2 z-[99]`}>
          {item}
       </span>
    )

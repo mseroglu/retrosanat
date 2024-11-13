@@ -50,10 +50,11 @@ const SaveProduct = () => {
          dataObj["tags"] = tags
 
          if (editProduct) {
+            // fotolar değişmeyecek
+            delete dataObj["photos"]
             // 3- ürünü güncelle
-            dataObj["photos"] = editProduct.photos
             const docRef = doc(db, "products", editProduct.id)
-            await updateDoc(docRef, dataObj)            
+            await updateDoc(docRef, dataObj)
             toast.success("Ürün başarıyla güncellendi..")
             dispatch({ type: ActionTypes.EDIT_PRODUCT, payload: null })
          } else {
@@ -85,8 +86,8 @@ const SaveProduct = () => {
    }
 
    useEffect(() => {
-      editProduct && setImagesUrl(editProduct.photos)      
-   }, [])
+      editProduct && setImagesUrl(editProduct.photos)
+   }, [editProduct])
 
    return (
       <Container className="grid place-items-center">
@@ -94,11 +95,13 @@ const SaveProduct = () => {
 
             {isLoading && <Loader stil="absolute top-20" />}
 
-            <h2 className="text-center font-bold bg-zinc-300 py-1 rounded-t-md">{editProduct ? "Ürün Düzenle" : "Yeni Ürün"} </h2>
+            <h2 className="text-center font-bold bg-zinc-300 py-1 rounded-t-md">
+               {editProduct ? "Ürün Düzenle" : "Yeni Ürün"} </h2>
             <div className="flex flex-col">
                <label htmlFor="title">Ürün Adı</label>
-               <input id="title" name="title" type="text" defaultValue={editProduct ? editProduct.title : ""}
-                  required className="border px-2 py-1 rounded-md " />
+               <input id="title" name="title" type="text" required
+                  defaultValue={editProduct ? editProduct.title : ""}
+                  className="border px-2 py-1 rounded-md " />
             </div>
 
             <div className="flex flex-col">

@@ -22,7 +22,6 @@ const Products = () => {
 
   useEffect(() => {
     getProducts(sorting, dispatch, selectedCategory, selectedTag)
-    console.log(sorting, selectedCategory, selectedTag)
   }, [sorting, selectedCategory, selectedTag])
 
   console.log("Products render oldu")
@@ -49,6 +48,7 @@ const Products = () => {
                 : products?.map((item, i) => <ProductCard key={i} product={item} />)
         }
       </div>
+      <div  className="h-5 bg-red-600"></div>
     </Container>
   )
 }

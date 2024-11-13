@@ -6,6 +6,7 @@ import delProduct from "../db-operations/delProduct";
 import Pagination from "../components/Pagination";
 import { Link, useNavigate } from "react-router-dom";
 import ActionTypes from "../constants/ActionTypes";
+import { getProductsPagination, getProductsPaginationNext } from "../db-operations/getProducts";
 
 
 const Dashboard = () => {
@@ -14,6 +15,13 @@ const Dashboard = () => {
    const dispatch = useDispatch()
    const navigate = useNavigate()
 
+   const dene = async ()=>{
+      const last = await getProductsPagination()
+
+      getProductsPaginationNext(last)
+   }
+   
+   dene()
 
 
    const handleDelete = (product) => {
