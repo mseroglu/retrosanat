@@ -95,18 +95,20 @@ const SaveProduct = () => {
 
             {isLoading && <Loader stil="absolute top-20" />}
 
-            <h2 className="text-center font-bold bg-zinc-300 py-1 rounded-t-md">
-               {editProduct ? "Ürün Düzenle" : "Yeni Ürün"} </h2>
+            <h2 className="text-center font-bold bg-yellow-300 py-1 rounded-t-md">
+               {editProduct ? "Ürün Düzenle" : "Yeni Ürün"}
+            </h2>
+
             <div className="flex flex-col">
                <label htmlFor="title">Ürün Adı</label>
                <input id="title" name="title" type="text" required
                   defaultValue={editProduct ? editProduct.title : ""}
-                  className="border px-2 py-1 rounded-md " />
+                  className="border px-2 py-1 rounded-md text-sm" />
             </div>
 
             <div className="flex flex-col">
                <label htmlFor="categories">Kategori</label>
-               <select name="category" className=" border px-2 py-1 rounded-md"
+               <select name="category" className=" border px-2 py-1 rounded-md text-sm"
                   defaultValue={editProduct ? editProduct.category : ""}>
                   <option value="">Kategori Seçiniz</option>
                   {
@@ -119,23 +121,23 @@ const SaveProduct = () => {
 
             <div className="flex flex-col">
                <label htmlFor="tags">Etiketler</label>
-               <input id="tags" name="tags" required placeholder="cam, boya, fırça " className="border px-2 py-1 rounded-md " defaultValue={editProduct ? editProduct.tags?.join(", ") : ""} />
+               <input id="tags" name="tags" required placeholder="cam, boya, fırça " className="border px-2 py-1 rounded-md text-sm " defaultValue={editProduct ? editProduct.tags?.join(", ") : ""} />
             </div>
 
             <div className="flex flex-col">
                <label htmlFor="description">Açıklama</label>
                <textarea id="description" name="description" defaultValue={editProduct ? editProduct.description : ""}
-                  className="border px-2 py-1 rounded-md" />
+                  className="border px-2 py-1 rounded-md text-sm" />
             </div>
 
             <div className="flex flex-col">
                <label htmlFor="stock">Stok</label>
-               <input id="stock" type="number" name="stock" defaultValue={editProduct ? editProduct.stock : 1} className="border px-2 py-1 rounded-md" />
+               <input id="stock" type="number" name="stock" defaultValue={editProduct ? editProduct.stock : 1} className="border px-2 py-1 rounded-md text-sm" />
             </div>
 
             <div className="flex flex-col">
                <label htmlFor="price">Fiyat</label>
-               <input id="price" name="price" type="number" defaultValue={editProduct ? editProduct.price : 0} className="border px-2 py-1 rounded-md" />
+               <input id="price" name="price" type="number" defaultValue={editProduct ? editProduct.price : 0} className="border px-2 py-1 rounded-md text-sm" />
             </div>
 
             {
@@ -143,7 +145,7 @@ const SaveProduct = () => {
                   <div className="flex flex-col">
                      <label htmlFor="photos">Resim (Max 4 adet)</label>
                      <input id="photos" name="photos" type="file" multiple accept=".jpeg, .jpg, .png, .bmp, .webp" onChange={handleImageAdd}
-                        className="border px-2 py-1 rounded-md" />
+                        className="border px-2 py-1 rounded-md text-sm" />
                   </div>
                )
             }

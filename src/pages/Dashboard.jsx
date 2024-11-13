@@ -40,9 +40,9 @@ const Dashboard = () => {
    return (
       <Container >
          <div className="flex flex-col h-full">
-            <h2 className="text-center text-3xl font-bold mb-3">Ürünler</h2>
+            <h2 className="text-center text-xl font-bold mb-3">Ürünler</h2>
 
-            <Link to={"/addProduct"} className="border py-1 px-3 w-max self-end bg-yellow-300 text-bold mb-2" onClick={()=> dispatch({type: ActionTypes.EDIT_PRODUCT, payload:null})}>Ürün Ekle</Link>
+            <Link to={"/addProduct"} className="border py-1 px-3 w-max self-end bg-yellow-300 mb-2 font-semibold rounded-sm text-sm" onClick={()=> dispatch({type: ActionTypes.EDIT_PRODUCT, payload:null})}>Ürün Ekle</Link>
             <table className="table table-warning">
                <thead>
                   <tr className="table-danger">
@@ -56,7 +56,7 @@ const Dashboard = () => {
                <tbody>
                   {
                      products?.map((item, i) => (
-                        <tr key={item.id} className="table-warning">
+                        <tr key={item.id} className="table-warning text-sm">
                            <th scope="row">{i + 1}</th>
                            <td className="">{item.title} </td>
                            <td className="">{item.stock} </td>

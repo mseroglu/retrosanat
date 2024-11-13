@@ -22,7 +22,7 @@ const Navbar = () => {
       <div className="fixed w-full z-[999]">
          <div className="bg-zinc-200 w-full bg-opacity-75  px-10 md:px-20" >
             <header className="py-2 flex items-center justify-between ">
-               <div className="flex gap-3 items-end">
+               <div className="flex gap-3 items-center">
 
                   <Link to={"/"} className="text-xl md:text-3xl">
                      <div className="font-semibold underline cursor-pointer hover:scale-105 transition logo md:text-[32] xl:text-[40px]">retro
@@ -36,14 +36,10 @@ const Navbar = () => {
                   {
                      // şart devreye alınacak
                      // auth.currentUser !== null  &&
-                     <>
-                        <Link to={"/addProduct"} 
-                        onClick={() => dispatch({ type: ActionTypes.EDIT_PRODUCT, payload: null })}
-                        className="text-slate-600 transition hover:underline text-sm font-semibold whitespace-nowrap" > Ürün Ekle
-                        </Link>
-                        <Link to={"/dashboard"} className="text-slate-600 transition hover:underline text-sm font-semibold whitespace-nowrap" > Dashboard
-                        </Link>
-                     </>
+
+                     <Link to={"/dashboard"} className="text-slate-600 transition hover:underline text-sm font-semibold whitespace-nowrap" > Dashboard
+                     </Link>
+
                   }
                   <div className="flex gap-3 font-normal text-slate-700 ">
                   </div>
