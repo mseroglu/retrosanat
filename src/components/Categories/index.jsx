@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom"
 
 
 const Categories = () => {
-   const { selectedCategory } = useSelector(store => store)
+   const { selectedCategory } = useSelector(store => store.products)
    const [category, setCategory] = useState(null)
 
    const dispatch = useDispatch()

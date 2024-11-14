@@ -37,46 +37,27 @@ export const getProducts = (sorting, dispatch, selectedCategory, selectedTag) =>
 }
 
 
-export const getProductsPagination = async () => {
+export const getPageProducts = async (dispatch) => {
 
    // collection un referansı
    const productsColl = collection(db, "products")
 
-   let first = query(productsColl, orderBy("created_at", "desc"), limit(5))
+   let q = query(productsColl, orderBy("created_at", "desc"), limit(5))
 
    const result = []
    let last = null
    // ürünleri alma
    try {
-      const docSnapshot = await getDocs(first)
+      dispatch({ type: ActionTypes.DASHBOARD_PRODUCTS_LOADING })
+
+      const docSnapshot = await getDocs(q)
       docSnapshot.forEach(item => result.push({ ...item.data(), id: item.id }))
-      last = docSnapshot.docs[docSnapshot.docs.length - 1]
-      console.log("las: ", last)
+      lastItem = docSnapshot.docs[docSnapshot.docs.length - 1]
+      
+      dispatch({ type: ActionTypes.DASHBOARD_PRODUCTS_SUCCESS, payload: result })
       console.log(result)
-   } catch (error) {
-      console.log(err)
+   } catch (err) {
+      dispatch({ type: ActionTypes.DASHBOARD_PRODUCTS_ERROR, payload: err.code })
    }
-   return last
 }
 
-export const getProductsPaginationNext = async (previousLast) => {
-
-   // collection un referansı
-   const productsColl = collection(db, "products")
-
-   let after = query(productsColl, orderBy("created_at", "desc"), startAfter(previousLast), limit(5))
-
-   const result = []
-   let last = null
-   // ürünleri alma
-   try {
-      const docSnapshot = await getDocs(after)
-      docSnapshot.forEach(item => result.push({ ...item.data(), id: item.id }))
-      last = docSnapshot.docs[docSnapshot.docs.length - 1]
-      console.log("las: ", last)
-      console.log(result)
-   } catch (error) {
-      console.log(err)
-   }
-   
-}

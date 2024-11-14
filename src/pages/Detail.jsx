@@ -7,9 +7,11 @@ import { useEffect, useState } from "react"
 import Loader from "../components/Loader"
 import { GrFormPrevious } from "react-icons/gr";
 import Tag from "../components/Tag"
+import { useSelector } from "react-redux"
 
 
 const Detail = () => {
+  const {products } = useSelector(store => store.products)
   const [data, setData] = useState(null)
   const [imageIndex, setImageIndex] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
