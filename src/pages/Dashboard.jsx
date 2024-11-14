@@ -51,7 +51,7 @@ const Dashboard = () => {
 
    const getPageProducts = async () => {
       // istenen döcüman sayısının bir fazlası çekilir ki bu sayede mevcut sayfa son sayfa mı belirlenir
-      const lim = 5
+      const lim = 21
       setIsLoading(true)
       try {
          let q;
