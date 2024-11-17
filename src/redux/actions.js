@@ -4,7 +4,7 @@ import { collection, query, where, getDocs, limit, orderBy, startAfter } from "f
 
 
 export const getProducts = (sorting, selectedCategory, selectedTag, lastVisible) => async (dispatch) => {
-   const lim = 20
+   const lim = 10
    // collection un referansı
    const productsColl = collection(db, "products")
    // sorgu ayarları

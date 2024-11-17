@@ -7,8 +7,7 @@ const initialState = {
    selectedCategory: null,
    selectedTag: null,
    lastVisible: null,
-   hasDoc: true
-
+   hasDoc: true,
 }
 
 const productReducer = (state = initialState, { type, payload }) => {
@@ -43,7 +42,7 @@ const productReducer = (state = initialState, { type, payload }) => {
 
       case ActionTypes.SELECTED_SORT:
          return {
-            ...state,  ...payload
+            ...state, products: [], hasDoc: true, lastVisible: null
          };
 
       default:
