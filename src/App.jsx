@@ -41,7 +41,9 @@ function App() {
             </Route>
             <Route path='*' element={<NotFound />} />
           </Routes>
+          {/*           
           <Footer />
+           */}
           <ToastContainer position='bottom-right' theme='colored' />
         </BrowserRouter>
       </div>

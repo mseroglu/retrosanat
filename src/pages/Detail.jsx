@@ -20,14 +20,20 @@ const Detail = () => {
   const docRef = doc(db, "products", params.id)
 
   useEffect(() => {
-    setIsLoading(true)
-    getDoc(docRef)
+    // data store da varsa ordan al, yoksa api den çek
+    const found = products.find(item => item.id === params.id)
+    if (found){
+      setData(found)
+    }else{
+      setIsLoading(true)
+      getDoc(docRef)
       .then((res) => {
         setData(res.data())
         setImageIndex(res.data().indexMainImage)
       })
       .catch(err => toast.error("Veri alınamadı! HATA: " + err.code))
-    setIsLoading(false)
+      setIsLoading(false)
+    }
   }, [])
 
 

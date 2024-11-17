@@ -1,9 +1,8 @@
-import { combineReducers, createStore } from "redux"
+import { combineReducers, createStore, applyMiddleware } from "redux"
 import productReducer from "./Reducers/productReducer"
 import editProductReducer from "./Reducers/editProductReducer"
 import dashboardReducer from "./Reducers/dashboardReducer"
-
-
+import { thunk } from "redux-thunk"
 
    
    const rootReducer = combineReducers({
@@ -13,4 +12,4 @@ import dashboardReducer from "./Reducers/dashboardReducer"
    })
    
 
-export default createStore(rootReducer)
+export default createStore(rootReducer, applyMiddleware(thunk))
