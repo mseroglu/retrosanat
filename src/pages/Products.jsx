@@ -13,6 +13,7 @@ const Products = () => {
   let { isLoading, error, products, hasDoc, lastVisible, selectedCategory, selectedTag } = useSelector(store => store.products)
   const [searchParams, setSearchParams] = useSearchParams()
   const [sorting, setSorting] = useState(searchParams.get("sırala")?.split("-") || ["created_at", "desc"])
+  const [sortActive, setSortActive] = useState(false)
 
 
   const dispatch = useDispatch()
@@ -23,7 +24,7 @@ const Products = () => {
     let f = e.target.value
     searchParams.set("sırala", f)
     setSorting(f.split("-"))
-
+    setSortActive(true)
     if (f == "created_at-desc") { searchParams.delete("sırala") }
     setSearchParams(searchParams)
   }
@@ -37,7 +38,7 @@ const Products = () => {
 
     const observerDiv = observerRef.current
     // hasDoc başka sayfa olup olmadığını tutan state
-    if (!observerDiv || !hasDoc) return
+    if (!observerDiv || (!hasDoc && !sortActive)) return
 
     const observer = new IntersectionObserver((entires) => {
       entires.forEach(entry => {
@@ -51,6 +52,7 @@ const Products = () => {
         threshold: 1.0 // Div tamamen ekrana girdiğinde tetiklenir
       }
     )
+    setSortActive(false)
     // div takibi başlasın
     observer.observe(observerDiv)
 
