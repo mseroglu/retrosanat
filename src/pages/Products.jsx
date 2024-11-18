@@ -32,13 +32,16 @@ const Products = () => {
   useEffect(() => {
     // sorting değişince verileri temizliyoruz
     dispatch({ type: ActionTypes.SELECTED_SORT })
+    if (!hasDoc){
+      dispatch(getProducts(sorting, selectedCategory, selectedTag, lastVisible, hasDoc))
+    }
   }, [sorting])
 
   useEffect(() => {
 
     const observerDiv = observerRef.current
     // hasDoc başka sayfa olup olmadığını tutan state
-    if (!observerDiv || (!hasDoc && !sortActive)) return
+    if (!observerDiv || !hasDoc) return
 
     const observer = new IntersectionObserver((entires) => {
       entires.forEach(entry => {
