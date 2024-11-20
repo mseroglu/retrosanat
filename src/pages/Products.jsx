@@ -4,17 +4,21 @@ import ProductCard from "../components/ProductCard"
 import { useDispatch, useSelector } from "react-redux"
 import Loader from "../components/Loader"
 import Error from "../components/Error"
-import { useSearchParams } from "react-router-dom"
+import { useParams, useSearchParams } from "react-router-dom"
 import { getProducts } from "../redux/actions"
 import ActionTypes from "../constants/ActionTypes"
 
 
 const Products = () => {
-  let { isLoading, error, products, hasDoc, lastVisible, selectedCategory, selectedTag } = useSelector(store => store.products)
+  let { isLoading, error, products, hasDoc, lastVisible, selectedCategory, selectedTag, searchKeyword } = useSelector(store => store.products)
   const [searchParams, setSearchParams] = useSearchParams()
   const [sorting, setSorting] = useState(searchParams.get("sırala")?.split("-") || ["created_at", "desc"])
-  const [sortActive, setSortActive] = useState(false)
+  const params = useParams()
 
+  useEffect(() => {
+    console.log(params.category)
+
+  }, [selectedCategory])
 
   const dispatch = useDispatch()
   const observerRef = useRef(null)
@@ -24,7 +28,7 @@ const Products = () => {
     let f = e.target.value
     searchParams.set("sırala", f)
     setSorting(f.split("-"))
-    setSortActive(true)
+
     if (f == "created_at-desc") { searchParams.delete("sırala") }
     setSearchParams(searchParams)
   }
@@ -32,10 +36,10 @@ const Products = () => {
   useEffect(() => {
     // sorting değişince verileri temizliyoruz
     dispatch({ type: ActionTypes.SELECTED_SORT })
-    if (!hasDoc){
-      dispatch(getProducts(sorting, selectedCategory, selectedTag, lastVisible, hasDoc))
+    if (!hasDoc) {
+      dispatch(getProducts(sorting, selectedCategory, selectedTag, lastVisible, searchKeyword))
     }
-  }, [sorting])
+  }, [sorting, searchKeyword])
 
   useEffect(() => {
 
@@ -46,7 +50,7 @@ const Products = () => {
     const observer = new IntersectionObserver((entires) => {
       entires.forEach(entry => {
         if (entry.isIntersecting) {
-          dispatch(getProducts(sorting, selectedCategory, selectedTag, lastVisible, hasDoc))
+          dispatch(getProducts(sorting, selectedCategory, selectedTag, lastVisible, searchKeyword))
         }
       })
     },
@@ -55,14 +59,13 @@ const Products = () => {
         threshold: 1.0 // Div tamamen ekrana girdiğinde tetiklenir
       }
     )
-    setSortActive(false)
     // div takibi başlasın
     observer.observe(observerDiv)
 
     // komponent ekrandan ayrılınca takibi bırak
     return () => observer.disconnect()
 
-  }, [lastVisible, sorting, selectedCategory, selectedTag])
+  }, [lastVisible, sorting, selectedCategory, selectedTag, searchKeyword])
 
 
   return (

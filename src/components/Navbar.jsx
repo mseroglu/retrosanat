@@ -17,6 +17,10 @@ const Navbar = () => {
 
    const dispatch = useDispatch()
 
+   const categoryReset = ()=>{
+      dispatch({ type: ActionTypes.SELECTED_CATEGORY, payload: null })
+   }
+
 
    return (
       <div className="fixed w-full z-[999]">
@@ -31,13 +35,13 @@ const Navbar = () => {
                   </Link>
 
                   <Link to={"/products"}
-                     onClick={() => dispatch({ type: ActionTypes.SELECTED_CATEGORY, payload: null })} className="text-slate-600 transition hover:underline text-sm font-semibold" > Ürünler
+                     onClick={categoryReset} className="text-slate-600 transition hover:underline text-sm font-semibold" > Ürünler
                   </Link>
                   {
                      // şart devreye alınacak
                      // auth.currentUser !== null  &&
 
-                     <Link to={"/dashboard"} className="text-slate-600 transition hover:underline text-sm font-semibold whitespace-nowrap" > Dashboard
+                     <Link to={"/dashboard"} onClick={categoryReset} className="text-slate-600 transition hover:underline text-sm font-semibold whitespace-nowrap" > Dashboard
                      </Link>
 
                   }

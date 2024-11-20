@@ -3,7 +3,7 @@ import { db } from "../db-operations/config";
 import { collection, query, where, getDocs, limit, orderBy, startAfter } from "firebase/firestore";
 
 
-export const getProducts = (sorting, selectedCategory, selectedTag, lastVisible) => async (dispatch) => {
+export const getProducts = (sorting, selectedCategory, selectedTag, lastVisible, searchKeyword) => async (dispatch) => {
    const lim = 20
    // collection un referansı
    const productsColl = collection(db, "products")
@@ -12,24 +12,24 @@ export const getProducts = (sorting, selectedCategory, selectedTag, lastVisible)
    if (lastVisible) {
       if (selectedCategory) {
          console.log("1 çalıştı")
-         q = query(productsColl, where("category", "==", selectedCategory), orderBy(...sorting), startAfter(lastVisible), limit(lim))
+         q = query(productsColl, where("category", "==", selectedCategory), where("title", ">=", searchKeyword),  orderBy(...sorting), startAfter(lastVisible), limit(lim))
       } else if (selectedTag) {
          console.log("2 çalıştı")
-         q = query(productsColl, where("tags", "array-contains", selectedTag.toLocaleLowerCase()), orderBy(...sorting), startAfter(lastVisible), limit(lim))
+         q = query(productsColl, where("tags", "array-contains", selectedTag.toLocaleLowerCase()), where("title", ">=", searchKeyword),  orderBy(...sorting), startAfter(lastVisible), limit(lim))
       } else {
          console.log("3 çalıştı")
-         q = query(productsColl, orderBy(...sorting), startAfter(lastVisible), limit(lim))
+         q = query(productsColl,  where("title", ">=", searchKeyword), orderBy(...sorting), startAfter(lastVisible), limit(lim))
       }
    } else {
       if (selectedCategory) {
          console.log("4 çalıştı")
-         q = query(productsColl, where("category", "==", selectedCategory), orderBy(...sorting), limit(lim))
+         q = query(productsColl, where("category", "==", selectedCategory), where("title", ">=", searchKeyword), orderBy(...sorting), limit(lim))
       } else if (selectedTag) {
          console.log("5 çalıştı")
-         q = query(productsColl, where("tags", "array-contains", selectedTag.toLocaleLowerCase()), orderBy(...sorting), limit(lim))
+         q = query(productsColl, where("tags", "array-contains", selectedTag.toLocaleLowerCase()), where("title", ">=", searchKeyword), orderBy(...sorting), limit(lim))
       } else {
          console.log("6 çalıştı")
-         q = query(productsColl, orderBy(...sorting), limit(lim))
+         q = query(productsColl, where("title", "<=", searchKeyword+ "\uf8ff"), orderBy(...sorting), limit(lim))
       }
 
    }
