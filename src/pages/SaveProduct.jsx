@@ -14,8 +14,19 @@ const SaveProduct = () => {
    const { editProduct } = useSelector(store => store.editProduct)
    const [isLoading, setIsLoading] = useState(false)
    const [imagesUrl, setImagesUrl] = useState([])
+   const [subCategories, setSubCategories] = useState([])
+
+   useEffect(() => {
+      console.log(subCategories)
+   }, [subCategories])
 
    const dispatch = useDispatch()
+
+   const handleCategorySelect = (e) => {
+      const selected = e.target.value
+      const found = CATEGORIES.find(item => item.key === selected)
+      setSubCategories(found?.subs || [])
+   }
 
 
    const handleSubmit = async (e) => {
@@ -105,15 +116,28 @@ const SaveProduct = () => {
                   defaultValue={editProduct ? editProduct.title : ""}
                   className="border px-2 py-1 rounded-md text-sm" />
             </div>
-
+            {/* KATEGORİLER */}
             <div className="flex flex-col">
                <label htmlFor="categories">Kategori</label>
                <select name="category" className=" border px-2 py-1 rounded-md text-sm"
-                  defaultValue={editProduct ? editProduct.category : ""}>
+                  defaultValue={editProduct ? editProduct.category : ""} onChange={handleCategorySelect} >
                   <option value="">Kategori Seçiniz</option>
                   {
                      CATEGORIES.map((item) => {
                         return <option key={item.key} value={item.key} > {item.value} </option>
+                     })
+                  }
+               </select>
+            </div>
+            {/* ALT KATEGORİLER */}
+            <div className="flex flex-col">
+               <label htmlFor="sub-categories">Alt Kategori</label>
+               <select name="sub-category" className=" border px-2 py-1 rounded-md text-sm"
+                  defaultValue={editProduct ? editProduct.sub - category : ""} onChange={(e) => setSelectedCategory(e.target.value)} >
+                  <option value="">Alt Kategori Seçiniz</option>
+                  {
+                     subCategories.map((item) => {
+                        return <option key={item.key} value={item.key} className="capitalize" > {item.value} </option>
                      })
                   }
                </select>
