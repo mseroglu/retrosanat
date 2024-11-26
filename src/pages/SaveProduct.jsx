@@ -101,8 +101,8 @@ const SaveProduct = () => {
    }, [editProduct])
 
    return (
-      <Container className="grid place-items-center">
-         <form onSubmit={handleSubmit} className="flex flex-col w-5/6 md:w-[400px] gap-3 border-2 rounded-lg shadow-lg p-3 relative">
+      <Container className="grid place-items-center bg-image ">
+         <form onSubmit={handleSubmit} className="flex flex-col w-5/6 md:w-[400px] gap-3 border-2 rounded-lg shadow-lg p-3 relative bg-white">
 
             {isLoading && <Loader stil="absolute top-20" />}
 
@@ -132,7 +132,7 @@ const SaveProduct = () => {
             {/* ALT KATEGORİLER */}
             <div className="flex flex-col">
                <label htmlFor="sub-categories">Alt Kategori</label>
-               <select name="sub-category" className=" border px-2 py-1 rounded-md text-sm"
+               <select name="sub-category" className=" border px-2 py-1 rounded-md text-sm capitalize"
                   defaultValue={editProduct ? editProduct.sub - category : ""} onChange={(e) => setSelectedCategory(e.target.value)} >
                   <option value="">Alt Kategori Seçiniz</option>
                   {

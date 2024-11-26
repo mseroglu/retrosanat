@@ -23,6 +23,7 @@ form label {
 form input, form textarea, select{
   outline-color: #facc15;
 }
+
 option {
   background-color: #facc15;
 }
@@ -30,6 +31,11 @@ option {
 .logo{
   font-family:  "DynaPuff", "Roboto", sans-serif;
   font-weight: 700;
+}
+
+.bg-image{
+  background-image: url("bg-objects.jpg");
+  background-repeat: repeat;  
 }
 
 

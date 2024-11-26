@@ -72,7 +72,7 @@ const Products = () => {
     <Container className="flex flex-col gap-3">
 
       <select onChange={handleSorting} name="sorting" id="sorting" defaultValue={searchParams.get("sırala") || "created_at-desc"}
-        className="self-center rounded-md border-2 px-2 py-1 text-sm">
+        className="self-center rounded-md border-2 px-2 py-1 mt-16 text-sm">
         <option value="created_at-desc">Sırala (Varsayılan son eklenen)</option>
         <option value="price-asc">Ucuzdan pahalıya</option>
         <option value="price-desc">Pahalıdan ucuza</option>
