@@ -4,7 +4,7 @@ import ProductCard from "../components/ProductCard"
 import { useDispatch, useSelector } from "react-redux"
 import Loader from "../components/Loader"
 import Error from "../components/Error"
-import { useParams, useSearchParams } from "react-router-dom"
+import { useSearchParams } from "react-router-dom"
 import { getProducts } from "../redux/actions"
 import ActionTypes from "../constants/ActionTypes"
 
@@ -13,12 +13,7 @@ const Products = () => {
   let { isLoading, error, products, hasDoc, lastVisible, selectedCategory, selectedTag, searchKeyword } = useSelector(store => store.products)
   const [searchParams, setSearchParams] = useSearchParams()
   const [sorting, setSorting] = useState(searchParams.get("sırala")?.split("-") || ["created_at", "desc"])
-  const params = useParams()
-
-  useEffect(() => {
-    console.log(params.category)
-
-  }, [selectedCategory])
+  
 
   const dispatch = useDispatch()
   const observerRef = useRef(null)

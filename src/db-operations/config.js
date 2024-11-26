@@ -27,17 +27,3 @@ export const db = getFirestore(app)
 // dosya saklama için storage referansı
 export const storage = getStorage(app)
 
-
-/**
- * BENİM HESABIN DENEME AYARLARI
-const firebaseConfig = {
-  apiKey: "AIzaSyDwVzEZ74mZYmYhaB14--DPxcPkWrHVLq0",
-  authDomain: "retro-sanat-8171c.firebaseapp.com",
-  projectId: "retro-sanat-8171c",
-  storageBucket: "retro-sanat-8171c.appspot.com",
-  messagingSenderId: "669423857461",
-  appId: "1:669423857461:web:12a58f0dcc075e0f8da67c",
-  measurementId: "G-BFXM19FXWD"
-}; 
-
- */

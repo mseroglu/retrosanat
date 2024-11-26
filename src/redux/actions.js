@@ -51,6 +51,7 @@ export const getProducts = (sorting, selectedCategory, selectedTag, lastVisible,
          payload
       })
    } catch (err) {
+      console.log(err)
       dispatch({ type: ActionTypes.PRODUCTS_ERROR, payload: err.code })
    }
 }

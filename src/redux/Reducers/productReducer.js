@@ -12,7 +12,7 @@ const initialState = {
 }
 
 const productReducer = (state = initialState, { type, payload }) => {
-   console.log("REDUCERA YENİ GELEN: ", type, payload)
+   //console.log("REDUCERA YENİ GELEN: ", type, payload)
 
    switch (type) {
 

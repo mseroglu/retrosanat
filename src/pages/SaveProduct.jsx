@@ -16,10 +16,6 @@ const SaveProduct = () => {
    const [imagesUrl, setImagesUrl] = useState([])
    const [subCategories, setSubCategories] = useState([])
 
-   useEffect(() => {
-      console.log(subCategories)
-   }, [subCategories])
-
    const dispatch = useDispatch()
 
    const handleCategorySelect = (e) => {
@@ -129,11 +125,12 @@ const SaveProduct = () => {
                   }
                </select>
             </div>
+
             {/* ALT KATEGORİLER */}
             <div className="flex flex-col">
                <label htmlFor="sub-categories">Alt Kategori</label>
                <select name="sub-category" className=" border px-2 py-1 rounded-md text-sm capitalize"
-                  defaultValue={editProduct ? editProduct.sub - category : ""} onChange={(e) => setSelectedCategory(e.target.value)} >
+                  defaultValue={editProduct ? editProduct.sub - category : ""}>
                   <option value="">Alt Kategori Seçiniz</option>
                   {
                      subCategories.map((item) => {

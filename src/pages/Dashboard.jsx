@@ -54,7 +54,6 @@ const Dashboard = () => {
       navigate("/product/edit/" + product.id)
    }
 
-   console.log(products)
    
    return (
       <Container >

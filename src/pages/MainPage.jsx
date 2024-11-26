@@ -41,14 +41,13 @@ const MainPage = () => {
       setProducts(result)
     })
     .catch(err => {
-      console.log(err.code)
+      console.log(err)
       setError(err.code)
     })
     setIsLoading(false)
 
   }, [])
 
-  console.log(products)
 
   return (
     <Container >

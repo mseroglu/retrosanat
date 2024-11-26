@@ -54,15 +54,10 @@ const Categories = () => {
          <div className={`${!selectedCategory && "hidden"} bg-zinc-100 flex justify-center md:gap-5 md:p-2 w-full py-2 transition`}>
             {
                subCategories?.map(sub => (
-                  <span className="border-4 rounded-full ">
-                     <img src="art-3.jpg" className="w-20 h-20 " alt="boya" />
-                     
-                     {/*
+                  <span key={sub.key} className="border-4 rounded-full ">
                      <button key={sub.key} className="hover:bg-yellow-300 text-center font-semibold text-xs py-1 hover:font-semibold transition capitalize rounded-full h-16 w-16 border-2 border-yellow-300 grid place-items-center">
-                        
+                        { sub.value }
                      </button>
-                        */} {/* sub.value */}
-                        
                   </span>
                )
                )
