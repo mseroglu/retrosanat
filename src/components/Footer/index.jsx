@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Container from "./Container"
+import Container from "../Container"
 import { FaFacebook, FaInstagram, FaSquareYoutube } from "react-icons/fa6";
 
 
@@ -9,6 +9,8 @@ const Footer = () => {
          <div className="flex justify-center rounded-3xl overflow-hidden shadow-yellow-400 shadow-xl w-full sm:w-fit mx-auto ">
             {/* https://www.google.com/maps/d/edit?mid=1Y01bDsIc5Xz71DQFumLvzvVDr8iLowg&usp=sharing */}
             <iframe src="https://www.google.com/maps/d/embed?mid=1Y01bDsIc5Xz71DQFumLvzvVDr8iLowg&ehbc=2E312F&noprof=1" width="480" height="320"></iframe>
+
+            
          </div>
          <div className="flex flex-col gap-3 items-center justify-center flex-grow ">
             <div className="flex items-center justify-center gap-3">
