@@ -34,14 +34,16 @@ const Navbar = () => {
                      </div>
                   </Link>
 
+                  {/*      BURASI SİLİNECEK
                   <Link to={"/products"}
                      onClick={categoryReset} className="text-slate-600 transition hover:underline text-sm font-semibold" > Ürünler
                   </Link>
+                   */}
                   {
                      // şart devreye alınacak
                      // auth.currentUser !== null  &&
 
-                     <Link to={"/dashboard"} onClick={categoryReset} className="text-slate-600 transition hover:underline text-sm font-semibold whitespace-nowrap" > Dashboard
+                     <Link to={"/dashboard"} onClick={categoryReset} className="text-slate-600 transition hover:underline text-lg font-semibold whitespace-nowrap" > Dashboard
                      </Link>
 
                   }
