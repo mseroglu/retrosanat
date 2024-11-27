@@ -1,4 +1,4 @@
-import {APIProvider, Map, Marker} from '@vis.gl/react-google-maps';
+import {APIProvider, Map, AdvancedMarker} from '@vis.gl/react-google-maps';
 
 const GoogleMap = () => {
 
@@ -19,8 +19,10 @@ const GoogleMap = () => {
         defaultZoom={14}
         gestureHandling={'greedy'}
         disableDefaultUI={false}
+        // Projeden alınan proje Id numarası buraya eklenir
+        mapId={"retrosanat"}
       >
-        <Marker position={retrosanat72} onClick={handleMarkerClick} />
+        <AdvancedMarker position={retrosanat72} onClick={handleMarkerClick} title={"Tıkla: Retro Sanat'a rota oluştur"} />
       </Map>
     </APIProvider>
   );

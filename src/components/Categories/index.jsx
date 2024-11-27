@@ -8,6 +8,7 @@ import { useNavigate, useParams } from "react-router-dom"
 const Categories = () => {
    const { selectedCategory } = useSelector(store => store.products)
    const [category, setCategory] = useState(null)
+   const [subCategory, setSubCategory] = useState(null)
    const [subCategories, setSubCategories] = useState([])
 
    const dispatch = useDispatch()
@@ -16,25 +17,38 @@ const Categories = () => {
    const handleClick = (e) => {
       const cat = e.target.getAttribute("data-category")
       setCategory(cat)
+      setSubCategory(null)
       const found = CATEGORIES.find(item => item.key == cat)
       setSubCategories(found?.subs)
    }
+
+   const handleSetSubCategory = (e) => {
+      const cat = e.target.getAttribute("data-category")
+      if (cat == subCategory) {
+         setSubCategory(null)
+      } else {
+         setSubCategory(cat)
+      }
+   }
+
+   useEffect(() => {
+      if (subCategory) {
+         navigate(`/products/category/${category}/${subCategory}` )
+      }
+   }, [subCategory])
 
    useEffect(() => {
       dispatch({ type: ActionTypes.SELECTED_CATEGORY, payload: category })
 
       if (category) {
          navigate("/products/category/" + category)
-      } else {
-         navigate("/products")
       }
-
    }, [category])
 
    return (
       <>
          <div id="categories" className="flex text-[14px] md:text-[16px] justify-center bg-zinc-300 border-t-4 border-yellow-400 ">
-            <span onClick={()=> navigate("/products")}>
+            <span onClick={() => navigate("/products")}>
                <button onClick={handleClick} data-category={null}
                   className={`h-full font-semibold py-1 px-2 md:w-32 lg:w-40 border-x hover:bg-zinc-200 text-[12px] uppercase`} >
                   Tüm Ürünler
@@ -55,12 +69,11 @@ const Categories = () => {
             {
                subCategories?.map(sub => (
                   <span key={sub.key} className="border-4 rounded-full ">
-                     <button key={sub.key} className="hover:bg-yellow-300 text-center font-semibold text-xs py-1 hover:font-semibold transition capitalize rounded-full h-16 w-16 border-2 border-yellow-300 grid place-items-center">
-                        { sub.value }
+                     <button className={`${sub.key == subCategory && "bg-yellow-300"} hover:scale-105 text-center font-semibold text-xs py-1 hover:font-semibold transition capitalize rounded-full h-16 w-16 border-2 border-yellow-300 grid place-items-center`} onClick={handleSetSubCategory} data-category={sub.key}>
+                        {sub.value}
                      </button>
                   </span>
-               )
-               )
+               ))
             }
          </div>
       </>

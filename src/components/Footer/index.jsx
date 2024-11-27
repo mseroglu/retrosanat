@@ -7,9 +7,9 @@ import GoogleMap from "./GoogleMap";
 const Footer = () => {
    return (
       <Container className="h-[800px] bg-slate-800 text-white flex flex-col lg:flex-row gap-5 mt-3">
-         <div className="flex justify-center rounded-3xl overflow-hidden shadow-yellow-400 shadow-xl w-full sm:w-fit mx-auto ">
-            {/* https://www.google.com/maps/d/edit?mid=1Y01bDsIc5Xz71DQFumLvzvVDr8iLowg&usp=sharing */}
-            {/*
+         <div className="flex justify-center rounded-3xl overflow-hidden shadow-white shadow-md w-full sm:w-fit mx-auto ">
+            
+            {/*   ESKİ HARİTA
             <iframe src="https://www.google.com/maps/d/embed?mid=1Y01bDsIc5Xz71DQFumLvzvVDr8iLowg&ehbc=2E312F&noprof=1" width="480" height="320"></iframe>
             */}
 
