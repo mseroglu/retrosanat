@@ -36,7 +36,7 @@ const Categories = () => {
          <div id="categories" className="flex text-[14px] md:text-[16px] justify-center bg-zinc-300 border-t-4 border-yellow-400 ">
             <span onClick={()=> navigate("/products")}>
                <button onClick={handleClick} data-category={null}
-                  className={`font-semibold py-1 px-2 md:w-32 lg:w-40 border-x hover:bg-zinc-200 text-[12px] uppercase`} >
+                  className={`h-full font-semibold py-1 px-2 md:w-32 lg:w-40 border-x hover:bg-zinc-200 text-[12px] uppercase`} >
                   Tüm Ürünler
                </button>
             </span>

@@ -17,7 +17,7 @@ const Navbar = () => {
 
    const dispatch = useDispatch()
 
-   const categoryReset = ()=>{
+   const categoryReset = () => {
       dispatch({ type: ActionTypes.SELECTED_CATEGORY, payload: null })
    }
 
@@ -25,7 +25,7 @@ const Navbar = () => {
    return (
       <div className="fixed w-full z-[999]">
          <div className="bg-zinc-200 w-full bg-opacity-75  px-10 md:px-20" >
-            <header className="py-2 flex items-center justify-between ">
+            <header className="py-2 flex items-center justify-between gap-2 md:gap-5 lg:gap-10 ">
                <div className="flex gap-3 items-center">
 
                   <Link to={"/"} className="text-xl md:text-3xl">
@@ -39,30 +39,31 @@ const Navbar = () => {
                      onClick={categoryReset} className="text-slate-600 transition hover:underline text-sm font-semibold" > Ürünler
                   </Link>
                    */}
-                  {
-                     // şart devreye alınacak
-                     // auth.currentUser !== null  &&
 
-                     <Link to={"/dashboard"} onClick={categoryReset} className="text-slate-600 transition hover:underline text-lg font-semibold whitespace-nowrap" > Dashboard
-                     </Link>
-
-                  }
                   <div className="flex gap-3 font-normal text-slate-700 ">
                   </div>
                </div>
 
 
-               <div className="flex gap-2 font-semibold items-center relative">
+               <SearchBar className="max-md:hidden111" />
+
+               {isOpen && <Modal setIsOpen={setIsOpen} />}
+
+               <div className="flex flex-col gap-2 items-center">
+                  {
+                     // şart devreye alınacak
+                     // auth.currentUser !== null  &&
+                     
+                     <Link to={"/dashboard"} onClick={categoryReset} className="text-slate-600 transition hover:underline text-xs font-semibold whitespace-nowrap " > Yönetici Paneli
+                     </Link>
+                     
+                  }
+
                   {/* menu butonu */}
                   <BsMenuUp className="md:hidden text-xl font-bold cursor-pointer" onClick={() => setIsOpen(!isOpen)} />
-
-                  {isOpen && <Modal setIsOpen={setIsOpen} />}
-
-                  <SearchBar className="max-md:hidden" />
-
                   <LoginBtn className="max-md:hidden" />
-
                </div>
+
             </header>
          </div>
          <Categories />

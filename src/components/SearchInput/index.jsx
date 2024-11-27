@@ -26,9 +26,9 @@ const SearchBar = ({ className }) => {
    const debouncedHandleInput = debounce(handleSearch, 1500);
 
    return (
-      <div className={`${className} relative w-full h-full`}>
+      <div className={`${className} relative w-full h-full max-w-[500px]`}>
          <input type="text" placeholder="Ne aramıştınız?" autoFocus onChange={debouncedHandleInput}
-            className="max-w-60 w-full outline-none py-1 px-3 rounded-full placeholder:text-sm placeholder:font-normal" />
+            className="w-full outline-none py-1 px-3 rounded-full placeholder:text-sm placeholder:font-normal" />
          <FaSearch className="absolute right-0 top-0 text-lg text-white bg-gray-500 rounded-full w-8 h-8 p-2" />
       </div>
    )

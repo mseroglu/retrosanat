@@ -7,7 +7,7 @@ import LoginBtn from "../LoginBtn";
 const Modal = ({ setIsOpen }) => {
 
    return (
-      <div className="absolute top-8 right-0 w-[300px] bg-slate-200 md:hidden border-2 border-zinc-500 rounded-lg z-50">
+      <div className="absolute top-16 right-0 w-[300px] bg-slate-200 md:hidden border-2 border-zinc-500 rounded-lg z-50">
 
          <div className="border relative flex gap-2 bg-zinc-200 py-5 px-2 rounded-lg items-center">
 
