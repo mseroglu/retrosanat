@@ -25,7 +25,6 @@ const Dashboard = () => {
          entires.forEach(entry => {            
             if (entry.isIntersecting) {
                dispatch(getPageProducts(lastVisible))
-               //getPageProducts(dispatch, lastVisible)
             }
          })
       },
@@ -37,14 +36,17 @@ const Dashboard = () => {
       // div takibi başlasın
       observer.observe(observerDiv)
 
-      // komponent ekrandan ayrınca takibi bırak
+      // komponent ekrandan ayrılınca takibi bırak
       return () => observer.disconnect()
    }, [lastVisible])
 
-   const handleDelete = (product) => {
+   const handleDelete = async (product) => {
       const result = confirm("Ürünü silmek istediğine emin misin? ")
       if (result) {
-         delProduct(product)
+         const res = await delProduct(product)
+         // ürün silindikten sonra state i güncelle
+         const filtred = products.filter(item => item.id !== product.id)         
+         dispatch({type: ActionTypes.DASHBOARD_PRODUCTS_UPDATE, payload: filtred })
       }
    }
 

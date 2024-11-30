@@ -16,6 +16,7 @@ const SaveProduct = () => {
    const [imagesUrl, setImagesUrl] = useState([])
    const [subCategories, setSubCategories] = useState([])
 
+
    const dispatch = useDispatch()
 
    const handleCategorySelect = (e) => {
@@ -23,6 +24,11 @@ const SaveProduct = () => {
       const found = CATEGORIES.find(item => item.key === selected)
       setSubCategories(found?.subs || [])
    }
+
+   useEffect(() => {
+      const found = CATEGORIES.find(item => item.key === editProduct?.category)
+      setSubCategories(found?.subs || [])
+   }, [editProduct])
 
 
    const handleSubmit = async (e) => {
@@ -69,8 +75,12 @@ const SaveProduct = () => {
             dataObj["created_at"] = serverTimestamp()
             // 3- yeni ürünü firebase ekle
             const productCollection = collection(db, "products")
-            await addDoc(productCollection, dataObj)
+            const res = await addDoc(productCollection, dataObj)
             toast.success("Ürün başarıyla kaydedildi.")
+
+            // ürünün firebase id sini ekleyip state kaydediyoruz
+            dataObj["id"] = res?.id
+            dispatch({ type: ActionTypes.DASHBOARD_PRODUCTS_NEWADD, payload: dataObj })
          }
          // 4- formu sıfırla
          e.target.reset()
@@ -93,6 +103,7 @@ const SaveProduct = () => {
    }
 
    useEffect(() => {
+      console.log(editProduct)
       editProduct && setImagesUrl(editProduct.photos)
    }, [editProduct])
 
@@ -112,6 +123,7 @@ const SaveProduct = () => {
                   defaultValue={editProduct ? editProduct.title : ""}
                   className="border px-2 py-1 rounded-md text-sm" />
             </div>
+            
             {/* KATEGORİLER */}
             <div className="flex flex-col">
                <label htmlFor="categories">Kategori</label>
@@ -128,9 +140,9 @@ const SaveProduct = () => {
 
             {/* ALT KATEGORİLER */}
             <div className="flex flex-col">
-               <label htmlFor="sub-categories">Alt Kategori</label>
-               <select name="sub-category" className=" border px-2 py-1 rounded-md text-sm capitalize"
-                  defaultValue={editProduct ? editProduct.sub - category : ""}>
+               <label htmlFor="subCategory">Alt Kategori</label>
+               <select name="subCategory" className="border px-2 py-1 rounded-md text-sm capitalize"
+                  defaultValue={editProduct ? editProduct.subCategory : ""}>
                   <option value="">Alt Kategori Seçiniz</option>
                   {
                      subCategories.map((item) => {
@@ -141,7 +153,7 @@ const SaveProduct = () => {
             </div>
 
             <div className="flex flex-col">
-               <label htmlFor="tags">Etiketler</label>
+               <label htmlFor="tags">Etiketler (max 4)</label>
                <input id="tags" name="tags" required placeholder="cam, boya, fırça " className="border px-2 py-1 rounded-md text-sm " defaultValue={editProduct ? editProduct.tags?.join(", ") : ""} />
             </div>
 
@@ -190,9 +202,8 @@ const SaveProduct = () => {
                }
             </div>
 
-
-
-            <button type="submit" className="font-semibold border-2 px-5 py-1 mt-3 rounded-md hover:bg-slate-800 hover:text-white transition w-fit self-center">Gönder</button>
+            <button type="submit" disabled={isLoading} className="font-semibold border-2 px-5 py-1 mt-3 rounded-md hover:bg-slate-800 hover:text-white transition w-fit self-center disabled:bg-yellow-400">
+               Gönder</button>
          </form>
       </Container>
    )

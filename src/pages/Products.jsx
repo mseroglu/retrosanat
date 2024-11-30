@@ -4,7 +4,7 @@ import ProductCard from "../components/ProductCard"
 import { useDispatch, useSelector } from "react-redux"
 import Loader from "../components/Loader"
 import Error from "../components/Error"
-import { useSearchParams } from "react-router-dom"
+import { useParams, useSearchParams } from "react-router-dom"
 import { getProducts } from "../redux/actions"
 import ActionTypes from "../constants/ActionTypes"
 
@@ -17,6 +17,7 @@ const Products = () => {
 
   const dispatch = useDispatch()
   const observerRef = useRef(null)
+  const params = useParams()
 
 
   const handleSorting = (e) => {
@@ -24,20 +25,25 @@ const Products = () => {
     searchParams.set("sırala", f)
     setSorting(f.split("-"))
 
+    
     if (f == "created_at-desc") { searchParams.delete("sırala") }
     setSearchParams(searchParams)
   }
-
+  useEffect(()=>{
+    console.log(params)
+  },[params])
+  
   useEffect(() => {
     // sorting değişince verileri temizliyoruz
     dispatch({ type: ActionTypes.SELECTED_SORT })
+    
     if (!hasDoc) {
       dispatch(getProducts(sorting, selectedCategory, selectedTag, lastVisible, searchKeyword))
     }
   }, [sorting, searchKeyword])
-
+  
   useEffect(() => {
-
+    
     const observerDiv = observerRef.current
     // hasDoc başka sayfa olup olmadığını tutan state
     if (!observerDiv || !hasDoc) return
