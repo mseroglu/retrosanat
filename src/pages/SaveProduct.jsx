@@ -15,6 +15,7 @@ const SaveProduct = () => {
    const [isLoading, setIsLoading] = useState(false)
    const [imagesUrl, setImagesUrl] = useState([])
    const [subCategories, setSubCategories] = useState([])
+   const [subCategory, setSubCategory] = useState("")
 
 
    const dispatch = useDispatch()
@@ -28,7 +29,12 @@ const SaveProduct = () => {
    useEffect(() => {
       const found = CATEGORIES.find(item => item.key === editProduct?.category)
       setSubCategories(found?.subs || [])
+      setSubCategory(editProduct?.subCategory||"")      
    }, [editProduct])
+   
+   useEffect(()=>{
+
+   },[subCategories])
 
 
    const handleSubmit = async (e) => {
@@ -103,7 +109,6 @@ const SaveProduct = () => {
    }
 
    useEffect(() => {
-      console.log(editProduct)
       editProduct && setImagesUrl(editProduct.photos)
    }, [editProduct])
 
@@ -123,7 +128,7 @@ const SaveProduct = () => {
                   defaultValue={editProduct ? editProduct.title : ""}
                   className="border px-2 py-1 rounded-md text-sm" />
             </div>
-            
+
             {/* KATEGORİLER */}
             <div className="flex flex-col">
                <label htmlFor="categories">Kategori</label>
@@ -131,9 +136,7 @@ const SaveProduct = () => {
                   defaultValue={editProduct ? editProduct.category : ""} onChange={handleCategorySelect} >
                   <option value="">Kategori Seçiniz</option>
                   {
-                     CATEGORIES.map((item) => {
-                        return <option key={item.key} value={item.key} > {item.value} </option>
-                     })
+                     CATEGORIES.map((item) => (<option key={item.key} value={item.key} >{item.value}</option>))
                   }
                </select>
             </div>
@@ -142,11 +145,11 @@ const SaveProduct = () => {
             <div className="flex flex-col">
                <label htmlFor="subCategory">Alt Kategori</label>
                <select name="subCategory" className="border px-2 py-1 rounded-md text-sm capitalize"
-                  defaultValue={editProduct ? editProduct.subCategory : ""}>
+                  value={subCategory} onChange={(e)=> setSubCategory(e.target.value)}>
                   <option value="">Alt Kategori Seçiniz</option>
                   {
                      subCategories.map((item) => {
-                        return <option key={item.key} value={item.key} className="capitalize" > {item.value} </option>
+                        return <option key={item.key} value={item.key} className="capitalize" >{item.value}</option>
                      })
                   }
                </select>
@@ -154,7 +157,9 @@ const SaveProduct = () => {
 
             <div className="flex flex-col">
                <label htmlFor="tags">Etiketler (max 4)</label>
-               <input id="tags" name="tags" required placeholder="cam, boya, fırça " className="border px-2 py-1 rounded-md text-sm " defaultValue={editProduct ? editProduct.tags?.join(", ") : ""} />
+               <input id="tags" name="tags" required placeholder="cam, boya, fırça"
+                  className="border px-2 py-1 rounded-md text-sm "
+                  defaultValue={editProduct ? editProduct.tags?.join(", ") : ""} />
             </div>
 
             <div className="flex flex-col">
