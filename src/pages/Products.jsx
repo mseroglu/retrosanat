@@ -10,10 +10,14 @@ import ActionTypes from "../constants/ActionTypes"
 
 
 const Products = () => {
-  let { isLoading, error, products, hasDoc, lastVisible, selectedCategory, selectedTag, searchKeyword } = useSelector(store => store.products)
+  let { isLoading, error, products, hasDoc, lastVisible, } = useSelector(store => store.products)
   const [searchParams, setSearchParams] = useSearchParams()
+  const [searchKeyword, setSearchKeyword] = useState("")
+  const [selectedCategory, setSelectedCategory] = useState()
+  const [selectedSubCategory, setSelectedSubCategory] = useState()
+  const [selectedTag, setSelectedTag] = useState()
   const [sorting, setSorting] = useState(searchParams.get("sırala")?.split("-") || ["created_at", "desc"])
-  
+
 
   const dispatch = useDispatch()
   const observerRef = useRef(null)
@@ -21,37 +25,49 @@ const Products = () => {
 
 
   const handleSorting = (e) => {
-    let f = e.target.value
-    searchParams.set("sırala", f)
-    setSorting(f.split("-"))
+    const val = e.target.value
+    searchParams.set("sırala", val)
+    setSorting(val.split("-"))
 
-    
-    if (f == "created_at-desc") { searchParams.delete("sırala") }
+    if (val == "created_at-desc") { searchParams.delete("sırala") }
     setSearchParams(searchParams)
   }
-  useEffect(()=>{
-    console.log(params)
-  },[params])
-  
+
+  useEffect(() => {
+    setSelectedCategory(params.category)
+    setSelectedSubCategory(params.subCategory)
+    setSelectedTag(params.tag)
+
+    // sıralama parametresi varsa
+    const sirala = searchParams.get("sırala")
+    if (sirala) {
+      setSorting(sirala.split("-"))
+    }
+
+    // arama parametresi varsa
+    setSearchKeyword(searchParams.get("ara")||"")
+
+  }, [params, searchParams])
+
   useEffect(() => {
     // sorting değişince verileri temizliyoruz
     dispatch({ type: ActionTypes.SELECTED_SORT })
-    
+
     if (!hasDoc) {
-      dispatch(getProducts(sorting, selectedCategory, selectedTag, lastVisible, searchKeyword))
+      dispatch(getProducts(sorting, selectedCategory, selectedTag, lastVisible, searchKeyword, selectedSubCategory))
     }
-  }, [sorting, searchKeyword])
-  
+  }, [sorting, searchKeyword,selectedSubCategory])
+
   useEffect(() => {
-    
     const observerDiv = observerRef.current
     // hasDoc başka sayfa olup olmadığını tutan state
     if (!observerDiv || !hasDoc) return
-
+    
     const observer = new IntersectionObserver((entires) => {
       entires.forEach(entry => {
         if (entry.isIntersecting) {
-          dispatch(getProducts(sorting, selectedCategory, selectedTag, lastVisible, searchKeyword))
+          console.log([lastVisible, sorting, selectedCategory, selectedTag, searchKeyword, selectedSubCategory])
+          dispatch(getProducts(sorting, selectedCategory, selectedTag, lastVisible, searchKeyword, selectedSubCategory))
         }
       })
     },
@@ -66,7 +82,7 @@ const Products = () => {
     // komponent ekrandan ayrılınca takibi bırak
     return () => observer.disconnect()
 
-  }, [lastVisible, sorting, selectedCategory, selectedTag, searchKeyword])
+  }, [lastVisible, sorting, selectedCategory, selectedTag, searchKeyword, selectedSubCategory])
 
 
   return (

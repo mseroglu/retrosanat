@@ -18,7 +18,6 @@ const delProduct = async (product) => {
       product.photos.forEach(photo => {
          delImage(photo)
       })
-      toast.success("Ürün fotoğrafları silindi.")
    }
    catch (err) {
       toast.error("Ürün fotoğrafları silinemedi !..")

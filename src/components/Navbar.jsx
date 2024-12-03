@@ -34,18 +34,12 @@ const Navbar = () => {
                      </div>
                   </Link>
 
-                  {/*      BURASI SİLİNECEK
-                  <Link to={"/products"}
-                     onClick={categoryReset} className="text-slate-600 transition hover:underline text-sm font-semibold" > Ürünler
-                  </Link>
-                   */}
-
                   <div className="flex gap-3 font-normal text-slate-700 ">
                   </div>
                </div>
 
 
-               <SearchBar className="max-md:hidden111" />
+               <SearchBar className="" />
 
                {isOpen && <Modal setIsOpen={setIsOpen} />}
 
@@ -53,10 +47,12 @@ const Navbar = () => {
                   {
                      // şart devreye alınacak
                      // auth.currentUser !== null  &&
-                     
-                     <Link to={"/dashboard"} onClick={categoryReset} className="text-slate-600 transition hover:underline text-xs font-semibold whitespace-nowrap " > Yönetici Paneli
+
+                     <Link to={"/dashboard"} onClick={categoryReset}
+                        className="text-slate-600 transition hover:underline text-xs font-semibold whitespace-nowrap " >
+                        Yönetici Paneli
                      </Link>
-                     
+
                   }
 
                   {/* menu butonu */}

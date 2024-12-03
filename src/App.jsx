@@ -29,6 +29,7 @@ function App() {
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/products/tag/:tag' element={<Products />} />
             <Route path='/products/category/:category' element={<Products />} />
+            <Route path='/products/category/:category/:subCategory' element={<Products />} />
             <Route path='/product/detail/:id' element={<Detail />} />
             <Route path='/product/edit/:id' element={<SaveProduct />} />
 

@@ -8,7 +8,6 @@ const initialState = {
    selectedTag: null,
    lastVisible: null,
    hasDoc: true,
-   searchKeyword: ""
 }
 
 const productReducer = (state = initialState, { type, payload }) => {
@@ -44,11 +43,6 @@ const productReducer = (state = initialState, { type, payload }) => {
       case ActionTypes.SELECTED_SORT:
          return {
             ...state, products: [], hasDoc: true, lastVisible: null
-         };
-
-      case ActionTypes.ADD_SEARCH_PARAMS:
-         return {
-            ...state, products: [], hasDoc: true, lastVisible: null, searchKeyword: payload == null ? "" : payload
          };
 
       default:

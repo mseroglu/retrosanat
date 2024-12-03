@@ -3,35 +3,71 @@ import { db } from "../db-operations/config";
 import { collection, query, where, getDocs, limit, orderBy, startAfter } from "firebase/firestore";
 
 
-export const getProducts = (sorting, selectedCategory, selectedTag, lastVisible, searchKeyword) => async (dispatch) => {
+export const getProducts = (sorting, selectedCategory, selectedTag, lastVisible, searchKeyword, selectedSubCategory) => async (dispatch) => {
+   console.log({ sorting, selectedCategory, selectedTag, lastVisible, searchKeyword, selectedSubCategory })
    const lim = 20
    // collection un referansı
    const productsColl = collection(db, "products")
    // sorgu ayarları
    let q;
    if (lastVisible) {
-      if (selectedCategory) {
+      if (selectedSubCategory) {
          console.log("1 çalıştı")
-         q = query(productsColl, where("category", "==", selectedCategory), where("title", ">=", searchKeyword),  orderBy(...sorting), startAfter(lastVisible), limit(lim))
-      } else if (selectedTag) {
+         q = query(productsColl,
+            where("subCategory", "==", selectedSubCategory),
+            where("title", ">=", searchKeyword),
+            where("title", "<", searchKeyword + "\uf8ff"),
+            orderBy(...sorting), startAfter(lastVisible), limit(lim))
+      } else if (selectedCategory) {
          console.log("2 çalıştı")
-         q = query(productsColl, where("tags", "array-contains", selectedTag.toLocaleLowerCase()), where("title", ">=", searchKeyword),  orderBy(...sorting), startAfter(lastVisible), limit(lim))
-      } else {
+         q = query(productsColl,
+            where("category", "==", selectedCategory),
+            where("title", ">=", searchKeyword),
+            where("title", "<", searchKeyword + "\uf8ff"),
+            orderBy(...sorting), startAfter(lastVisible), limit(lim))
+      } else if (selectedTag) {
          console.log("3 çalıştı")
-         q = query(productsColl,  where("title", ">=", searchKeyword), orderBy(...sorting), startAfter(lastVisible), limit(lim))
+         q = query(productsColl,
+            where("tags", "array-contains", selectedTag.toLocaleLowerCase()),
+            where("title", ">=", searchKeyword),
+            where("title", "<", searchKeyword + "\uf8ff"),
+            orderBy(...sorting), startAfter(lastVisible), limit(lim))
+      } else {
+         console.log("4 çalıştı")
+         q = query(productsColl,
+            where("title", ">=", searchKeyword),
+            where("title", "<", searchKeyword + "\uf8ff"),
+            orderBy(...sorting), startAfter(lastVisible), limit(lim))
       }
    } else {
-      if (selectedCategory) {
-         console.log("4 çalıştı")
-         q = query(productsColl, where("category", "==", selectedCategory), where("title", ">=", searchKeyword), orderBy(...sorting), limit(lim))
-      } else if (selectedTag) {
+      if (selectedSubCategory) {
          console.log("5 çalıştı")
-         q = query(productsColl, where("tags", "array-contains", selectedTag.toLocaleLowerCase()), where("title", ">=", searchKeyword), orderBy(...sorting), limit(lim))
-      } else {
+         q = query(productsColl,
+            where("subCategory", "==", selectedSubCategory),
+            where("title", ">=", searchKeyword),
+            where("title", "<", searchKeyword + "\uf8ff"),
+            orderBy(...sorting), limit(lim))
+      } else if (selectedCategory) {
          console.log("6 çalıştı")
-         q = query(productsColl, where("title", "<=", searchKeyword+ "\uf8ff"), orderBy(...sorting), limit(lim))
+         q = query(productsColl,
+            where("category", "==", selectedCategory),
+            where("title", ">=", searchKeyword),
+            where("title", "<", searchKeyword + "\uf8ff"),
+            orderBy(...sorting), limit(lim))
+      } else if (selectedTag) {
+         console.log("7 çalıştı")
+         q = query(productsColl,
+            where("tags", "array-contains", selectedTag.toLocaleLowerCase()),
+            where("title", ">=", searchKeyword),
+            where("title", "<", searchKeyword + "\uf8ff"),
+            orderBy(...sorting), limit(lim))
+      } else {
+         console.log("8 çalıştı")
+         q = query(productsColl,
+            where("title", ">=", searchKeyword),
+            where("title", "<", searchKeyword + "\uf8ff"),
+            orderBy(...sorting), limit(lim))
       }
-
    }
 
    try {
@@ -45,7 +81,7 @@ export const getProducts = (sorting, selectedCategory, selectedTag, lastVisible,
          hasDoc: snapshot.docs.length == lim,
          // sonraki sayfa varsa bu sayfanın son öğesini referans olarak işaretliyoruz
          lastVisible: snapshot.docs.length == lim ? snapshot.docs[snapshot.docs.length - 1] : null,
-      }      
+      }
       dispatch({
          type: ActionTypes.PRODUCTS_SUCCESS,
          payload
@@ -73,7 +109,7 @@ export const getPageProducts = (lastVisible) => async (dispatch) => {
       const newProd = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
 
       dispatch({
-         type: ActionTypes.DASHBOARD_PRODUCTS_SUCCESS, 
+         type: ActionTypes.DASHBOARD_PRODUCTS_SUCCESS,
          payload: {
             products: newProd,
             // istenen sayıda dökümanın gelirse sonraki sayfa var demektir
