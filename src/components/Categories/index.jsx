@@ -20,6 +20,8 @@ const Categories = () => {
       setSubCategory(null)
       const found = CATEGORIES.find(item => item.key == cat)
       setSubCategories(found?.subs)
+
+      
    }
 
    const handleSetSubCategory = (e) => {
@@ -44,14 +46,18 @@ const Categories = () => {
       dispatch({ type: ActionTypes.SELECTED_CATEGORY, payload: category })
       if (category) {
          navigate("/products/category/" + category)
+      }else{
+navigate("/products")
       }
    }, [category])
 
    return (
       <>
          <div id="categories" className="flex text-[14px] md:text-[16px] justify-center bg-zinc-300 border-t-4 border-yellow-400 ">
-            <span onClick={() => navigate("/products")}>
-               <button onClick={handleClickCategory} data-category={null}
+
+            {/** BURDAKİ FONKSİYON SİLİNECEK */}
+            <span>
+               <button onClick={handleClickCategory} data-category={undefined}
                   className={`h-full font-semibold py-1 px-2 md:w-32 lg:w-40 border-x hover:bg-zinc-200 text-[12px] uppercase`} >
                   Tüm Ürünler
                </button>

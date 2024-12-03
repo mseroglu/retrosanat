@@ -4,7 +4,9 @@ import { collection, query, where, getDocs, limit, orderBy, startAfter } from "f
 
 
 export const getProducts = (sorting, selectedCategory, selectedTag, lastVisible, searchKeyword, selectedSubCategory) => async (dispatch) => {
-   console.log({ sorting, selectedCategory, selectedTag, lastVisible, searchKeyword, selectedSubCategory })
+   
+   //* console.log({ sorting, selectedCategory, selectedTag, lastVisible, searchKeyword, selectedSubCategory })
+
    const lim = 20
    // collection un referansı
    const productsColl = collection(db, "products")

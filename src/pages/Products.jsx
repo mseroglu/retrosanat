@@ -66,7 +66,9 @@ const Products = () => {
     const observer = new IntersectionObserver((entires) => {
       entires.forEach(entry => {
         if (entry.isIntersecting) {
-          console.log([lastVisible, sorting, selectedCategory, selectedTag, searchKeyword, selectedSubCategory])
+
+          //! BURASI SİLİNECEK
+          //console.log([lastVisible, sorting, selectedCategory, selectedTag, searchKeyword, selectedSubCategory])
           dispatch(getProducts(sorting, selectedCategory, selectedTag, lastVisible, searchKeyword, selectedSubCategory))
         }
       })
