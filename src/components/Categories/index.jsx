@@ -19,9 +19,7 @@ const Categories = () => {
       setCategory(cat)
       setSubCategory(null)
       const found = CATEGORIES.find(item => item.key == cat)
-      setSubCategories(found?.subs)
-
-      
+      setSubCategories(found?.subs)      
    }
 
    const handleSetSubCategory = (e) => {
@@ -54,8 +52,7 @@ navigate("/products")
    return (
       <>
          <div id="categories" className="flex text-[14px] md:text-[16px] justify-center bg-zinc-300 border-t-4 border-yellow-400 ">
-
-            {/** BURDAKİ FONKSİYON SİLİNECEK */}
+           
             <span>
                <button onClick={handleClickCategory} data-category={undefined}
                   className={`h-full font-semibold py-1 px-2 md:w-32 lg:w-40 border-x hover:bg-zinc-200 text-[12px] uppercase`} >
@@ -73,7 +70,7 @@ navigate("/products")
          </div>
 
          {/* ALT KATEGORİLER    */}
-         <div className={`${!selectedCategory && "hidden"} bg-zinc-100 flex justify-center md:gap-5 md:p-2 w-full py-2 transition`}>
+         <div className={`${!selectedCategory && "hidden"} bg-zinc-100 flex justify-center md:gap-5 md:p-2 w-full py-2 transition overflow-x-auto scrollbar-none`}>
             {
                subCategories?.map(sub => (
                   <span key={sub.key} className="border-4 rounded-full ">

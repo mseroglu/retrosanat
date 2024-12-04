@@ -1,11 +1,19 @@
 import { Link } from "react-router-dom"
 import CATEGORIES from "../constants/categories"
 import Tag from "./Tag"
+import ActionTypes from "../constants/ActionTypes"
+import { useDispatch } from "react-redux"
 
 const ProductCard = ({ product }) => {
 
+   const dispatch = useDispatch()
+
 
    const found = CATEGORIES.find(item => item.key == product.category)
+
+   const handleClick = ()=>{
+      dispatch({ type: ActionTypes.SELECTED_CATEGORY, payload: null })
+   }
 
 
    return (
@@ -35,7 +43,7 @@ const ProductCard = ({ product }) => {
                   ))}
             </div>
 
-            <Link to={"/product/detail/" + product.id}>
+            <Link to={"/product/detail/" + product.id} onClick={handleClick}>
                <div className="font-semibold bg-yellow-500 text-center py-2">
                   Detay
                </div>

@@ -42,7 +42,7 @@ const Detail = () => {
       {isLoading
         ? <Loader />
         : data && (
-          <div className="grid grid-cols-1 md:grid-cols-2 mt-2 shadow-md shadow-slate-900 bg-zinc-100 relative w-fit place-items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 mt-5 shadow-md shadow-slate-900 bg-zinc-100 relative w-fit place-items-center">
 
             <div className="absolute top-[-30px] left-0 ">
               <Link to={-1} className="flex items-center bg-yellow-300 rounded-full pe-3 hover:bg-yellow-400">
