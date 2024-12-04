@@ -1,9 +1,8 @@
 import CATEGORIES from "../../constants/categories"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import ActionTypes from "../../constants/ActionTypes"
-import { useNavigate } from "react-router-dom"
-
+import { useLocation, useNavigate } from "react-router-dom"
 
 const Categories = () => {
    const { selectedCategory } = useSelector(store => store.products)
@@ -14,12 +13,16 @@ const Categories = () => {
    const dispatch = useDispatch()
    const navigate = useNavigate()
 
+
    const handleClickCategory = (e) => {
       const cat = e.target.getAttribute("data-category")
+      if (!cat) {
+         navigate("/products")
+      }
       setCategory(cat)
       setSubCategory(null)
       const found = CATEGORIES.find(item => item.key == cat)
-      setSubCategories(found?.subs)      
+      setSubCategories(found?.subs)
    }
 
    const handleSetSubCategory = (e) => {
@@ -35,24 +38,17 @@ const Categories = () => {
    useEffect(() => {
       if (subCategory) {
          navigate(`/products/category/${category}/${subCategory}`)
-      }else{
-         navigate(`/products/category/${category}`)
-      }
-   }, [subCategory])
-
-   useEffect(() => {
-      dispatch({ type: ActionTypes.SELECTED_CATEGORY, payload: category })
-      if (category) {
+      } else if (category) {
+         dispatch({ type: ActionTypes.SELECTED_CATEGORY, payload: category })
          navigate("/products/category/" + category)
-      }else{
-navigate("/products")
       }
-   }, [category])
+
+   }, [category, subCategory])
 
    return (
       <>
          <div id="categories" className="flex text-[14px] md:text-[16px] justify-center bg-zinc-300 border-t-4 border-yellow-400 ">
-           
+
             <span>
                <button onClick={handleClickCategory} data-category={undefined}
                   className={`h-full font-semibold py-1 px-2 md:w-32 lg:w-40 border-x hover:bg-zinc-200 text-[12px] uppercase`} >

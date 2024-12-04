@@ -28,6 +28,7 @@ const productReducer = (state = initialState, { type, payload }) => {
             hasDoc: payload.hasDoc,
             lastVisible: payload.lastVisible
          };
+         
       case ActionTypes.SELECTED_CATEGORY:
          return {
             ...state, isLoading: false, error: null, selectedTag: null,
