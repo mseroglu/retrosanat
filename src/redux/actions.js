@@ -4,7 +4,7 @@ import { collection, query, where, getDocs, limit, orderBy, startAfter } from "f
 
 
 export const getProducts = (sorting, selectedCategory, selectedTag, lastVisible, searchKeyword, selectedSubCategory) => async (dispatch) => {
-   
+
    //* console.log({ sorting, selectedCategory, selectedTag, lastVisible, searchKeyword, selectedSubCategory })
 
    const lim = 20
@@ -77,12 +77,13 @@ export const getProducts = (sorting, selectedCategory, selectedTag, lastVisible,
 
       const snapshot = await getDocs(q)
       const newProd = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+      // istenen sayıda dökümanın gelirse sonraki sayfa var demektir
+      const hasDoc = snapshot.docs.length == lim
       const payload = {
          products: newProd,
-         // istenen sayıda dökümanın gelirse sonraki sayfa var demektir
-         hasDoc: snapshot.docs.length == lim,
+         hasDoc,
          // sonraki sayfa varsa bu sayfanın son öğesini referans olarak işaretliyoruz
-         lastVisible: snapshot.docs.length == lim ? snapshot.docs[snapshot.docs.length - 1] : null,
+         lastVisible: hasDoc ? snapshot.docs[snapshot.docs.length - 1] : null,
       }
       dispatch({
          type: ActionTypes.PRODUCTS_SUCCESS,
@@ -95,7 +96,6 @@ export const getProducts = (sorting, selectedCategory, selectedTag, lastVisible,
 }
 
 export const getPageProducts = (lastVisible) => async (dispatch) => {
-   // istenen döküman sayısının bir fazlası çekilir ki bu sayede mevcut sayfa son sayfa mı belirlenir
    const lim = 20
 
    try {

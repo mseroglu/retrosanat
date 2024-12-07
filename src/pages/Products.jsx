@@ -10,12 +10,13 @@ import ActionTypes from "../constants/ActionTypes"
 
 
 const Products = () => {
-  let { isLoading, error, products, hasDoc, lastVisible, } = useSelector(store => store.products)
+  let { isLoading, error, products, hasDoc, lastVisible } = useSelector(store => store.products)
   const [searchParams, setSearchParams] = useSearchParams()
-  const [searchKeyword, setSearchKeyword] = useState("")
+  const [searchKeyword, setSearchKeyword] = useState(searchParams.get("ara") || "")
   const [selectedCategory, setSelectedCategory] = useState()
   const [selectedSubCategory, setSelectedSubCategory] = useState()
   const [selectedTag, setSelectedTag] = useState()
+  const [moreData, setMoreData] = useState(false)
   const [sorting, setSorting] = useState(searchParams.get("sırala")?.split("-") || ["created_at", "desc"])
 
 
@@ -45,22 +46,64 @@ const Products = () => {
     }
 
     // arama parametresi varsa
-    setSearchKeyword(searchParams.get("ara")||"")
+    setSearchKeyword(searchParams.get("ara") || "")
 
   }, [params, searchParams])
 
   useEffect(() => {
+    console.log("Products render oldu...")
     // sorting değişince verileri temizliyoruz
     dispatch({ type: ActionTypes.SELECTED_SORT })
 
-    if (!hasDoc) {
-      dispatch(getProducts(sorting, selectedCategory, selectedTag, lastVisible, searchKeyword, selectedSubCategory))
-    }
-  }, [sorting, searchKeyword,selectedSubCategory])
+    dispatch(getProducts(sorting, selectedCategory, selectedTag, lastVisible, searchKeyword, selectedSubCategory))
 
-  useEffect(() => {
+  }, [sorting, selectedCategory, selectedTag, searchKeyword, selectedSubCategory, moreData])
+
+
+  return (
+    <Container className="flex flex-col gap-3 align-items-center">
+
+      <select onChange={handleSorting} name="sorting" id="sorting" defaultValue={searchParams.get("sırala") || "created_at-desc"}
+        className="self-center rounded-md border-2 px-2 py-1 mt-16 text-sm">
+        <option value="created_at-desc">Sırala (Varsayılan son eklenen)</option>
+        <option value="price-asc">Ucuzdan pahalıya</option>
+        <option value="price-desc">Pahalıdan ucuza</option>
+        <option value="title-asc">Ürün Adı A &gt; Z</option>
+        <option value="title-desc">Ürün Adı Z &gt; A</option>
+      </select>
+
+      <div className="flex gap-4 flex-wrap justify-center min-h-[400px]">
+        {
+          isLoading
+            ? <Loader />
+            : error
+              ? <Error err={error} />
+              : products.length == 0
+                ? <h2 className="mt-20 font-semibold">Ürün bulunamadı..</h2>
+                : products?.map((item, i) => <ProductCard key={i} product={item} />)
+        }
+      </div>
+
+      {
+        hasDoc && 
+        <div onClick={()=> setMoreData(!moreData)} className="border p-1 w-fit rounded-full px-3" >Daha Fazla Ürün</div>
+      }
+
+    </Container>
+  )
+}
+
+export default Products
+
+
+{/**
+   useEffect(() => {
     const observerDiv = observerRef.current
     // hasDoc başka sayfa olup olmadığını tutan state
+    if (!hasDoc){
+     () => observer.disconnect()
+    }
+
     if (!observerDiv || !hasDoc) return
     
     const observer = new IntersectionObserver((entires) => {
@@ -85,36 +128,5 @@ const Products = () => {
     return () => observer.disconnect()
 
   }, [lastVisible, sorting, selectedCategory, selectedTag, searchKeyword, selectedSubCategory])
-
-
-  return (
-    <Container className="flex flex-col gap-3">
-
-      <select onChange={handleSorting} name="sorting" id="sorting" defaultValue={searchParams.get("sırala") || "created_at-desc"}
-        className="self-center rounded-md border-2 px-2 py-1 mt-16 text-sm">
-        <option value="created_at-desc">Sırala (Varsayılan son eklenen)</option>
-        <option value="price-asc">Ucuzdan pahalıya</option>
-        <option value="price-desc">Pahalıdan ucuza</option>
-        <option value="title-asc">Ürün Adı A &gt; Z</option>
-        <option value="title-desc">Ürün Adı Z &gt; A</option>
-      </select>
-
-      <div className="flex gap-4 flex-wrap justify-center min-h-[400px]">
-        {
-          isLoading
-            ? <Loader />
-            : error
-              ? <Error err={error} />
-              : products.length == 0
-                ? <h2 className="mt-20 font-semibold">Ürün bulunamadı..</h2>
-                : products?.map((item, i) => <ProductCard key={i} product={item} />)
-        }
-      </div>
-
-      {/* Ekran girişi takip edilen div. Ekrana girdiğinde yeni ürünler gelir*/}
-      <div ref={observerRef} ></div>
-    </Container>
-  )
-}
-
-export default Products
+  
+  */}
