@@ -18,8 +18,8 @@ function App() {
 
   return (
     <>
-      <div className='flex flex-col h-screen '>
-        <BrowserRouter >
+      <BrowserRouter >
+        <div className='flex flex-col min-h-screen '>
           <Navbar />
           <Routes>
             <Route path='/' element={<MainPage />} />
@@ -42,11 +42,11 @@ function App() {
             </Route>
             <Route path='*' element={<NotFound />} />
           </Routes>
+        </div>
 
-          <Footer />
-          <ToastContainer position='bottom-right' theme='colored' />
-        </BrowserRouter>
-      </div>
+        <Footer />
+        <ToastContainer position='bottom-right' theme='colored' />
+      </BrowserRouter>
     </>
   )
 }

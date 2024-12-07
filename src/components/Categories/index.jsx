@@ -16,16 +16,19 @@ const Categories = () => {
 
    const handleClickCategory = (e) => {
       const cat = e.target.getAttribute("data-category")
-      if (!cat) {
-         navigate("/products")
-      }
       setCategory(cat)
       setSubCategory(null)
       const found = CATEGORIES.find(item => item.key == cat)
       setSubCategories(found?.subs)
+      console.log(cat)
+
+      // Burası useEffect içine alınamaz, alınırsa anasayfa yerine sürekli products sayfası ilk gelir
+      if (!cat) {
+         navigate("/products")
+      }
    }
 
-   const handleSetSubCategory = (e) => {
+   const handleClickSubCategory = (e) => {
       const cat = e.target.getAttribute("data-category")
       // aynı kategoriyi tıklayınca seçili ise kaldır
       if (cat == subCategory) {
@@ -38,19 +41,23 @@ const Categories = () => {
    useEffect(() => {
       if (subCategory) {
          navigate(`/products/category/${category}/${subCategory}`)
-      } else if (category) {
-         dispatch({ type: ActionTypes.SELECTED_CATEGORY, payload: category })
+      } 
+
+   }, [subCategory])
+
+   useEffect(() => {
+      dispatch({ type: ActionTypes.SELECTED_CATEGORY, payload: category })       
+      if (category) {  
          navigate("/products/category/" + category)
       }
-
-   }, [category, subCategory])
+   }, [category])
 
    return (
       <>
-         <div id="categories" className="flex text-[14px] md:text-[16px] justify-center bg-zinc-300 border-t-4 border-yellow-400 ">
+         <div id="categories" className="flex text-[14px] md:text-[16px] justify-center bg-zinc-300 border-t-4 border-yellow-400 overflow-x-auto scrollbar-none">
 
             <span>
-               <button onClick={handleClickCategory} data-category={undefined}
+               <button onClick={handleClickCategory} data-category={null}
                   className={`h-full font-semibold py-1 px-2 md:w-32 lg:w-40 border-x hover:bg-zinc-200 text-[12px] uppercase`} >
                   Tüm Ürünler
                </button>
@@ -70,7 +77,7 @@ const Categories = () => {
             {
                subCategories?.map(sub => (
                   <span key={sub.key} className="border-4 rounded-full ">
-                     <button className={`${sub.key == subCategory && "bg-yellow-300"} hover:scale-105 text-center font-semibold text-xs py-1 hover:font-semibold transition capitalize rounded-full h-16 w-16 border-2 border-yellow-300 grid place-items-center`} onClick={handleSetSubCategory} data-category={sub.key}>
+                     <button className={`${sub.key == subCategory && "bg-yellow-300"} hover:scale-105 text-center font-semibold text-xs py-1 hover:font-semibold transition capitalize rounded-full h-16 w-16 border-2 border-yellow-300 grid place-items-center`} onClick={handleClickSubCategory} data-category={sub.key}>
                         {sub.value}
                      </button>
                   </span>
