@@ -1,15 +1,14 @@
-import Container from "../components/Container"
 import { MdOutlineDelete } from "react-icons/md";
 import { FiEdit } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
-import delProduct from "../db-operations/delProduct";
+import delProduct from "../../db-operations/delProduct";
 import { Link, useNavigate } from "react-router-dom";
-import ActionTypes from "../constants/ActionTypes";
-import { useEffect, useRef, useState } from "react";
-import Loader from "../components/Loader"
-import { getPageProducts } from "../redux/actions";
+import ActionTypes from "../../constants/ActionTypes";
+import { useEffect, useRef } from "react";
+import Loader from "../../components/Loader"
+import { getPageProducts } from "../../redux/actions";
 
-const Dashboard = () => {
+const Products = ({ setPage }) => {
    const { isLoading, error, products, hasDoc, lastVisible } = useSelector(store => store.dashboard)
 
    const dispatch = useDispatch()
@@ -22,7 +21,7 @@ const Dashboard = () => {
       // gizli divi takip eder ve ekrana girdiğinde tekrar api isteği yapılmasını sağlar
       const observer = new IntersectionObserver((entires) => {
 
-         entires.forEach(entry => {            
+         entires.forEach(entry => {
             if (entry.isIntersecting) {
                dispatch(getPageProducts(lastVisible))
             }
@@ -43,31 +42,31 @@ const Dashboard = () => {
    const handleDelete = async (product) => {
       const result = confirm("Ürünü silmek istediğine emin misin? ")
       if (result) {
-         const res = await delProduct(product)
+         await delProduct(product)
          // ürün silindikten sonra state i güncelle
-         const filtred = products.filter(item => item.id !== product.id)         
-         dispatch({type: ActionTypes.DASHBOARD_PRODUCTS_UPDATE, payload: filtred })
+         const filtred = products.filter(item => item.id !== product.id)
+         dispatch({ type: ActionTypes.DASHBOARD_PRODUCTS_UPDATE, payload: filtred })
       }
    }
 
    const handleEdit = (product) => {
 
       dispatch({ type: ActionTypes.EDIT_PRODUCT, payload: product })
-      navigate("/product/edit/" + product.id)
+      setPage("addProduct")
+      // navigate("/product/edit/" + product.id)
    }
 
-   
+
    return (
-      <Container >
+      <>
          {isLoading
             ? <Loader />
             : error
                ? <Error err={error} />
                : (
                   <div className="flex flex-col h-full">
-                     <h2 className="text-center text-xl font-bold mb-3">Ürünler</h2>
 
-                     <Link to={"/addProduct"} className="border py-1 px-3 w-max self-end bg-yellow-300 mb-2 font-semibold rounded-sm text-sm" onClick={() => dispatch({ type: ActionTypes.EDIT_PRODUCT, payload: null })}>Ürün Ekle</Link>
+
                      <table className="table table-warning ">
                         <thead>
                            <tr className="table-danger">
@@ -103,11 +102,11 @@ const Dashboard = () => {
 
                   </div>
                )}
-      </Container>
+      </>
    )
 }
 
-export default Dashboard
+export default Products
 
 
 {/*
@@ -145,3 +144,4 @@ export default Dashboard
    
    
    */}
+

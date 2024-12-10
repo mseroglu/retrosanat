@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react"
-import Container from "../components/Container"
-import { uploadImage } from "../db-operations/imageToFirestore"
+import Container from "../../components/Container"
+import { uploadImage } from "../../db-operations/imageToFirestore"
 import { addDoc, collection, doc, serverTimestamp, updateDoc } from "firebase/firestore"
-import { db } from "../db-operations/config"
+import { db } from "../../db-operations/config"
 import { toast } from "react-toastify"
-import Loader from "../components/Loader"
-import CATEGORIES from "../constants/categories"
+import Loader from "../../components/Loader"
+import CATEGORIES from "../../constants/categories"
 import { useDispatch, useSelector } from "react-redux"
-import ActionTypes from "../constants/ActionTypes"
+import ActionTypes from "../../constants/ActionTypes"
 
 
-const SaveProduct = () => {
+const AddProduct = () => {
    const { editProduct } = useSelector(store => store.editProduct)
    const [isLoading, setIsLoading] = useState(false)
    const [imagesUrl, setImagesUrl] = useState([])
@@ -113,7 +113,7 @@ const SaveProduct = () => {
    }, [editProduct])
 
    return (
-      <Container className="grid place-items-center bg-image ">
+      <div className="grid place-items-center bg-image ">
          <form onSubmit={handleSubmit} className="flex flex-col w-5/6 md:w-[400px] gap-3 border-2 rounded-lg shadow-lg p-3 relative bg-white">
 
             {isLoading && <Loader stil="absolute top-20" />}
@@ -210,8 +210,8 @@ const SaveProduct = () => {
             <button type="submit" disabled={isLoading} className="font-semibold border-2 px-5 py-1 mt-3 rounded-md hover:bg-slate-800 hover:text-white transition w-fit self-center disabled:bg-yellow-400">
                Gönder</button>
          </form>
-      </Container>
+      </div>
    )
 }
 
-export default SaveProduct
+export default AddProduct

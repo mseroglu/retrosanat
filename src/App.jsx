@@ -3,7 +3,6 @@ import Navbar from './components/Navbar'
 import MainPage from './pages/MainPage'
 import Login from './pages/Login'
 import Register from './pages/Register'
-import SaveProduct from './pages/SaveProduct'
 import Products from './pages/Products'
 import Footer from './components/Footer'
 import Detail from './pages/Detail'
@@ -26,15 +25,14 @@ function App() {
             <Route path='/home' element={<MainPage />} />
             <Route path='/login' element={<Login />} />
             <Route path='/products' element={<Products />} />
-            <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/products/tag/:tag' element={<Products />} />
             <Route path='/products/category/:category' element={<Products />} />
             <Route path='/products/category/:category/:subCategory' element={<Products />} />
             <Route path='/product/detail/:id' element={<Detail />} />
-            <Route path='/product/edit/:id' element={<SaveProduct />} />
 
             {/* Burası protecteda alınacak */}
-            <Route path='/addProduct' element={<SaveProduct />} />
+            <Route path='/dashboard' element={<Dashboard />} />
+   
 
             {/** Protected - Giriş yapmadan erişilemez alanlar */}
             <Route element={<Protected />}>

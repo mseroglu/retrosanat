@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import Container from "../components/Container"
 import ProductCard from "../components/ProductCard"
 import { useDispatch, useSelector } from "react-redux"
@@ -21,7 +21,6 @@ const Products = () => {
 
 
   const dispatch = useDispatch()
-  const observerRef = useRef(null)
   const params = useParams()
 
 
