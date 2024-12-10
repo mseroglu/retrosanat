@@ -43,7 +43,7 @@ const AddCampaign = () => {
 
             //! BURASI KAMPANYALARA EKLENECEK ürünün firebase id sini ekleyip state kaydediyoruz
             dataObj["id"] = res?.id
-            dispatch({ type: ActionTypes.DASHBOARD_PRODUCTS_NEWADD, payload: dataObj })
+            dispatch({ type: ActionTypes.CAMPAIGN_ADD_STORE, payload: dataObj })
          }
          // 4- formu sıfırla
          e.target.reset()
