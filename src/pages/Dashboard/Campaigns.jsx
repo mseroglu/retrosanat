@@ -8,7 +8,7 @@ import ActionTypes from "../../constants/ActionTypes"
 
 
 const AddCampaign = () => {
-   const { editProduct } = useSelector(store => store.editProduct)
+   const { editCampaign } = useSelector(store => store.editProduct)
    const [isLoading, setIsLoading] = useState(false)
 
 
@@ -29,19 +29,19 @@ const AddCampaign = () => {
          // string verileri, numbera çeviriyoruz
          dataObj["discount"] = +dataObj["discount"]
 
-         if (editProduct) {
+         if (editCampaign) {
             // 3- ürünü güncelle
-            const docRef = doc(db, "campaigns", editProduct.id)
+            const docRef = doc(db, "campaigns", editCampaign.id)
             await updateDoc(docRef, dataObj)
             toast.success("Ürün başarıyla güncellendi..")
-            dispatch({ type: ActionTypes.EDIT_PRODUCT, payload: null })
+            dispatch({ type: ActionTypes.EDIT_CAMPAIGN, payload: null })
          } else {
             // 3- yeni ürünü firebase ekle
             const productCollection = collection(db, "campaigns")
             const res = await addDoc(productCollection, dataObj)
             toast.success("Kampanya başarıyla kaydedildi.")
 
-            // ürünün firebase id sini ekleyip state kaydediyoruz
+            //! BURASI KAMPANYALARA EKLENECEK ürünün firebase id sini ekleyip state kaydediyoruz
             dataObj["id"] = res?.id
             dispatch({ type: ActionTypes.DASHBOARD_PRODUCTS_NEWADD, payload: dataObj })
          }
@@ -57,24 +57,24 @@ const AddCampaign = () => {
 
    return (
       <div className="grid place-items-center bg-image ">
-         <form onSubmit={handleSubmit} className="flex flex-col w-5/6 md:w-[400px] gap-3 border-2 rounded-lg shadow-lg p-3 relative bg-white">
+         <form onSubmit={handleSubmit} className="flex flex-col w-[300px] gap-3 border-2 rounded-lg shadow-lg p-3 relative bg-white">
 
             {isLoading && <Loader stil="absolute top-20" />}
 
             <h2 className="text-center font-bold bg-yellow-300 py-1 rounded-t-md">
-               {editProduct ? "Kampanya Düzenle" : "Yeni Kampanya"}
+               {editCampaign ? "Kampanya Düzenle" : "Yeni Kampanya"}
             </h2>
 
             <div className="flex flex-col">
                <label htmlFor="title">Kampanya Adı</label>
                <input id="title" name="title" type="text" required
-                  defaultValue={editProduct ? editProduct.title : ""}
+                  defaultValue={editCampaign ? editCampaign.title : ""}
                   className="border p-1 text-sm" />
             </div>
 
             <div className="flex flex-col">
                <label htmlFor="discount">İndirim Oranı %</label>
-               <input id="discount" name="discount" type="number" defaultValue={editProduct ? editProduct.price : 20} className="border px-2 py-1 rounded-md text-sm" />
+               <input id="discount" name="discount" type="number" defaultValue={editCampaign ? editCampaign.discount : 20} className="border px-2 py-1 rounded-md text-sm" />
             </div>
 
             <div className="flex flex-col">
