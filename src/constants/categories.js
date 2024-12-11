@@ -33,7 +33,7 @@ const CATEGORIES = [
          {key:"sehpa", value: "sehpa"},
          {key:"pano", value: "pano"},
          {key:"fener", value: "fener"},
-         {key:"diger", value: "diğer"},
+         {key:"diger-ahsap", value: "diğer"},
    ]   },
    { key:"boyanabilir", value: "Boyanabilir Obje", 
       subs:[
@@ -60,7 +60,7 @@ const CATEGORIES = [
          {key:"kase", value: "kase"},
          {key:"nazarlik", value: "nazarlık"},
          {key:"taki", value: "takı"},
-         {key:"diger", value: "diğer"},
+         {key:"diger-elisi", value: "diğer"},
    ] },
 ]
 export default CATEGORIES
