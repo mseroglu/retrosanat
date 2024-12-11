@@ -132,7 +132,7 @@ const AddProduct = () => {
             {/* KATEGORİLER */}
             <div className="flex flex-col">
                <label htmlFor="categories">Kategori</label>
-               <select name="category" className=" border px-2 py-1 rounded-md text-sm"
+               <select name="category" className=" border px-2 py-1 rounded-md text-sm capitalize"
                   defaultValue={editProduct ? editProduct.category : ""} onChange={handleCategorySelect} >
                   <option value="">Kategori Seçiniz</option>
                   {

@@ -52,7 +52,16 @@ const CATEGORIES = [
          {key:"mum-malzemeler", value: "mum malzemeler"},
          {key:"tuval", value: "tuval"},
          {key:"punch", value: "punch"},
-   ] }
+   ] },
+   { key:"el-isi", value: "el İşi ürünler", 
+      subs:[
+         {key:"kupa", value: "kupa"},
+         {key:"fincan", value: "fincan"},
+         {key:"kase", value: "kase"},
+         {key:"nazarlik", value: "nazarlık"},
+         {key:"taki", value: "takı"},
+         {key:"diger", value: "diğer"},
+   ] },
 ]
 export default CATEGORIES
 
