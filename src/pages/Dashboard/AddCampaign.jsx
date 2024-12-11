@@ -21,13 +21,13 @@ const AddCampaign = () => {
       const data = new FormData(e.target)
       const dataObj = Object.fromEntries(data.entries())
 
-
       try {
          setIsLoading(true)
 
          dataObj["title"] = dataObj["title"].toLocaleLowerCase()
          // string verileri, numbera çeviriyoruz
          dataObj["discount"] = +dataObj["discount"]
+         dataObj["status"] = dataObj["status"] == "true" ? true : false
 
          if (editCampaign) {
             // 3- ürünü güncelle
@@ -37,6 +37,7 @@ const AddCampaign = () => {
             dispatch({ type: ActionTypes.EDIT_CAMPAIGN, payload: null })
          } else {
             // 3- yeni ürünü firebase ekle
+            dataObj["created_at"] = serverTimestamp()
             const productCollection = collection(db, "campaigns")
             const res = await addDoc(productCollection, dataObj)
             toast.success("Kampanya başarıyla kaydedildi.")
@@ -91,7 +92,7 @@ const AddCampaign = () => {
                <label>Durum</label>
                <div className="flex gap-5 justify-evenly border p-1">
                   <span>
-                     <input type="radio" name="status" id="status1" value={true} defaultChecked={true}/>
+                     <input type="radio" name="status" id="status1" value={true} defaultChecked={true} />
                      <label htmlFor="status1">Aktif</label>
                   </span>
                   <span>

@@ -2,7 +2,6 @@ import { MdOutlineDelete } from "react-icons/md";
 import { FiEdit } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import delProduct from "../../db-operations/delProduct";
-import { Link, useNavigate } from "react-router-dom";
 import ActionTypes from "../../constants/ActionTypes";
 import { useEffect, useRef } from "react";
 import Loader from "../../components/Loader"
@@ -12,7 +11,6 @@ const Products = ({ setPage }) => {
    const { isLoading, error, products, hasDoc, lastVisible } = useSelector(store => store.dashboard)
 
    const dispatch = useDispatch()
-   const navigate = useNavigate()
    const observerRef = useRef()
 
    useEffect(() => {
@@ -50,10 +48,8 @@ const Products = ({ setPage }) => {
    }
 
    const handleEdit = (product) => {
-
       dispatch({ type: ActionTypes.EDIT_PRODUCT, payload: product })
       setPage("addProduct")
-      // navigate("/product/edit/" + product.id)
    }
 
 

@@ -8,9 +8,13 @@ import { getPageProducts } from "../../redux/actions";
 import Products from "./Products";
 import Campaigns from "./Campaigns"
 import AddProduct from "./AddProduct";
+import AddCampaign from "./AddCampaign";
+import SideButton from "./SideButton";
+
+const PAGES = ["Ürünler", "Ürün Ekle", "Kampanya Ekle", "Kampanyalar"]
 
 const Dashboard = () => {
-   const [page, setPage] = useState("products")
+   const [page, setPage] = useState(PAGES[0])
 
    const dispatch = useDispatch()
    const navigate = useNavigate()
@@ -22,30 +26,23 @@ const Dashboard = () => {
          <main className="flex gap-1">
 
             <aside className="flex flex-col bg-zinc-300 h-fit ">
-               <button className={`text-left border-b border-s-4 hover:border-yellow-300 p-2 ${page == "products" && "bg-yellow-400"}`} onClick={() => setPage("products")}>Ürünler</button>
-
-               <button className={`text-left border-b border-s-4 hover:border-yellow-300 p-2 ${page == "addProduct" && "bg-yellow-400"}`}
-                  onClick={() => {
-                     setPage("addProduct")
-                     dispatch({ type: ActionTypes.EDIT_PRODUCT, payload: null })
-                  }}>
-                     Ürün Ekle
-                  </button>
-
-               <button className={`text-left border-b border-s-4 hover:border-yellow-300 p-2 ${page == "addCampaign" && "bg-yellow-400"}`} onClick={() => setPage("addCampaign")}>
-                  Kampanya Ekle
-               </button>
+               {
+                  PAGES.map((item, i) => <SideButton key={i} text={item} selectedPage={page} setSelectedPage={setPage}/>)
+               }
             </aside>
 
             <aside className="flex-1">
                {
-                  page == "products" && <Products setPage={setPage} />
+                  page == PAGES[0] && <Products setPage={setPage} />
                }
                {
-                  page == "addProduct" && <AddProduct />
+                  page == PAGES[1] && <AddProduct />
                }
                {
-                  page == "addCampaign" && <Campaigns />
+                  page == PAGES[2] && <AddCampaign />
+               }
+               {
+                  page == PAGES[3] && <Campaigns />
                }
             </aside>
 

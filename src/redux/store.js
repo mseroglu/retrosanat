@@ -3,6 +3,7 @@ import productReducer from "./Reducers/productReducer"
 import editProductReducer from "./Reducers/editProductReducer"
 import dashboardReducer from "./Reducers/dashboardReducer"
 import { thunk } from "redux-thunk"
+import campaignsReducer from "./Reducers/campaignReducer"
 
 const composeEnhancers =
   typeof window === 'object' &&
@@ -19,7 +20,8 @@ const enhancer = composeEnhancers(
    const rootReducer = combineReducers({
       products: productReducer,
       editProduct: editProductReducer,
-      dashboard: dashboardReducer
+      dashboard: dashboardReducer,
+      campaigns: campaignsReducer,
    })
    
 

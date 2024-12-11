@@ -11,6 +11,7 @@ import ActionTypes from "../constants/ActionTypes";
 
 const MainPage = () => {
   const [products, setProducts] = useState([])
+  const [campaigns, setCampaigns] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
 
@@ -18,14 +19,15 @@ const MainPage = () => {
 
   // collection un referansı
   const productsColl = collection(db, "products")
+  const campaignsColl = collection(db, "campaigns")
 
   useEffect(() => {
     // seçili kategoriyi temizliyoruz
-    dispatch({type:ActionTypes.SELECTED_CATEGORY, payload:null})
+    dispatch({ type: ActionTypes.SELECTED_CATEGORY, payload: null })
     // sorgu ayarları 
-    const q = query(productsColl, 
-      where("indexMainImage", "in", [0, 1, 2, 3]), 
-      orderBy("created_at", "desc"), 
+    const q = query(productsColl,
+      where("indexMainImage", "in", [0, 1, 2, 3]),
+      orderBy("created_at", "desc"),
       limit(10))
 
     const result = []
@@ -36,16 +38,26 @@ const MainPage = () => {
       setProducts(result)      
     })    */
     getDocs(q)
-    .then(res => {
-      res.forEach(item => { result.push({ ...item.data(), id: item.id }) })
-      setProducts(result)
-    })
-    .catch(err => {
-      console.log(err)
-      setError(err.code)
-    })
+      .then(res => {
+        res.forEach(item => { result.push({ ...item.data(), id: item.id }) })
+        setProducts(result)
+      })
+      .catch(err => {
+        console.log(err)
+        setError(err.code)
+      })
     setIsLoading(false)
 
+  }, [])
+
+  useEffect(() => {
+    const result = []
+    const q = query(campaignsColl, where("status", "==", true), orderBy("startDate", "desc"))
+
+    getDocs(q).then(res => {
+      res.forEach(item => result.push({ ...item.data(), id: item.id }))
+      setCampaigns(result)
+    })
   }, [])
 
 
