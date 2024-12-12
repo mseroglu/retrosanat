@@ -15,7 +15,7 @@ const Login = () => {
     signInWithPopup(auth, provider)
       .then(res => {
         toast.success("Giriş başarılı..", { position: "bottom-right" })
-        navigate("/addProduct")
+        navigate("/products")
       })
       .catch(err => {
         toast.error("Giriş başarısız!  HATA:" + err.code, { position: "bottom-right" })
