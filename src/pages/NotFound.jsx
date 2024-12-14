@@ -2,9 +2,9 @@ import Container from "../components/Container"
 
 const NotFound = () => {
    return (
-      <Container className="grid place-items-center ">
-         <div className="h-60 md:h-96 grid place-items-center text-center">
-            <h2 className="font-bold">Aradığınız sayfa bulunamadı</h2>
+      <Container className="grid place-items-center bg-black h-full ">
+         <div className="h-full grid place-items-center text-center text-yellow-400">
+            <h2 className="font-bold text-3xl">Aradığınız sayfa bulunamadı</h2>
          </div>
       </Container>
    )

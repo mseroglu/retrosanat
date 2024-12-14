@@ -30,15 +30,12 @@ function App() {
             <Route path='/products/category/:category/:subCategory' element={<Products />} />
             <Route path='/product/detail/:id' element={<Detail />} />
 
-            {/* Burası protecteda alınacak */}
-
-
-            {/** Protected - Giriş yapmadan erişilemez alanlar */}
             <Route element={<Protected />}>
               <Route path='/dashboard' element={<Dashboard />} />
               <Route path='/register' element={<Register />} />
             </Route>
-            <Route path='/*' element={<NotFound />} />
+
+            <Route path='*' element={<NotFound />} />
           </Routes>
         </div>
 
