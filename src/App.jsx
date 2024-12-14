@@ -31,14 +31,14 @@ function App() {
             <Route path='/product/detail/:id' element={<Detail />} />
 
             {/* Burası protecteda alınacak */}
-            <Route path='/dashboard' element={<Dashboard />} />
-   
+
 
             {/** Protected - Giriş yapmadan erişilemez alanlar */}
             <Route element={<Protected />}>
+              <Route path='/dashboard' element={<Dashboard />} />
               <Route path='/register' element={<Register />} />
             </Route>
-            <Route path='*' element={<NotFound />} />
+            <Route path='/*' element={<NotFound />} />
           </Routes>
         </div>
 

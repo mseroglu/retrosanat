@@ -9,12 +9,14 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
+    
 
   const handleClick = () => {
     setIsLoading(true)
     signInWithPopup(auth, provider)
       .then(res => {
         toast.success("Giriş başarılı..", { position: "bottom-right" })
+        localStorage.setItem("user", JSON.stringify({name: res.user.displayName, email: res.user.email}))
         navigate("/products")
       })
       .catch(err => {
@@ -29,6 +31,7 @@ const Login = () => {
     .then(res => {
       toast.info("Oturum kapatıldı..", {position:"bottom-right"})
       navigate("/")
+      localStorage.removeItem("user")
     })
     .catch(err => {
       toast.error("Oturum kapatılamadı "+err.code, {position: "bottom-right"})
@@ -46,7 +49,7 @@ const Login = () => {
         {
           isLoading
             ? <Loader />
-            : auth.currentUser
+            : JSON.parse(localStorage.getItem("user"))
               ? (
                 <button onClick={handleSignOut}
                   className="border-2 rounded-full px-5 py-3 grid place-items-center ">

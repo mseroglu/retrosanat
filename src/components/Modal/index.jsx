@@ -17,7 +17,7 @@ const Modal = ({ setIsOpen }) => {
 
             <SearchBar />
 
-            <LoginBtn setIsOpen={setIsOpen} />
+            <LoginBtn setIsOpen={setIsOpen}  />
          </div>
 
       </div>
