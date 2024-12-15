@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
-import { getFirestore, writeBatch } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
@@ -26,7 +26,4 @@ export const db = getFirestore(app)
 
 // dosya saklama için storage referansı
 export const storage = getStorage(app)
-
-// batch işlemleri çoklu collektion da aynı anda veri yazma
-export const batch = writeBatch(db)
 

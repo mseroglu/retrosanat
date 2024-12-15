@@ -1,40 +1,26 @@
-import { MdOutlineDelete } from "react-icons/md";
-import { FiEdit } from "react-icons/fi";
+
 import { useDispatch, useSelector } from "react-redux";
-import delProduct from "../../../db-operations/delProduct";
-import ActionTypes from "../../../constants/ActionTypes";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import Loader from "../../../components/Loader"
 import { getPageProducts } from "../../../redux/actions";
-import dateFormatter from "../../../utils/DateFormatter";
-import { doc } from "firebase/firestore";
-import { batch, db } from "../../../db-operations/config";
-import { toast } from "react-toastify";
-import { DASHBOARD_PAGES } from "../../../constants/DashboardPages";
+import MatchCampaign from "./MatchCampaign";
+import ListItem from "./ListItem";
+
 
 const Products = ({ setPage }) => {
    const { isLoading, error, products, hasDoc, lastVisible } = useSelector(store => store.dashboard)
-   const { campaigns } = useSelector(store => store.campaigns)
 
-   const [selectedCampaign, setSelectedCampaign] = useState('')
-   const [selectedCampaignInfo, setSelectedCampaignInfo] = useState({})
-
+   let selectedProducts = []
 
    const dispatch = useDispatch()
    const observerRef = useRef()
 
    useEffect(() => {
-      const found = campaigns.find(item => item.id == selectedCampaign)
-      setSelectedCampaignInfo(found || {})
-   }, [selectedCampaign])
-
-
-   useEffect(() => {
       const observerDiv = observerRef.current
       if (!observerDiv || !hasDoc) return
+
       // gizli divi takip eder ve ekrana girdiğinde tekrar api isteği yapılmasını sağlar
       const observer = new IntersectionObserver((entires) => {
-
          entires.forEach(entry => {
             if (entry.isIntersecting) {
                dispatch(getPageProducts(lastVisible))
@@ -53,53 +39,6 @@ const Products = ({ setPage }) => {
       return () => observer.disconnect()
    }, [lastVisible])
 
-   const handleDelete = async (product) => {
-      const result = confirm("Ürünü silmek istediğine emin misin? ")
-      if (result) {
-         await delProduct(product)
-         // ürün silindikten sonra state i güncelle
-         const filtred = products.filter(item => item.id !== product.id)
-         dispatch({ type: ActionTypes.DASHBOARD_PRODUCTS_UPDATE, payload: filtred })
-      }
-   }
-
-   const handleEdit = (product) => {
-      dispatch({ type: ActionTypes.EDIT_PRODUCT, payload: product })
-      setPage(DASHBOARD_PAGES[1].page)
-   }
-
-   const addCampaignOnProducts = async () => {
-      if (selectedProducts.length == 0) {
-         return toast.info("Kampanya eklenecek ürün seçimi yapmadınız!")
-      }
-      if (selectedCampaign) {
-         selectedProducts.forEach(id => {
-            const refDoc = doc(db, "products", id)
-            batch.update(refDoc, { campaignId: selectedCampaign })
-         })
-
-         batch.commit()
-            .then(res => {
-               toast.success("Seçilim tüm ürünlere kampanya eklendi.")
-               setSelectedCampaign("")
-               setSelectedCampaignInfo({})
-            })
-            .catch(err => toast.error("Bir sorun oluştu ! " + err.code))
-      } else {
-         toast.info("Kampanya seçimi yapmadınız!")
-      }
-   }
-
-   let selectedProducts = []
-   const handleCheckBox = (e) => {
-      const prodId = e.target.value
-      if (e.target.checked) {
-         selectedProducts.push(prodId)
-      } else {
-         selectedProducts = selectedProducts.filter(item => item !== prodId)
-      }
-   }
-
 
    return (
       <>
@@ -111,49 +50,7 @@ const Products = ({ setPage }) => {
                   <div className="flex flex-col h-full">
 
                      {/** KAMPANYA SEÇME VE GÖSTERME  */}
-                     <div className="flex flex-col gap-2 mb-4">
-                        <div className="flex gap-2 justify-between">
-                           <select className="capitalize text-sm border" value={selectedCampaign} onChange={(e) => setSelectedCampaign(e.target.value)}>
-                              <option value={""}>Kampanya seçiniz</option>
-                              {
-                                 campaigns.map((item, i) =>
-                                    <option key={i} value={item.id} >
-                                       {item.title}
-                                    </option>)
-                              }
-                           </select>
-
-                           <button className={`w-fit px-2 py-1 text-sm rounded-md border text-white disabled:bg-gray-300 bg-gray-700 `} disabled={!selectedCampaign} onClick={addCampaignOnProducts}>
-                              KAYDET
-                           </button>
-                        </div>
-
-                        {/** Seçili kampanya bilgileri gösterilecek */}
-                        {
-                           selectedCampaign !== "" && (
-                              <div className="bg-yellow-500">
-                                 <table className="w-full text-xs text-center rtl:text-center text-gray-500 dark:text-gray-400">
-                                    <thead className=" text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                       <tr >
-                                          <th scope="col" className="px-3">İndirim %</th>
-                                          <th scope="col" className="px-3">Aktif mi</th>
-                                          <th scope="col" className="py-1">Başlama T.</th>
-                                          <th scope="col" className="py-1">Bitiş Tar.</th>
-                                       </tr>
-                                    </thead>
-                                    <tbody className="text-white ">
-                                       <tr>
-                                          <th scope="col" className="py-1">{selectedCampaignInfo.discount}</th>
-                                          <th scope="col " className="py-1">{selectedCampaignInfo.isActive ? "Aktif" : "Pasif"}</th>
-                                          <th scope="col" className="px-1">{dateFormatter(selectedCampaignInfo.startDate)}</th>
-                                          <th scope="col" className="px-1">{dateFormatter(selectedCampaignInfo.endDate)}</th>
-                                       </tr>
-                                    </tbody>
-                                 </table>
-                              </div>
-                           )
-                        }
-                     </div>
+                     <MatchCampaign selectedProducts={selectedProducts} />
 
                      {/** ÜRÜNLER TABLOSU */}
 
@@ -170,25 +67,9 @@ const Products = ({ setPage }) => {
                            </tr>
                         </thead>
                         <tbody>
-
                            {
                               products?.map((item, i) => (
-                                 <tr key={item.id} className="text-sm capitalize">
-                                    <th scope="row" className="py-2 ps-1" >{i + 1}</th>
-                                    <td className="py-2">{item.title} </td>
-                                    <td className="py-2">{campaigns.find(i => i.id == item.campaignId)?.title} </td>
-                                    <td className="py-2 text-center">
-                                       <input type="checkbox" value={item.id} onChange={handleCheckBox} />
-                                    </td>
-                                    <td className="py-2 text-right">{item.stock} </td>
-                                    <td className="py-2 text-right">{item.price} </td>
-                                    <td className="py-2 ">
-                                       <span className="flex gap-1 justify-center">
-                                          <button onClick={() => handleDelete(item)}><MdOutlineDelete className="text-lg hover:text-red-500" /></button>
-                                          <button onClick={() => handleEdit(item)}><FiEdit className="text-md hover:text-blue-600" /></button>
-                                       </span>
-                                    </td>
-                                 </tr>
+                                 <ListItem key={item.id} item={item} number={i} setPage={setPage} selectedProducts={selectedProducts} />
                               ))
                            }
                         </tbody>
