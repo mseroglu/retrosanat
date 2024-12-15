@@ -1,16 +1,16 @@
 import { MdOutlineDelete } from "react-icons/md";
 import { FiEdit } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
-import delProduct from "../../db-operations/delProduct";
-import ActionTypes from "../../constants/ActionTypes";
+import delProduct from "../../../db-operations/delProduct";
+import ActionTypes from "../../../constants/ActionTypes";
 import { useEffect, useRef, useState } from "react";
-import Loader from "../../components/Loader"
-import { getPageProducts } from "../../redux/actions";
-import dateFormatter from "../../utils/DateFormatter";
+import Loader from "../../../components/Loader"
+import { getPageProducts } from "../../../redux/actions";
+import dateFormatter from "../../../utils/DateFormatter";
 import { doc } from "firebase/firestore";
-import { batch, db } from "../../db-operations/config";
+import { batch, db } from "../../../db-operations/config";
 import { toast } from "react-toastify";
-import {DASHBOARD_PAGES} from "../../constants/DashboardPages";
+import { DASHBOARD_PAGES } from "../../../constants/DashboardPages";
 
 const Products = ({ setPage }) => {
    const { isLoading, error, products, hasDoc, lastVisible } = useSelector(store => store.dashboard)
@@ -69,7 +69,7 @@ const Products = ({ setPage }) => {
    }
 
    const addCampaignOnProducts = async () => {
-      if (selectedProducts.length==0){
+      if (selectedProducts.length == 0) {
          return toast.info("Kampanya eklenecek ürün seçimi yapmadınız!")
       }
       if (selectedCampaign) {
@@ -162,7 +162,8 @@ const Products = ({ setPage }) => {
                            <tr >
                               <th scope="col" className="py-2 ps-1">#</th>
                               <th scope="col" className="py-2">Ürün Adı</th>
-                              <th scope="col" className="py-2 text-center">Kampanya</th>
+                              <th scope="col" className="py-2">Kampanya</th>
+                              <th scope="col" className="py-2 text-center">Yeni Kampanya</th>
                               <th scope="col" className="py-2 text-right">Stok</th>
                               <th scope="col" className="py-2 text-right">Fiyat</th>
                               <th scope="col" className="py-2 text-center">İşlemler</th>
@@ -175,6 +176,7 @@ const Products = ({ setPage }) => {
                                  <tr key={item.id} className="text-sm capitalize">
                                     <th scope="row" className="py-2 ps-1" >{i + 1}</th>
                                     <td className="py-2">{item.title} </td>
+                                    <td className="py-2">{campaigns.find(i => i.id == item.campaignId)?.title} </td>
                                     <td className="py-2 text-center">
                                        <input type="checkbox" value={item.id} onChange={handleCheckBox} />
                                     </td>

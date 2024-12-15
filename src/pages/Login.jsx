@@ -39,9 +39,6 @@ const Login = () => {
     setIsLoading(false)
   }
 
-  useEffect(()=> {
-    console.log(auth.currentUser)
-  }, [auth.currentUser])
 
   return (
     <Container >

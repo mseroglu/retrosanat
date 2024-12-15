@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react"
 import { addDoc, collection, doc, serverTimestamp, updateDoc } from "firebase/firestore"
-import { db } from "../../db-operations/config"
+
 import { toast } from "react-toastify"
-import Loader from "../../components/Loader"
+import Loader from "../../../components/Loader"
 import { useDispatch, useSelector } from "react-redux"
-import ActionTypes from "../../constants/ActionTypes"
+import ActionTypes from "../../../constants/ActionTypes"
+import { db } from "../../../db-operations/config"
 
 
 const AddCampaign = () => {

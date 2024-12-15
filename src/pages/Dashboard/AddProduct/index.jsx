@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react"
-import Container from "../../components/Container"
-import { uploadImage } from "../../db-operations/imageToFirestore"
+import { uploadImage } from "../../../db-operations/imageToFirestore"
 import { addDoc, collection, doc, serverTimestamp, updateDoc } from "firebase/firestore"
-import { db } from "../../db-operations/config"
+import { db } from "../../../db-operations/config"
 import { toast } from "react-toastify"
-import Loader from "../../components/Loader"
-import CATEGORIES from "../../constants/categories"
+import Loader from "../../../components/Loader"
+import CATEGORIES from "../../../constants/categories"
 import { useDispatch, useSelector } from "react-redux"
-import ActionTypes from "../../constants/ActionTypes"
+import ActionTypes from "../../../constants/ActionTypes"
 
 
 const AddProduct = () => {

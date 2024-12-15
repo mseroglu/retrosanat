@@ -9,8 +9,9 @@ import {DASHBOARD_PAGES} from "../../constants/DashboardPages";
 
 
 
+
 const Dashboard = () => {
-   const [page, setPage] = useState(DASHBOARD_PAGES[0].page)
+   const [page, setPage] = useState(DASHBOARD_PAGES[3].page)
 
 
    return (
