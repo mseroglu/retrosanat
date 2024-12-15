@@ -1,22 +1,16 @@
 import Container from "../../components/Container"
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import ActionTypes from "../../constants/ActionTypes";
 import { useState } from "react";
-import Loader from "../../components/Loader"
-import { getPageProducts } from "../../redux/actions";
 import Products from "./Products";
 import Campaigns from "./Campaigns"
 import AddProduct from "./AddProduct";
 import AddCampaign from "./AddCampaign";
 import SideButton from "./SideButton";
+import {DASHBOARD_PAGES} from "../../constants/DashboardPages";
 
-const PAGES = ["Ürünler", "Ürün Ekle", "Kampanya Ekle", "Kampanyalar"]
+
 
 const Dashboard = () => {
-   const [page, setPage] = useState(PAGES[0])
-
-   const dispatch = useDispatch()
+   const [page, setPage] = useState(DASHBOARD_PAGES[0].page)
 
 
    return (
@@ -25,22 +19,22 @@ const Dashboard = () => {
 
             <aside className="flex flex-col bg-zinc-300 h-fit ">
                {
-                  PAGES.map((item, i) => <SideButton key={i} text={item} selectedPage={page} setSelectedPage={setPage}/>)
+                  DASHBOARD_PAGES.map((item, i) => <SideButton key={i} text={item.page} selectedPage={page} setSelectedPage={setPage} icon={i} />)
                }
             </aside>
 
             <aside className="flex-1">
                {
-                  page == PAGES[0] && <Products setPage={setPage} />
+                  page == DASHBOARD_PAGES[0].page && <Products setPage={setPage} />
                }
                {
-                  page == PAGES[1] && <AddProduct />
+                  page == DASHBOARD_PAGES[1].page && <AddProduct />
                }
                {
-                  page == PAGES[2] && <AddCampaign />
+                  page == DASHBOARD_PAGES[2].page && <AddCampaign />
                }
                {
-                  page == PAGES[3] && <Campaigns />
+                  page == DASHBOARD_PAGES[3].page && <Campaigns />
                }
             </aside>
 

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import { BsMenuUp } from "react-icons/bs";
 import Categories from "./Categories";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "../components/Modal";
 import SearchBar from "./SearchInput";
 import LoginBtn from "./LoginBtn";
@@ -9,6 +9,11 @@ import LoginBtn from "./LoginBtn";
 
 const Navbar = () => {
    const [isOpen, setIsOpen] = useState(false)
+
+   useEffect(()=>{
+      // Sayfa kapatıldığında storage deki user ı temizle
+      return () => localStorage.removeItem("user")
+   },[])
 
 
    return (

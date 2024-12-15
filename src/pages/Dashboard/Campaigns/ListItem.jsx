@@ -44,14 +44,14 @@ const ListItem = ({ item }) => {
    }
 
    return (
-      <tr className=" bg-white border-t dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-         <td className="px-6 py-3">
+      <tr className="text-xs lg:text-sm bg-white border-t dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+         <td className="px-4 py-2">
             {edit ? <input type="text" autoFocus value={title} onChange={(e) => setTitle(e.target.value)} className="border indent-1 " /> : title}
          </td>
-         <td className="px-6 py-3">
+         <td className="px-4 py-2 text-center">
             {edit ? <input type="number" value={discount} onChange={(e) => setDiscount(+e.target.value)} className="border indent-1" /> : discount}
          </td>
-         <td className="px-6 py-3">
+         <td className="px-4 py-2 text-center">
             {edit ?
                <select className="border" value={isActive} onChange={(e) => setIsActive(e.target.value == "false" ? false : true)} >
                   <option value={true}>Aktif</option>
@@ -59,14 +59,14 @@ const ListItem = ({ item }) => {
                </select>
                : isActive ? "Aktif" : "Pasif"}
          </td>
-         <td className="px-6 py-3">
+         <td className="px-4 py-2 ">
             {edit ? <input type="datetime-local" value={startDate} onChange={(e) => setStartDate(e.target.value)} className="border indent-1" /> : dateFormatter(startDate)}
          </td>
-         <td className="px-6 py-3">
+         <td className="px-4 py-2 ">
             {edit ? <input type="datetime-local" value={endDate} onChange={(e) => setEndDate(e.target.value)} className="border indent-1" /> : dateFormatter(endDate)}
          </td>
-         <td className="px-6 py-3 text-right">
-            <span className="flex gap-3">
+         <td className="px-4 py-2 text-right">
+            <span className="flex gap-2">
                {!edit && <button onClick={() => handleDelete(item.id)}><MdOutlineDelete className="text-lg hover:text-red-500" /></button>}
                {edit && <button onClick={() => handleEdit(item)}><FiSave className="text-lg hover:text-green-600" /></button>}
                <button onClick={() => setEdit(prev => !prev)}><FiEdit className="text-md hover:text-blue-600" /></button>

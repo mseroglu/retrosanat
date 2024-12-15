@@ -7,9 +7,10 @@ import { useEffect, useRef, useState } from "react";
 import Loader from "../../components/Loader"
 import { getPageProducts } from "../../redux/actions";
 import dateFormatter from "../../utils/DateFormatter";
-import { addDoc, doc } from "firebase/firestore";
+import { doc } from "firebase/firestore";
 import { batch, db } from "../../db-operations/config";
 import { toast } from "react-toastify";
+import {DASHBOARD_PAGES} from "../../constants/DashboardPages";
 
 const Products = ({ setPage }) => {
    const { isLoading, error, products, hasDoc, lastVisible } = useSelector(store => store.dashboard)
@@ -64,24 +65,27 @@ const Products = ({ setPage }) => {
 
    const handleEdit = (product) => {
       dispatch({ type: ActionTypes.EDIT_PRODUCT, payload: product })
-      setPage("addProduct")
+      setPage(DASHBOARD_PAGES[1].page)
    }
 
    const addCampaignOnProducts = async () => {
+      if (selectedProducts.length==0){
+         return toast.info("Kampanya eklenecek ürün seçimi yapmadınız!")
+      }
       if (selectedCampaign) {
          selectedProducts.forEach(id => {
             const refDoc = doc(db, "products", id)
             batch.update(refDoc, { campaignId: selectedCampaign })
          })
-         
+
          batch.commit()
             .then(res => {
-               toast.success("Tüm ürünlere kampanya eklendi.")
+               toast.success("Seçilim tüm ürünlere kampanya eklendi.")
                setSelectedCampaign("")
                setSelectedCampaignInfo({})
             })
             .catch(err => toast.error("Bir sorun oluştu ! " + err.code))
-      }else{
+      } else {
          toast.info("Kampanya seçimi yapmadınız!")
       }
    }
@@ -109,7 +113,7 @@ const Products = ({ setPage }) => {
                      {/** KAMPANYA SEÇME VE GÖSTERME  */}
                      <div className="flex flex-col gap-2 mb-4">
                         <div className="flex gap-2 justify-between">
-                           <select className="capitalize text-sm " value={selectedCampaign} onChange={(e) => setSelectedCampaign(e.target.value)}>
+                           <select className="capitalize text-sm border" value={selectedCampaign} onChange={(e) => setSelectedCampaign(e.target.value)}>
                               <option value={""}>Kampanya seçiniz</option>
                               {
                                  campaigns.map((item, i) =>
@@ -168,7 +172,7 @@ const Products = ({ setPage }) => {
 
                            {
                               products?.map((item, i) => (
-                                 <tr key={item.id} className="text-sm">
+                                 <tr key={item.id} className="text-sm capitalize">
                                     <th scope="row" className="py-2 ps-1" >{i + 1}</th>
                                     <td className="py-2">{item.title} </td>
                                     <td className="py-2 text-center">
