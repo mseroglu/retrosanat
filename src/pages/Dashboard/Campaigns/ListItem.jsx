@@ -5,9 +5,12 @@ import { useEffect, useState } from "react";
 import { db } from "../../../db-operations/config";
 import { doc, updateDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import ActionTypes from "../../../constants/ActionTypes";
+import dateFormatter from "../../../utils/DateFormatter";
 
 
-const ListItem = ({ item, campaigns, setCampaigns }) => {
+const ListItem = ({ item }) => {
    const [edit, setEdit] = useState(false)
    const [title, setTitle] = useState(item.title || "")
    const [discount, setDiscount] = useState(item.discount || 0)
@@ -15,31 +18,14 @@ const ListItem = ({ item, campaigns, setCampaigns }) => {
    const [startDate, setStartDate] = useState(item.startDate || "")
    const [endDate, setEndDate] = useState(item.endDate || "")
 
+   const dispatch = useDispatch()
 
-   const dateFormatter = (isoDate) => {
-      const date = new Date(isoDate);
-
-      const readableDate = date.toLocaleString("tr-TR", {
-         weekday: "short",
-         day: "numeric",
-         month: "short",
-         year: "numeric",
-         hour: "2-digit",
-         minute: "2-digit"
-      });
-      return readableDate
-   }
-
-   useEffect(() => {
-
-   }, [edit])
 
    const handleDelete = async (id) => {
       const result = confirm("Ürünü silmek istediğine emin misin? ")
       if (result) {
          await delCampaign(id)
-         const filtered = campaigns.filter(item => item.id !== id)
-         setCampaigns(filtered)
+         dispatch({type: ActionTypes.CAMPAIGN_DEL, payload: id})
       }
    }
 
@@ -50,6 +36,7 @@ const ListItem = ({ item, campaigns, setCampaigns }) => {
          const docRef = doc(db, "campaigns", item.id)
          await updateDoc(docRef, data)
          toast.success("Ürün başarıyla güncellendi..")
+         dispatch({type: ActionTypes.CAMPAIGN_UPDATE, payload: data})
          setEdit(false)
       } catch (error) {
          toast.error("Kampanya kaydı başarısız! " + error.code)

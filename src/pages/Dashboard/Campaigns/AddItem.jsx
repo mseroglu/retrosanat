@@ -3,9 +3,11 @@ import { useState } from "react";
 import { db } from "../../../db-operations/config";
 import { addDoc, collection } from "firebase/firestore";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import ActionTypes from "../../../constants/ActionTypes";
 
 
-const AddItem = ({ campaigns, setCampaigns, setIsOpenAddArea }) => {
+const AddItem = ({ setIsOpenAddArea }) => {
 
    const [title, setTitle] = useState("")
    const [discount, setDiscount] = useState(0)
@@ -17,6 +19,8 @@ const AddItem = ({ campaigns, setCampaigns, setIsOpenAddArea }) => {
       const newCampaign = { title, discount, isActive, startDate, endDate, }
       console.log(newCampaign) 
 
+      const dispatch = useDispatch()
+
       if (title == ""){
          return toast.info("Kampanya adı boş bırakılamaz!")
       }
@@ -27,7 +31,7 @@ const AddItem = ({ campaigns, setCampaigns, setIsOpenAddArea }) => {
          
          newCampaign["id"] = res?.id
          setIsOpenAddArea(false)
-         setCampaigns([newCampaign, ...campaigns])
+         dispatch({type: ActionTypes.CAMPAIGN_ADD_STORE, payload: newCampaign})
          toast.success("Kampanya başarıyla kaydedildi.")
       } catch (error) {
          console.log(error)

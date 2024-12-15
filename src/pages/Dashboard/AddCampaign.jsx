@@ -41,9 +41,8 @@ const AddCampaign = () => {
             const res = await addDoc(productCollection, dataObj)
             toast.success("Kampanya başarıyla kaydedildi.")
 
-            //! BURASI KAMPANYALARA EKLENECEK ürünün firebase id sini ekleyip state kaydediyoruz
             dataObj["id"] = res?.id
-            dispatch({ type: ActionTypes.CAMPAIGN_ADD_STORE, payload: dataObj })
+            dispatch({ type: ActionTypes.CAMPAIGN_ADD, payload: dataObj })
          }
          // 4- formu sıfırla
          e.target.reset()

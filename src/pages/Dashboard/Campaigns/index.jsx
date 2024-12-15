@@ -1,16 +1,19 @@
 import { collection, getDocs, orderBy, query } from "firebase/firestore"
 import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
 import { db } from "../../../db-operations/config"
 import ListItem from "./ListItem"
 import AddItem from "./AddItem"
 import { CgAdd } from "react-icons/cg"
+import { useDispatch, useSelector } from "react-redux"
+import ActionTypes from "../../../constants/ActionTypes"
 
 
 const Campaigns = () => {
-   //const { campaigns } = useSelector(store => store.campaigns)
-   const [campaigns, setCampaigns] = useState([])
+   const { campaigns } = useSelector(store => store.campaigns)
+   //const [campaigns, setCampaigns] = useState([])
    const [isOpenAddArea, setIsOpenAddArea] = useState(false)
+
+   const dispatch = useDispatch()
 
    const campaignsColl = collection(db, "campaigns")
 
@@ -20,9 +23,9 @@ const Campaigns = () => {
 
       getDocs(q).then(res => {
          res.forEach(item => result.push({ ...item.data(), id: item.id }))
-         setCampaigns(result)
+         dispatch({type:ActionTypes.CAMPAIGNS_SUCCESS, payload: result})
       })
-   }, [campaigns])
+   }, [])
 
 
    return (
@@ -56,10 +59,10 @@ const Campaigns = () => {
 
             <tbody className="capitalize">
                {
-                  isOpenAddArea && <AddItem campaigns={campaigns} setCampaigns={setCampaigns} setIsOpenAddArea={setIsOpenAddArea} />
+                  isOpenAddArea && <AddItem setIsOpenAddArea={setIsOpenAddArea} />
                }
                {
-                  campaigns?.map(item => <ListItem key={item.id} item={item} campaigns={campaigns} setCampaigns={setCampaigns} />)
+                  campaigns?.map(item => <ListItem key={item.id} item={item} />)
                }
             </tbody>
          </table>

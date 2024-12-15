@@ -17,8 +17,6 @@ const Dashboard = () => {
    const [page, setPage] = useState(PAGES[0])
 
    const dispatch = useDispatch()
-   const navigate = useNavigate()
-
 
 
    return (
