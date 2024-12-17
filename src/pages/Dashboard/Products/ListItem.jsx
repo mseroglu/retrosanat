@@ -40,7 +40,7 @@ const ListItem = ({ item, number, setPage, selectedProducts }) => {
       <tr className="text-sm capitalize border-t ">
          <th scope="row" className="py-2 ps-1" >{number + 1}</th>
          <td className="py-2">{item.title} </td>
-         <td className="py-2">{campaigns.find(i => i.id == item.campaignId)?.title} </td>
+         <td className="py-2">{campaigns.find(i => i.id == item.campaignId)?.title || "-"} </td>
          <td className="py-2 text-center">
             <input type="checkbox" value={item.id} onChange={handleCheckBox} />
          </td>

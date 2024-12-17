@@ -11,24 +11,24 @@ const ProductCard = ({ product }) => {
 
    const found = CATEGORIES.find(item => item.key == product.category)
 
-   const handleClick = ()=>{
+   const handleClick = () => {
       dispatch({ type: ActionTypes.SELECTED_CATEGORY, payload: null })
    }
-   
+
 
    return (
       <div>
-         <div className="flex flex-col w-60 h-80 rounded-md overflow-hidden border transition hover:scale-105 shadow-md text-sm ">
+         <div className="flex flex-col w-60 h-fit rounded-md overflow-hidden border transition hover:scale-105 shadow-md text-sm ">
 
-            <div className="w-full h-40 overflow-hidden">
-            <img src={product.photos[product.indexMainImage || 0]} alt="product-image" className="w-full h-full object-cover " />
+            <div className="w-full h-52 overflow-hidden">
+               <img src={product.photos[product.indexMainImage || 0]} alt="product-image" className="w-full h-full object-cover " />
             </div>
             <div className="flex flex-col flex-grow">
 
                <div className="flex-grow px-2 pt-2 bg-gray-200 h-20">
                   <h3 className="font-semibold mb-2 capitalize leading-tight">{product.title}</h3>
                   <p className="first-letter:uppercase text-[10px] leading-tight">{product.description}</p>
-                  <p className="first-letter:uppercase font-semibold text-[11px] capitalize">Kategori: { found?.value }</p>
+                  <p className="first-letter:uppercase font-semibold text-[11px] capitalize">Kategori: {found?.value}</p>
                </div>
 
                <div className="px-2 pb-1 bg-gray-300">
@@ -41,7 +41,7 @@ const ProductCard = ({ product }) => {
             <div className="flex flex-wrap gap-1 bg-gray-400 justify-center">
                {product.tags?.map((item, i) => (
                   <Tag key={i} item={item} className="text-white bg-gray-600" />
-                  ))}
+               ))}
             </div>
 
             <Link to={"/product/detail/" + product.id} onClick={handleClick}>
