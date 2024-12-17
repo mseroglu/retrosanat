@@ -18,12 +18,14 @@ const ProductCard = ({ product }) => {
 
    return (
       <div>
-         <div className="flex flex-col w-40 md:w-60 rounded-md overflow-hidden border transition hover:scale-105 shadow-md h-80 text-sm ">
+         <div className="flex flex-col w-60 h-80 rounded-md overflow-hidden border transition hover:scale-105 shadow-md text-sm ">
 
-            <img src={product.photos[product.indexMainImage || 0]} alt="product-image" className="w-full h-36 object-cover " />
+            <div className="w-full h-40 overflow-hidden">
+            <img src={product.photos[product.indexMainImage || 0]} alt="product-image" className="w-full h-full object-cover " />
+            </div>
             <div className="flex flex-col flex-grow">
 
-               <div className="flex-grow px-2 pt-2 bg-gray-200">
+               <div className="flex-grow px-2 pt-2 bg-gray-200 h-20">
                   <h3 className="font-semibold mb-2 capitalize leading-tight">{product.title}</h3>
                   <p className="first-letter:uppercase text-[10px] leading-tight">{product.description}</p>
                   <p className="first-letter:uppercase font-semibold text-[11px] capitalize">Kategori: { found?.value }</p>

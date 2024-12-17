@@ -42,7 +42,8 @@ const Detail = () => {
       {isLoading
         ? <Loader />
         : data && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 shadow-md shadow-slate-900 bg-zinc-100 relative place-items-center w-[360px] lg:w-[800px]  ">
+          <div className="grid grid-cols-1 lg:grid-cols-2 shadow-md shadow-slate-900 bg-zinc-100 relative place-items-center
+           w-[400px] lg:w-[800px] lg:h-[400px] ">
 
             <div className="absolute top-[-36px] right-0 ">
               <Link to={-1} className="flex items-center bg-yellow-300 rounded-full pe-3 hover:bg-yellow-400">
@@ -50,16 +51,15 @@ const Detail = () => {
               </Link>
             </div>
 
-            <div className="col-span-1 h-full w-full ">             
+            <div className="col-span-1 h-full w-full ">
                 <img src={data.photos[imageIndex || 0]} alt="image"
-                  className="h-full w-full transition object-cover hover:scale-125 " />
-              
+                  className="h-[400px] w-full transition object-cover hover:scale-125 " />
             </div>
 
-            <div className="col-span-1 flex flex-col-reverse lg:flex-col h-full w-fit bg-zinc-100">
-              <div className="flex flex-col px-5 pb-3 pt-3 lg:pt-5 h-full justify-between">
+            <div className="col-span-1 flex flex-col-reverse lg:flex-col h-full w-full bg-zinc-100">
+              <div className="flex flex-col px-5 pb-2 h-full justify-between ">
                 <div className="grid gap-3 w-full items-center " >
-                  <h2 className="font-bold text-2xl capitalize lg:mt-10">{data.title}</h2>
+                  <h2 className="font-bold text-2xl capitalize mt-3 lg:mt-5">{data.title}</h2>
                   <p className="first-letter:uppercase text-sm">{data.description}</p>
 
                   {/* Fiyat ve miktar düzeni için */}
