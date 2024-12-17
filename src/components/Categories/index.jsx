@@ -41,31 +41,30 @@ const Categories = () => {
    useEffect(() => {
       if (subCategory) {
          navigate(`/products/category/${category}/${subCategory}`)
-      } 
+      }
 
    }, [subCategory])
 
    useEffect(() => {
-      dispatch({ type: ActionTypes.SELECTED_CATEGORY, payload: category })       
-      if (category) {  
+      dispatch({ type: ActionTypes.SELECTED_CATEGORY, payload: category })
+      if (category) {
          navigate("/products/category/" + category)
       }
    }, [category])
 
    return (
       <>
-         <div id="categories" className="flex text-[14px] md:text-[16px] justify-center bg-zinc-300 border-t-4 border-yellow-400 overflow-x-auto scrollbar-none">
+         <div id="categories" className="flex text-[14px] md:text-[16px] justify-center items-center bg-zinc-300 border-t-4 border-yellow-400 overflow-x-auto scrollbar-none">
 
-            <span>
-               <button onClick={handleClickCategory} data-category={null}
-                  className={`h-full font-semibold py-1 px-2 md:w-32 lg:w-40 border-x hover:bg-zinc-200 text-[12px] uppercase`} >
-                  Tüm Ürünler
-               </button>
-            </span>
+            <button onClick={handleClickCategory} data-category={null}
+               className={`h-full font-semibold py-1 px-2 md:w-32 lg:w-40 border-x hover:bg-zinc-200 text-xs uppercase`} >
+               Tüm Ürünler
+            </button>
+
             {
                CATEGORIES.map((item, i) => (
                   <button key={item.key} onClick={handleClickCategory} data-category={item.key}
-                     className={`${selectedCategory == item.key && "bg-zinc-100"} font-semibold py-1 px-2 md:w-32 lg:w-40 border-x hover:bg-zinc-200 text-[12px] uppercase`} >
+                     className={`${selectedCategory == item.key && "bg-zinc-100"} font-semibold py-1 px-2 md:w-32 lg:w-40 border-x hover:bg-zinc-200 text-xs uppercase`} >
                      {item.value}
                   </button>
                ))
