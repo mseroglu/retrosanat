@@ -18,7 +18,7 @@ const ProductCard = ({ product }) => {
 
    return (
       <div>
-         <div className="flex flex-col w-60 h-fit rounded-md overflow-hidden border transition hover:scale-105 shadow-md text-sm ">
+         <div className="flex flex-col w-48 sm:w-60 h-fit rounded-md overflow-hidden border transition hover:scale-105 shadow-md text-sm ">
 
             <div className="w-full h-52 overflow-hidden">
                <img src={product.photos[product.indexMainImage || 0]} alt="product-image" className="w-full h-full object-cover " />
