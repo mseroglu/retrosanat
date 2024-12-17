@@ -37,7 +37,7 @@ const ListItem = ({ item, number, setPage, selectedProducts }) => {
    }
 
    return (
-      <tr className="text-sm capitalize">
+      <tr className="text-sm capitalize border-t ">
          <th scope="row" className="py-2 ps-1" >{number + 1}</th>
          <td className="py-2">{item.title} </td>
          <td className="py-2">{campaigns.find(i => i.id == item.campaignId)?.title} </td>

@@ -11,7 +11,7 @@ import { useSelector } from "react-redux"
 
 
 const Detail = () => {
-  const {products } = useSelector(store => store.products)
+  const { products } = useSelector(store => store.products)
   const [data, setData] = useState(null)
   const [imageIndex, setImageIndex] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
@@ -22,16 +22,16 @@ const Detail = () => {
   useEffect(() => {
     // data store da varsa ordan al, yoksa api den çek
     const found = products.find(item => item.id === params.id)
-    if (found){
+    if (found) {
       setData(found)
-    }else{
+    } else {
       setIsLoading(true)
       getDoc(docRef)
-      .then((res) => {
-        setData(res.data())
-        setImageIndex(res.data().indexMainImage)
-      })
-      .catch(err => toast.error("Veri alınamadı! HATA: " + err.code))
+        .then((res) => {
+          setData(res.data())
+          setImageIndex(res.data().indexMainImage)
+        })
+        .catch(err => toast.error("Veri alınamadı! HATA: " + err.code))
       setIsLoading(false)
     }
   }, [])
@@ -42,26 +42,26 @@ const Detail = () => {
       {isLoading
         ? <Loader />
         : data && (
-          <div className="grid grid-cols-1 md:grid-cols-2 mt-5 shadow-md shadow-slate-900 bg-zinc-100 relative w-fit place-items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 shadow-md shadow-slate-900 bg-zinc-100 relative place-items-center w-[360px] lg:w-[800px]  ">
 
-            <div className="absolute top-[-30px] left-0 ">
+            <div className="absolute top-[-36px] right-0 ">
               <Link to={-1} className="flex items-center bg-yellow-300 rounded-full pe-3 hover:bg-yellow-400">
                 <GrFormPrevious className="text-3xl" />önceki sayfa
               </Link>
             </div>
 
-            <div className="col-span-1 flex w-full ">
-              <div className="h-[320px] md:h-[460px] w-[360px] ">
+            <div className="col-span-1 h-full w-full ">             
                 <img src={data.photos[imageIndex || 0]} alt="image"
-                  className="h-full w-full transition object-cover hover:scale-125  bg-zinc-200" />
-              </div>
+                  className="h-full w-full transition object-cover hover:scale-125 " />
+              
             </div>
 
-            <div className="col-span-1 flex flex-col-reverse md:flex-col h-full w-full bg-zinc-100">
-              <div className="flex flex-col px-5 pb-3 pt-3 md:pt-5 h-full justify-between">
+            <div className="col-span-1 flex flex-col-reverse lg:flex-col h-full w-fit bg-zinc-100">
+              <div className="flex flex-col px-5 pb-3 pt-3 lg:pt-5 h-full justify-between">
                 <div className="grid gap-3 w-full items-center " >
-                  <h2 className="font-bold text-2xl capitalize md:mt-10">{data.title}</h2>
-                  <p className="first-letter:uppercase">{data.description}</p>
+                  <h2 className="font-bold text-2xl capitalize lg:mt-10">{data.title}</h2>
+                  <p className="first-letter:uppercase text-sm">{data.description}</p>
+
                   {/* Fiyat ve miktar düzeni için */}
                   <table>
                     <tbody>
@@ -87,11 +87,11 @@ const Detail = () => {
                 </div>
               </div>
 
-                {/* Mini fotolar */}
+              {/* Mini fotolar */}
               <div className="flex gap-2 bg-zinc-300 py-3 justify-center">
                 {data.photos.map((item, i) =>
                   <img key={i} src={item} alt="product-image"
-                    className={`w-20 h-20 object-cover rounded-full border-4 ${imageIndex==i ? "border-zinc-100":"border-zinc-400"}`}
+                    className={`w-20 h-20 object-cover rounded-full border-4 ${imageIndex == i ? "border-zinc-100" : "border-zinc-400"}`}
                     onMouseEnter={() => setImageIndex(i)} />
                 )}
               </div>
