@@ -4,8 +4,8 @@ import Products from "./Products";
 import Campaigns from "./Campaigns"
 import AddProduct from "./AddProduct";
 import AddCampaign from "./AddCampaign";
-import SideButton from "./SideButton";
-import {DASHBOARD_PAGES} from "../../constants/DashboardPages";
+import { DASHBOARD_PAGES } from "../../constants/DashboardPages";
+import SideButtons from "./SideButtons";
 
 
 
@@ -19,9 +19,7 @@ const Dashboard = () => {
          <main className="flex gap-1">
 
             <aside className="flex flex-col bg-zinc-300 h-fit ">
-               {
-                  DASHBOARD_PAGES.map((item, i) => <SideButton key={i} text={item.page} selectedPage={page} setSelectedPage={setPage} icon={i} />)
-               }
+               <SideButtons selectedPage={page} setSelectedPage={setPage} />
             </aside>
 
             <aside className="flex-1">

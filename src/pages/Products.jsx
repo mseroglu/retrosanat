@@ -85,7 +85,7 @@ const Products = () => {
 
       {
         hasDoc && 
-        <div onClick={()=> setMoreData(!moreData)} className="border p-1 w-fit rounded-full px-3" >Daha Fazla Ürün</div>
+        <div onClick={()=> setMoreData(prev => !prev)} className="border p-1 w-fit rounded-full px-3 cursor-pointer" >Daha Fazla Ürün</div>
       }
 
     </Container>
