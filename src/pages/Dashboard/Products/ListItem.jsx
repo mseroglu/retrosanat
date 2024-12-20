@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 const ListItem = ({ item, number, setPage, selectedProducts }) => {
+   const { products } = useSelector(store => store.dashboard)
    const { campaigns } = useSelector(store => store.campaigns)
 
    const dispatch = useDispatch()

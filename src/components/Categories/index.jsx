@@ -1,13 +1,14 @@
 import CATEGORIES from "../../constants/categories"
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import ActionTypes from "../../constants/ActionTypes"
-import { useLocation, useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
 const Categories = () => {
+   const params = useParams()
    const { selectedCategory } = useSelector(store => store.products)
-   const [category, setCategory] = useState(null)
-   const [subCategory, setSubCategory] = useState(null)
+   const [category, setCategory] = useState(params.category)
+   const [subCategory, setSubCategory] = useState(params.subCategory)
    const [subCategories, setSubCategories] = useState([])
 
    const dispatch = useDispatch()
@@ -18,9 +19,11 @@ const Categories = () => {
       const cat = e.target.getAttribute("data-category")
       setCategory(cat)
       setSubCategory(null)
-      const found = CATEGORIES.find(item => item.key == cat)
-      setSubCategories(found?.subs)
-      console.log(cat)
+      {/**
+         const found = CATEGORIES.find(item => item.key == cat)
+         setSubCategories(found?.subs)
+         console.log(cat)
+         */}
 
       // Burası useEffect içine alınamaz, alınırsa anasayfa yerine sürekli products sayfası ilk gelir
       if (!cat) {
@@ -33,6 +36,8 @@ const Categories = () => {
       // aynı kategoriyi tıklayınca seçili ise kaldır
       if (cat == subCategory) {
          setSubCategory(null)
+         // bunu useffect içine taşımak sorun çıkarır.
+         navigate("/products/category/" + category)
       } else {
          setSubCategory(cat)
       }
@@ -42,15 +47,24 @@ const Categories = () => {
       if (subCategory) {
          navigate(`/products/category/${category}/${subCategory}`)
       }
-
+      
+      console.log("useeffect subCategory")
    }, [subCategory])
+
 
    useEffect(() => {
       dispatch({ type: ActionTypes.SELECTED_CATEGORY, payload: category })
       if (category) {
          navigate("/products/category/" + category)
+         const found = CATEGORIES.find(item => item.key == category)
+         setSubCategories(found?.subs)
       }
+      
+      console.log("useeffect category")
    }, [category])
+
+
+   console.log("Category component render...")
 
    return (
       <>
