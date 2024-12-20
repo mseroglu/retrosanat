@@ -11,17 +11,17 @@ import ActionTypes from "../constants/ActionTypes"
 
 const Products = () => {
   let { isLoading, error, products, hasDoc, lastVisible } = useSelector(store => store.products)
+  const params = useParams()
   const [searchParams, setSearchParams] = useSearchParams()
   const [searchKeyword, setSearchKeyword] = useState(searchParams.get("ara") || "")
-  const [selectedCategory, setSelectedCategory] = useState()
-  const [selectedSubCategory, setSelectedSubCategory] = useState()
-  const [selectedTag, setSelectedTag] = useState()
+  const [selectedCategory, setSelectedCategory] = useState(params.category)
+  const [selectedSubCategory, setSelectedSubCategory] = useState(params.subCategory)
+  const [selectedTag, setSelectedTag] = useState(params.tag)
   const [moreData, setMoreData] = useState(false)
   const [sorting, setSorting] = useState(searchParams.get("sırala")?.split("-") || ["created_at", "desc"])
 
 
   const dispatch = useDispatch()
-  const params = useParams()
 
 
   const handleSorting = (e) => {
@@ -64,7 +64,7 @@ const Products = () => {
 
       <select onChange={handleSorting} name="sorting" id="sorting" defaultValue={searchParams.get("sırala") || "created_at-desc"}
         className="self-center rounded-md border-2 px-2 py-1 mt-16 text-sm">
-        <option value="created_at-desc">Sırala (Varsayılan son eklenen)</option>
+        <option value="created_at-desc">Sırala (Varsayılan önce yeni)</option>
         <option value="price-asc">Ucuzdan pahalıya</option>
         <option value="price-desc">Pahalıdan ucuza</option>
         <option value="title-asc">Ürün Adı A &gt; Z</option>
