@@ -11,7 +11,7 @@ import SideButtons from "./SideButtons";
 
 
 const Dashboard = () => {
-   const [page, setPage] = useState(DASHBOARD_PAGES[3].page)
+   const [page, setPage] = useState(DASHBOARD_PAGES[0].page)
 
 
    return (

@@ -9,7 +9,6 @@ import { toast } from "react-toastify";
 
 
 const ListItem = ({ item, number, setPage, selectedProducts }) => {
-   //const { products } = useSelector(store => store.dashboard)
    const { campaigns } = useSelector(store => store.campaigns)
 
    const [isChecked, setIsChecked] = useState(false)
@@ -49,10 +48,9 @@ const ListItem = ({ item, number, setPage, selectedProducts }) => {
          }catch(err){
             toast.error("Ürün silinemedi !!")
          }
-
       }
    }
-   console.log("list item render oldu")
+
    return (
       <tr className="text-sm capitalize border-b ">
          <th scope="row" className="py-2 ps-1" >{number + 1}</th>

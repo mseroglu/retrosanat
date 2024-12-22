@@ -39,14 +39,14 @@ const MatchCampaign = ({ selectedProducts }) => {
             .then(res => {
                toast.success("Kampanya seçili tüm ürünlere eklendi.")
                dispatch({
-                  type:ActionTypes.DASHBOARD_PRODUCTS_ADD_CAMPAIGN, payload: {campaignId: selectedCampaign, selectedProducts}
+                  type: ActionTypes.DASHBOARD_PRODUCTS_ADD_CAMPAIGN, payload: { campaignId: selectedCampaign, selectedProducts }
                })
             })
             .catch(err => toast.error("Bir sorun oluştu! [batch.commit]: " + err.code))
       } else {
          toast.info("Kampanya seçimi yapmadınız!")
       }
-      
+
    }
 
    return (
@@ -55,8 +55,8 @@ const MatchCampaign = ({ selectedProducts }) => {
             <select className="capitalize text-sm border" value={selectedCampaign} onChange={(e) => setSelectedCampaign(e.target.value)}>
                <option value={""}>Kampanya seçiniz</option>
                {
-                  campaigns.map((item, i) =>
-                     <option key={i} value={item.id} >
+                  campaigns.map(item =>
+                     <option key={item.id} value={item.id} >
                         {item.title}
                      </option>)
                }
