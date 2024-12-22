@@ -1,9 +1,8 @@
 import { FiEdit, FiSave } from "react-icons/fi";
 import { MdOutlineDelete } from "react-icons/md";
-import { delCampaign } from "../../../db-operations/delProduct";
 import {  useState } from "react";
 import { db } from "../../../db-operations/config";
-import { doc, updateDoc } from "firebase/firestore";
+import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import ActionTypes from "../../../constants/ActionTypes";
@@ -27,7 +26,7 @@ const ListItem = ({ item }) => {
       const result = confirm("Ürünü silmek istediğine emin misin? ")
       if (result) {
          try {
-            await delCampaign(id)
+            await deleteDoc(doc(db, "campaigns", id))            
             dispatch({ type: ActionTypes.CAMPAIGN_DEL, payload: id })   
             toast.success("Kampanya silindi.")         
          } catch (error) {

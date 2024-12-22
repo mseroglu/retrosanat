@@ -43,7 +43,6 @@ const ListItem = ({ item, number, setPage, selectedProducts }) => {
       if (result) {
          try{
             await delProduct(product)
-            toast.success("Ürün silindi.")
 
             // ürün silindikten sonra state i güncelle
             dispatch({ type: ActionTypes.DASHBOARD_PRODUCT_DEL, payload: product.id })

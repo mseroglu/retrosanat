@@ -4,16 +4,6 @@ import { delImage } from "./imageToFirestore"
 import { toast } from "react-toastify"
 
 
-export const delCampaign = async (id) => {
-   try {
-      await deleteDoc(doc(db, "campaigns", id))
-      toast.success("Kampanya silindi..")
-   } catch (err) {
-      toast.error("Kampanya silinemedi!.. " + err.code)
-   }
-}
-
-
 const delProduct = async (product) => {
 
    try {
