@@ -9,6 +9,7 @@ import ListItem from "./ListItem";
 
 const Products = ({ setPage }) => {
    const { isLoading, error, products, hasDoc, lastVisible } = useSelector(store => store.dashboard)
+   
 
    let selectedProducts = []
 
@@ -54,7 +55,7 @@ const Products = ({ setPage }) => {
 
                      {/** ÜRÜNLER TABLOSU */}
 
-                     <table className="w-full text-xs text-left rtl:text-right text-gray-300 dark:text-gray-400">
+                     <table className="w-full text-xs text-left rtl:text-right text-gray-300 dark:text-gray-800">
                         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                            <tr >
                               <th scope="col" className="py-2 ps-1">#</th>

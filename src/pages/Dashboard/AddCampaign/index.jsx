@@ -1,17 +1,15 @@
-import { useEffect, useState } from "react"
-import { addDoc, collection, doc, serverTimestamp, updateDoc } from "firebase/firestore"
+import { useState } from "react"
+import { addDoc, collection } from "firebase/firestore"
 
 import { toast } from "react-toastify"
 import Loader from "../../../components/Loader"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import ActionTypes from "../../../constants/ActionTypes"
 import { db } from "../../../db-operations/config"
 
 
 const AddCampaign = () => {
-   const { editCampaign } = useSelector(store => store.editProduct)
    const [isLoading, setIsLoading] = useState(false)
-
 
    const dispatch = useDispatch()
 
@@ -30,24 +28,15 @@ const AddCampaign = () => {
          dataObj["discount"] = +dataObj["discount"]
          dataObj["isActive"] = dataObj["isActive"] == "true" ? true : false
 
-         if (editCampaign) {
-            // 3- ürünü güncelle
-            const docRef = doc(db, "campaigns", editCampaign.id)
-            await updateDoc(docRef, dataObj)
-            toast.success("Ürün başarıyla güncellendi..")
-            dispatch({ type: ActionTypes.EDIT_CAMPAIGN, payload: null })
-         } else {
-            // 3- yeni ürünü firebase ekle
-            const productCollection = collection(db, "campaigns")
-            const res = await addDoc(productCollection, dataObj)
-            toast.success("Kampanya başarıyla kaydedildi.")
+         // 3- yeni ürünü firebase ekle
+         const productCollection = collection(db, "campaigns")
+         const res = await addDoc(productCollection, dataObj)
+         toast.success("Kampanya başarıyla kaydedildi.")
 
-            dataObj["id"] = res?.id
-            dispatch({ type: ActionTypes.CAMPAIGN_ADD, payload: dataObj })
-         }
+         dataObj["id"] = res?.id
+         dispatch({ type: ActionTypes.CAMPAIGN_ADD, payload: dataObj })
          // 4- formu sıfırla
          e.target.reset()
-
       } catch (error) {
          toast.error("Kaydetme işlemi başarısız oldu. HATA: " + error.code)
       }
@@ -62,29 +51,27 @@ const AddCampaign = () => {
             {isLoading && <Loader stil="absolute top-20" />}
 
             <h2 className="text-center font-bold bg-yellow-300 py-1 rounded-t-md">
-               {editCampaign ? "Kampanya Düzenle" : "Yeni Kampanya"}
+               Yeni Kampanya
             </h2>
 
             <div className="flex flex-col">
                <label htmlFor="title">Kampanya Adı</label>
-               <input id="title" name="title" type="text" required
-                  defaultValue={editCampaign ? editCampaign.title : ""}
-                  className="border p-1 text-sm" />
+               <input id="title" name="title" type="text" required className="border p-1 text-sm" />
             </div>
 
             <div className="flex flex-col">
                <label htmlFor="discount">İndirim Oranı %</label>
-               <input id="discount" name="discount" type="number" defaultValue={editCampaign ? editCampaign.discount : 20} className="border px-2 py-1 rounded-md text-sm" />
+               <input id="discount" name="discount" type="number" className="border px-2 py-1 rounded-md text-sm" />
             </div>
 
             <div className="flex flex-col">
                <label htmlFor="startDate">Başlangıç Tarihi</label>
-               <input type="datetime-local" name="startDate" id="startDate" defaultValue={new Date().toISOString().slice(0, 11)+"00:00"} className="p-1 text-center border" />
+               <input type="datetime-local" name="startDate" id="startDate" defaultValue={new Date().toISOString().slice(0, 11) + "00:00"} className="p-1 text-center border" />
             </div>
 
             <div className="flex flex-col">
                <label htmlFor="endDate">Bitiş Tarihi</label>
-               <input type="datetime-local" name="endDate" id="endDate" defaultValue={new Date().toISOString().slice(0, 11)+"23:59"} className="p-1 text-center border" />
+               <input type="datetime-local" name="endDate" id="endDate" defaultValue={new Date().toISOString().slice(0, 11) + "23:59"} className="p-1 text-center border" />
             </div>
 
             <div className="flex flex-col">

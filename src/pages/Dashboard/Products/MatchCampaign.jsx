@@ -2,8 +2,9 @@ import dateFormatter from "../../../utils/DateFormatter";
 import { doc, writeBatch } from "firebase/firestore";
 import { db } from "../../../db-operations/config";
 import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import ActionTypes from "../../../constants/ActionTypes";
 
 
 const MatchCampaign = ({ selectedProducts }) => {
@@ -12,13 +13,16 @@ const MatchCampaign = ({ selectedProducts }) => {
    const [selectedCampaign, setSelectedCampaign] = useState('')
    const [selectedCampaignInfo, setSelectedCampaignInfo] = useState({})
 
-   // batch işlemleri çoklu collektion da aynı anda veri yazma
+   const dispatch = useDispatch()
+
+   // batch işlemleri çoklu collection da aynı anda veri yazma
    const batch = writeBatch(db)
 
    useEffect(() => {
       const found = campaigns.find(item => item.id == selectedCampaign)
       setSelectedCampaignInfo(found || {})
    }, [selectedCampaign])
+
 
    const addCampaignOnProducts = async () => {
       if (selectedProducts.length == 0) {
@@ -33,14 +37,16 @@ const MatchCampaign = ({ selectedProducts }) => {
 
          batch.commit()
             .then(res => {
-               toast.success("Seçilim tüm ürünlere kampanya eklendi.")
-               setSelectedCampaign("")
-               setSelectedCampaignInfo({})
+               toast.success("Kampanya seçili tüm ürünlere eklendi.")
+               dispatch({
+                  type:ActionTypes.DASHBOARD_PRODUCTS_ADD_CAMPAIGN, payload: {campaignId: selectedCampaign, selectedProducts}
+               })
             })
-            .catch(err => toast.error("Bir sorun oluştu ! " + err.code))
+            .catch(err => toast.error("Bir sorun oluştu! [batch.commit]: " + err.code))
       } else {
          toast.info("Kampanya seçimi yapmadınız!")
       }
+      
    }
 
    return (

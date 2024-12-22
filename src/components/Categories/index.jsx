@@ -19,11 +19,6 @@ const Categories = () => {
       const cat = e.target.getAttribute("data-category")
       setCategory(cat)
       setSubCategory(null)
-      {/**
-         const found = CATEGORIES.find(item => item.key == cat)
-         setSubCategories(found?.subs)
-         console.log(cat)
-         */}
 
       // Burası useEffect içine alınamaz, alınırsa anasayfa yerine sürekli products sayfası ilk gelir
       if (!cat) {
@@ -47,24 +42,20 @@ const Categories = () => {
       if (subCategory) {
          navigate(`/products/category/${category}/${subCategory}`)
       }
-      
-      console.log("useeffect subCategory")
+
    }, [subCategory])
 
 
    useEffect(() => {
-      dispatch({ type: ActionTypes.SELECTED_CATEGORY, payload: category })
+      //! dispatch({ type: ActionTypes.SELECTED_CATEGORY, payload: category })
       if (category) {
          navigate("/products/category/" + category)
          const found = CATEGORIES.find(item => item.key == category)
          setSubCategories(found?.subs)
       }
-      
-      console.log("useeffect category")
+      console.log("Category: ", category)
    }, [category])
-
-
-   console.log("Category component render...")
+   console.log("CATEGORİES ÇALIŞTI")
 
    return (
       <>
@@ -76,9 +67,9 @@ const Categories = () => {
             </button>
 
             {
-               CATEGORIES.map((item, i) => (
+               CATEGORIES.map(item => (
                   <button key={item.key} onClick={handleClickCategory} data-category={item.key}
-                     className={`${selectedCategory == item.key && "bg-zinc-100"} font-semibold py-1 px-2 md:w-32 lg:w-40 border-x hover:bg-zinc-200 text-xs uppercase`} >
+                     className={`${category == item.key && "bg-zinc-100"} font-semibold py-1 px-2 md:w-32 lg:w-40 border-x hover:bg-zinc-200 text-xs uppercase`} >
                      {item.value}
                   </button>
                ))
@@ -86,7 +77,7 @@ const Categories = () => {
          </div>
 
          {/* ALT KATEGORİLER    */}
-         <div className={`${!selectedCategory && "hidden"} bg-zinc-100 flex justify-center md:gap-5 md:p-2 w-full py-2 transition overflow-x-auto scrollbar-none`}>
+         <div className={`${!category && "hidden"} bg-zinc-100 flex justify-center md:gap-5 md:p-2 w-full py-2 transition overflow-x-auto scrollbar-none`}>
             {
                subCategories?.map(sub => (
                   <span key={sub.key} className="border-4 rounded-full ">

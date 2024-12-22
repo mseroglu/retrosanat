@@ -11,7 +11,7 @@ const initialState = {
 }
 
 const productReducer = (state = initialState, { type, payload }) => {
-   console.log("REDUCERA YENİ GELEN: ", type, payload)
+   //console.log("REDUCERA YENİ GELEN: ", type, payload)
 
    switch (type) {
 
@@ -27,12 +27,6 @@ const productReducer = (state = initialState, { type, payload }) => {
             products: state.hasDoc ? [...state.products, ...payload.products] : payload.products,
             hasDoc: payload.hasDoc,
             lastVisible: payload.lastVisible
-         };
-         
-      case ActionTypes.SELECTED_CATEGORY:
-         return {
-            ...state, isLoading: false, error: null, selectedTag: null,
-            lastVisible: null, hasDoc: true, products: [], selectedCategory: payload
          };
 
       case ActionTypes.SELECTED_TAG:

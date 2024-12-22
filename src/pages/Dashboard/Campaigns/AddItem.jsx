@@ -10,16 +10,15 @@ import ActionTypes from "../../../constants/ActionTypes";
 const AddItem = ({ setIsOpenAddArea }) => {
 
    const [title, setTitle] = useState("")
-   const [discount, setDiscount] = useState(0)
+   const [discount, setDiscount] = useState(10)
    const [isActive, setIsActive] = useState(true)
    const [startDate, setStartDate] = useState(new Date().toISOString().slice(0, 11)+"00:00")
    const [endDate, setEndDate] = useState(new Date().toISOString().slice(0, 11)+"23:59")
 
+   const dispatch = useDispatch()
+
    const handleSave = async () => {
       const newCampaign = { title, discount, isActive, startDate, endDate, }
-      console.log(newCampaign) 
-
-      const dispatch = useDispatch()
 
       if (title == ""){
          return toast.info("Kampanya adı boş bırakılamaz!")
@@ -31,7 +30,7 @@ const AddItem = ({ setIsOpenAddArea }) => {
          
          newCampaign["id"] = res?.id
          setIsOpenAddArea(false)
-         dispatch({type: ActionTypes.CAMPAIGN_ADD_STORE, payload: newCampaign})
+         dispatch({type: ActionTypes.CAMPAIGN_ADD, payload: newCampaign})
          toast.success("Kampanya başarıyla kaydedildi.")
       } catch (error) {
          console.log(error)

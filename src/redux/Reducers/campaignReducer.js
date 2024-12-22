@@ -7,6 +7,8 @@ const initialState = {
 }
 
 const campaignsReducer = (state = initialState, { type, payload }) => {
+   //console.log("campaignsReducer : ", type, payload)
+
    switch (type) {
       case ActionTypes.CAMPAIGNS_LOADING:
          return { ...state, isLoading: true }
@@ -18,10 +20,10 @@ const campaignsReducer = (state = initialState, { type, payload }) => {
          return { ...state, isLoading: false, error: null, campaigns: payload }
 
       case ActionTypes.CAMPAIGN_ADD:
-         return { ...state, campaigns: [...state.campaigns, payload] }
+         return { ...state, campaigns: [payload, ...state.campaigns ] }
 
       case ActionTypes.CAMPAIGN_DEL:
-         const filtred = state.campaigns.filter(item => item.id == payload)
+         const filtred = state.campaigns.filter(item => item.id !== payload)
          return { ...state, isLoading: false, error: null, campaigns: filtred }
 
       case ActionTypes.CAMPAIGN_UPDATE:

@@ -28,12 +28,12 @@ const AddProduct = () => {
    useEffect(() => {
       const found = CATEGORIES.find(item => item.key === editProduct?.category)
       setSubCategories(found?.subs || [])
-      setSubCategory(editProduct?.subCategory||"")      
+      setSubCategory(editProduct?.subCategory || "")
    }, [editProduct])
-   
-   useEffect(()=>{
 
-   },[subCategories])
+   useEffect(() => {
+
+   }, [subCategories])
 
 
    const handleSubmit = async (e) => {
@@ -74,7 +74,10 @@ const AddProduct = () => {
             const docRef = doc(db, "products", editProduct.id)
             await updateDoc(docRef, dataObj)
             toast.success("Ürün başarıyla güncellendi..")
+            // Edit edilen ürün store den silinir
             dispatch({ type: ActionTypes.EDIT_PRODUCT, payload: null })
+            // Ürünün yeni durumunu store a kaydediyoruz
+            dispatch({ type: ActionTypes.DASHBOARD_PRODUCT_UPDATE, payload: { ...dataObj, id: editProduct.id } })
          } else {
             // oluşturma tarihi ekliyoruz
             dataObj["created_at"] = serverTimestamp()
@@ -85,7 +88,7 @@ const AddProduct = () => {
 
             // ürünün firebase id sini ekleyip state kaydediyoruz
             dataObj["id"] = res?.id
-            dispatch({ type: ActionTypes.DASHBOARD_PRODUCTS_NEWADD, payload: dataObj })
+            dispatch({ type: ActionTypes.DASHBOARD_PRODUCT_NEWADD, payload: dataObj })
          }
          // 4- formu sıfırla
          e.target.reset()
@@ -130,8 +133,8 @@ const AddProduct = () => {
 
             {/* KATEGORİLER */}
             <div className="flex flex-col">
-               <label htmlFor="categories">Kategori</label>
-               <select name="category" className=" border px-2 py-1 rounded-md text-sm capitalize"
+               <label htmlFor="category">Kategori</label>
+               <select id="category" name="category" className=" border px-2 py-1 rounded-md text-sm capitalize"
                   defaultValue={editProduct ? editProduct.category : ""} onChange={handleCategorySelect} >
                   <option value="">Kategori Seçiniz</option>
                   {
@@ -143,8 +146,8 @@ const AddProduct = () => {
             {/* ALT KATEGORİLER */}
             <div className="flex flex-col">
                <label htmlFor="subCategory">Alt Kategori</label>
-               <select name="subCategory" className="border px-2 py-1 rounded-md text-sm capitalize"
-                  value={subCategory} onChange={(e)=> setSubCategory(e.target.value)}>
+               <select id="subCategory" name="subCategory" className="border px-2 py-1 rounded-md text-sm capitalize"
+                  value={subCategory} onChange={(e) => setSubCategory(e.target.value)}>
                   <option value="">Alt Kategori Seçiniz</option>
                   {
                      subCategories.map((item) => {
