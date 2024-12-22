@@ -39,7 +39,7 @@ const ListItem = ({ item, number, setPage, selectedProducts }) => {
    }
 
    const handleDelete = async (product) => {
-      const result = confirm("Ürünü silmek istediğine emin misin? ")
+      const result = confirm(`${product.title.toLocaleUpperCase()} isimli ürünü silmek istediğine emin misin? `)
       if (result) {
          try{
             await delProduct(product)

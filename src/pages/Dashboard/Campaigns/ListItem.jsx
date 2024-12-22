@@ -23,7 +23,7 @@ const ListItem = ({ item }) => {
 
 
    const handleDelete = async (id) => {
-      const result = confirm("Ürünü silmek istediğine emin misin? ")
+      const result = confirm(`${item.title.toLocaleUpperCase()} isimli kampanyayı silmek istediğine emin misin? `)
       if (result) {
          try {
             await deleteDoc(doc(db, "campaigns", id))            
