@@ -2,8 +2,6 @@ import { collection, getDocs, limit, orderBy, query } from "firebase/firestore"
 import { useNavigate } from "react-router-dom"
 import { db } from "../../db-operations/config"
 import { useEffect, useState } from "react"
-import { toast } from "react-toastify"
-
 
 const LastProducts = () => {
    const [products, setProducts] = useState([])
@@ -32,9 +30,9 @@ const LastProducts = () => {
    }
 
    return (
-      <div className="flex flex-col mt-10 gap-2">
+      <div className="flex flex-col mt-10 gap-2 max-sm:p-4">
       <h2 className="font-bold text-xl">YENİ ÜRÜNLER</h2>
-      <div className="grid gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">  
+      <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">  
          {
             products.map((prod, i) => (
                <div key={prod.id} className="col-span-1 relative cursor-pointer" onClick={()=>getProduct(prod.id)}>
