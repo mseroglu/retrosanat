@@ -34,7 +34,7 @@ const ShowCampaigns = () => {
    }
 
    return (
-      <div className="flex flex-col text-xl gap-2 mt-20 max-sm:p-4">
+      <div className="flex flex-col text-xl gap-2 mt-20 ">
          <h2 className="font-bold">KAMPANYALAR</h2>
          <div className="grid gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
 
