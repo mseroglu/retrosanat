@@ -60,7 +60,7 @@ const Products = () => {
 
 
   return (
-    <Container className="flex flex-col gap-3 align-items-center">
+    <Container className="flex flex-col gap-3 lg:gap-4 align-items-center">
 
       <select onChange={handleSorting} name="sorting" id="sorting" defaultValue={searchParams.get("sırala") || "created_at-desc"}
         className="self-center rounded-md border-2 px-2 py-1 mt-16 text-sm">
@@ -71,7 +71,7 @@ const Products = () => {
         <option value="title-desc">Ürün Adı Z &gt; A</option>
       </select>
 
-      <div className="flex gap-4 flex-wrap justify-center min-h-[400px]">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 justify-center min-h-[400px] ">
         {
           isLoading
             ? <Loader />
