@@ -24,17 +24,19 @@ const Dashboard = () => {
 
             <aside className="flex-1">
                {
-                  page == DASHBOARD_PAGES[0].page && <Products setPage={setPage} />
+                  page == DASHBOARD_PAGES[0].page && <Campaigns />
                }
                {
-                  page == DASHBOARD_PAGES[1].page && <AddProduct />
+                  page == DASHBOARD_PAGES[1].page && <AddCampaign />
                }
                {
-                  page == DASHBOARD_PAGES[2].page && <AddCampaign />
+                  page == DASHBOARD_PAGES[2].page && <Products setPage={setPage} />
                }
                {
-                  page == DASHBOARD_PAGES[3].page && <Campaigns />
+                  page == DASHBOARD_PAGES[3].page && <AddProduct />
                }
+
+
             </aside>
 
          </main>
