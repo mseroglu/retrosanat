@@ -6,13 +6,8 @@ import GoogleMap from "./GoogleMap";
 
 const Footer = () => {
    return (
-      <Container className="max-h-max bg-slate-800 text-white flex flex-col lg:flex-row gap-5 mt-3">
+      <Container className="max-h-max bg-slate-800 text-white flex flex-col lg:flex-row gap-5">
          <div className="flex justify-center rounded-3xl overflow-hidden shadow-white shadow-md w-full sm:w-fit mx-auto ">
-            
-            {/*   ESKİ HARİTA
-            <iframe src="https://www.google.com/maps/d/embed?mid=1Y01bDsIc5Xz71DQFumLvzvVDr8iLowg&ehbc=2E312F&noprof=1" width="480" height="320"></iframe>
-            */}
-
             <GoogleMap />
          </div>
          <div className="flex flex-col gap-3 items-center justify-center flex-grow ">

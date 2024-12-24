@@ -54,27 +54,33 @@ const MainPage = () => {
 
 
   return (
-    <Container >
-      <div className="w-full h-fit ">
-        {
-          isLoading
-            ? <Loader />
-            : error
-              ? <Error err={error} />
-              : <Carousel products={products} />
-        }
-      </div>
+    <>
+      <Container className={"mt-24"}>
+        <div className="w-full h-fit ">
+          {
+            isLoading
+              ? <Loader />
+              : error
+                ? <Error err={error} />
+                : <Carousel products={products} />
+          }
+        </div>
+      </Container>
 
       {/** KAMPANYALAR */}
-      <ShowCampaigns />
+      <Container className="bg-zinc-200 mt-20" >
+        <ShowCampaigns />
+      </Container>
 
-      <div className="w-full h-fit">
-        <LastProducts />
-      </div>
+      <Container className="bg-zinc-100">
+        <div className="w-full h-fit ">
+          <LastProducts />
+        </div>
+      </Container>
 
 
 
-    </Container>
+    </>
 
   )
 }

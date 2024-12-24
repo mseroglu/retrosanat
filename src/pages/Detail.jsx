@@ -42,8 +42,8 @@ const Detail = () => {
       {isLoading
         ? <Loader />
         : data && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 shadow-md shadow-slate-900 bg-zinc-100 relative place-items-center
-           w-[400px] lg:w-[800px] lg:h-[400px] ">
+          <div className="grid grid-cols-1 md:grid-cols-2 shadow-md shadow-slate-900 bg-zinc-100 relative place-items-center
+          w-[320px] min-h-min md:w-[640px] md:h-[320px] lg:w-[800px] lg:h-[400px] max-md:mt-24">
 
             <div className="absolute top-[-36px] right-0 ">
               <Link to={-1} className="flex items-center bg-yellow-300 rounded-full pe-3 hover:bg-yellow-400">
@@ -52,11 +52,11 @@ const Detail = () => {
             </div>
 
             <div className="col-span-1 h-full w-full ">
-                <img src={data.photos[imageIndex || 0]} alt="image"
-                  className="h-[400px] w-full transition object-cover hover:scale-125 " />
+                <img src={data.photos[imageIndex || 0]} alt="product-image"
+                  className="max-xs:h-[300px] max-xs:w-[300px] w-full h-full lg:h-[400px] lg:w-full transition object-cover hover:scale-125 " />
             </div>
 
-            <div className="col-span-1 flex flex-col-reverse lg:flex-col h-full w-full bg-zinc-100">
+            <div className="col-span-1 flex flex-col-reverse md:flex-col h-full w-full bg-zinc-100">
               <div className="flex flex-col px-5 pb-2 h-full justify-between ">
                 <div className="grid gap-3 w-full items-center " >
                   <h2 className="font-bold text-2xl capitalize mt-3 lg:mt-5">{data.title}</h2>
@@ -91,7 +91,7 @@ const Detail = () => {
               <div className="flex gap-2 bg-zinc-300 py-3 justify-center">
                 {data.photos.map((item, i) =>
                   <img key={i} src={item} alt="product-image"
-                    className={`w-20 h-20 object-cover rounded-full border-4 ${imageIndex == i ? "border-zinc-100" : "border-zinc-400"}`}
+                    className={`w-16 h-16 lg:w-20 lg:h-20 object-cover rounded-full border-4 ${imageIndex == i ? "border-zinc-100" : "border-zinc-400"}`}
                     onMouseEnter={() => setImageIndex(i)} />
                 )}
               </div>

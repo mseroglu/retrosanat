@@ -62,14 +62,14 @@ const Categories = () => {
          <div id="categories" className="flex md:text-[14px] justify-center items-center bg-zinc-300 border-t-4 border-yellow-400 overflow-x-auto scrollbar-none ">
 
             <button onClick={handleClickCategory} data-category={null}
-               className={`h-full font-semibold max-sm:ms-20 py-1 px-2 md:w-32 lg:w-40 border-x hover:bg-zinc-200 text-xs uppercase`} >
+               className={`h-full font-semibold max-sm:ms-20 py-1 px-2 md:w-32 lg:w-40 border-x hover:bg-zinc-200 text-xs uppercase `} >
                Tüm Ürünler
             </button>
 
             {
                CATEGORIES.map(item => (
                   <button key={item.key} onClick={handleClickCategory} data-category={item.key}
-                     className={`${category == item.key && "bg-zinc-100"} font-semibold py-1 px-2 md:w-32 lg:w-40 border-x hover:bg-zinc-200 text-xs uppercase`} >
+                     className={`${category == item.key && "bg-zinc-100"} font-semibold py-1 px-2 md:w-32 lg:w-40 border-x hover:bg-zinc-200 text-xs uppercase `} >
                      {item.value}
                   </button>
                ))
