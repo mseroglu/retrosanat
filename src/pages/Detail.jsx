@@ -43,7 +43,7 @@ const Detail = () => {
         ? <Loader />
         : data && (
           <div className="grid grid-cols-1 md:grid-cols-2 shadow-md shadow-slate-900 bg-zinc-100 relative place-items-center
-          w-[320px] min-h-min md:w-[640px] md:h-[320px] lg:w-[800px] lg:h-[400px] max-md:mt-24">
+          w-[320px] h-[640px] md:w-[640px] md:h-[320px] lg:w-[800px] lg:h-[400px] max-md:mt-24">
 
             <div className="absolute top-[-36px] right-0 ">
               <Link to={-1} className="flex items-center bg-yellow-300 rounded-full pe-3 hover:bg-yellow-400">
@@ -53,7 +53,7 @@ const Detail = () => {
 
             <div className="col-span-1 h-full w-full ">
                 <img src={data.photos[imageIndex || 0]} alt="product-image"
-                  className="max-xs:h-[300px] max-xs:w-[300px] w-full h-full lg:h-[400px] lg:w-full transition object-cover hover:scale-125 " />
+                  className="max-xs:h-[320px] max-xs:w-[320px] w-full h-full lg:h-[400px]  transition object-cover hover:scale-125 " />
             </div>
 
             <div className="col-span-1 flex flex-col-reverse md:flex-col h-full w-full bg-zinc-100">
