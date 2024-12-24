@@ -8,8 +8,6 @@ import { DASHBOARD_PAGES } from "../../constants/DashboardPages";
 import SideButtons from "./SideButtons";
 
 
-
-
 const Dashboard = () => {
    const [page, setPage] = useState(DASHBOARD_PAGES[0].page)
 
@@ -35,8 +33,6 @@ const Dashboard = () => {
                {
                   page == DASHBOARD_PAGES[3].page && <AddProduct />
                }
-
-
             </aside>
 
          </main>

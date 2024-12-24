@@ -7,10 +7,10 @@ import { DASHBOARD_PAGES } from "../../constants/DashboardPages"
 const SideButtons = ({ selectedPage, setSelectedPage }) => {
 
    const ICONS = [
+      <MdOutlineCampaign className="text-xl" />,
+      <MdOutlineAddAlert className="text-xl" />,
       <AiOutlineProduct className="text-xl" />,
       <TiDocumentAdd className="text-xl" />,
-      <MdOutlineAddAlert className="text-xl" />,
-      <MdOutlineCampaign className="text-xl" />,
    ]
 
    return (
