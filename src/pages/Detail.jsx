@@ -46,7 +46,7 @@ const Detail = () => {
           w-[320px] h-[640px] md:w-[640px] md:h-[320px] lg:w-[800px] lg:h-[400px] max-md:mt-24">
 
             <div className="absolute top-[-36px] right-0 ">
-              <Link to={-1} className="flex items-center bg-yellow-300 rounded-full pe-3 hover:bg-yellow-400">
+              <Link to={-1} className="flex items-center bg-yellow-400 rounded-full pe-3 hover:bg-yellow-300">
                 <GrFormPrevious className="text-3xl" />önceki sayfa
               </Link>
             </div>

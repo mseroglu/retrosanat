@@ -15,7 +15,7 @@ const Dashboard = () => {
 
 
    return (
-      <Container >
+      <Container className="mt-24">
          <main className="flex gap-1">
 
             <aside className="flex flex-col bg-zinc-300 h-fit ">
