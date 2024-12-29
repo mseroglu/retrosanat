@@ -17,13 +17,17 @@ const Categories = () => {
 
    const handleClickCategory = (e) => {
       const cat = e.target.getAttribute("data-category")
-      setCategory(cat)
-      setSubCategory(null)
-
+      if (cat == category){
+         setCategory(null)
+      }else{
+         setCategory(cat)
+      }      
+      
       // Burası useEffect içine alınamaz, alınırsa anasayfa yerine sürekli products sayfası ilk gelir
       if (!cat) {
-         navigate("/products")
+         setSubCategory(null)
       }
+      navigate("/products")
    }
 
    const handleClickSubCategory = (e) => {
@@ -47,7 +51,7 @@ const Categories = () => {
 
 
    useEffect(() => {
-      //! dispatch({ type: ActionTypes.SELECTED_CATEGORY, payload: category })
+      dispatch({ type: ActionTypes.SELECTED_CATEGORY, payload: category })
       if (category) {
          navigate("/products/category/" + category)
          const found = CATEGORIES.find(item => item.key == category)
@@ -55,21 +59,21 @@ const Categories = () => {
       }
       console.log("Category: ", category)
    }, [category])
-   console.log("CATEGORİES ÇALIŞTI")
+
 
    return (
       <>
-         <div id="categories" className="flex md:text-[14px] justify-center items-center bg-zinc-300 border-t-4 border-yellow-400 overflow-x-auto scrollbar-none ">
+         <div id="categories" className="flex md:text-[14px] justify-center items-center bg-zinc-300 border-t-4 border-yellow-400 overflow-x-auto scrollbar-none">
 
             <button onClick={handleClickCategory} data-category={null}
-               className={`h-full font-semibold max-sm:ms-20 py-1 px-2 md:w-32 lg:w-40 border-x hover:bg-zinc-200 text-xs uppercase `} >
+               className={`h-full font-semibold text-xs max-sm:ms-20 py-1 px-2 md:w-32 lg:w-40 border-x hover:bg-zinc-200 uppercase `} >
                Tüm Ürünler
             </button>
 
             {
                CATEGORIES.map(item => (
                   <button key={item.key} onClick={handleClickCategory} data-category={item.key}
-                     className={`${category == item.key && "bg-zinc-100"} font-semibold py-1 px-2 md:w-32 lg:w-40 border-x hover:bg-zinc-200 text-xs uppercase `} >
+                     className={`${selectedCategory == item.key && "bg-zinc-100"} font-semibold py-1 px-2 md:w-32 lg:w-40 border-x hover:bg-zinc-200 text-xs uppercase `} >
                      {item.value}
                   </button>
                ))
@@ -77,7 +81,7 @@ const Categories = () => {
          </div>
 
          {/* ALT KATEGORİLER    */}
-         <div className={`${!category && "hidden"} bg-zinc-100 flex justify-center md:gap-5 md:p-2 w-full py-2 transition overflow-x-auto scrollbar-none`}>
+         <div className={`${!selectedCategory && "hidden"} bg-zinc-100 flex justify-center md:gap-5 md:p-2 w-full py-2 transition overflow-x-auto scrollbar-none`}>
             {
                subCategories?.map(sub => (
                   <span key={sub.key} className="border-4 rounded-full ">

@@ -5,19 +5,19 @@ import { useEffect, useState } from "react";
 import Modal from "../components/Modal";
 import SearchBar from "./SearchInput";
 import LoginBtn from "./LoginBtn";
+import { useDispatch } from "react-redux";
+import ActionTypes from "../constants/ActionTypes";
 
 
 const Navbar = () => {
    const [isOpen, setIsOpen] = useState(false)
 
-   useEffect(() => {
-      // Sayfa kapatıldığında storage deki user ı temizle
-      return () => localStorage.removeItem("user")
-   }, [])
+   const dispatch = useDispatch()
 
    const handleSelectedCategory = ()=> {
-      
+      dispatch({type:ActionTypes.SELECTED_CATEGORY, payload:null})      
    }
+
 
 
    return (

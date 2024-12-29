@@ -35,6 +35,12 @@ const productReducer = (state = initialState, { type, payload }) => {
             lastVisible: null, hasDoc: true, products: [], selectedTag: payload
          };
 
+      case ActionTypes.SELECTED_CATEGORY:
+         return {
+            ...state, isLoading: false, error: null, selectedTag: null,
+            lastVisible: null, hasDoc: true, products: [], selectedCategory: payload
+         };
+
       case ActionTypes.SELECTED_SORT:
          return {
             ...state, products: [], hasDoc: true, lastVisible: null

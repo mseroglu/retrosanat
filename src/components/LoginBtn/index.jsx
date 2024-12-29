@@ -35,7 +35,8 @@ const LoginBtn = ({ className, setIsOpen }) => {
                Yönetici Paneli
             </Link>
          }
-         {
+      
+         {            
             JSON.parse(localStorage.getItem("user"))?.email
                ? (
                   <Link to={"/"} onClick={handleSignOut}

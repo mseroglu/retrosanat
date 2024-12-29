@@ -34,11 +34,12 @@ const Detail = () => {
         .catch(err => toast.error("Veri alınamadı! HATA: " + err.code))
       setIsLoading(false)
     }
+    window.scrollTo(0,0)
   }, [])
 
 
   return (
-    <Container className="grid place-items-center ">
+    <Container className="grid place-items-center mt-24">
       {isLoading
         ? <Loader />
         : data && (

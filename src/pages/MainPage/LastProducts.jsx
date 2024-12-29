@@ -12,7 +12,7 @@ const LastProducts = () => {
 
    useEffect(() => {
       const result = []
-      const q = query(productsColl, orderBy("created_at", "desc"), limit(20))
+      const q = query(productsColl, orderBy("created_at", "desc"), limit(10))
 
       getDocs(q)
          .then(res => {
