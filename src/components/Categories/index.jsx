@@ -17,17 +17,17 @@ const Categories = () => {
 
    const handleClickCategory = (e) => {
       const cat = e.target.getAttribute("data-category")
-      if (cat == category){
+      if (cat == category || cat == null) {
          setCategory(null)
-      }else{
+         navigate("/products")
+      } else {
          setCategory(cat)
-      }      
-      
+      }
+
       // Burası useEffect içine alınamaz, alınırsa anasayfa yerine sürekli products sayfası ilk gelir
       if (!cat) {
          setSubCategory(null)
       }
-      navigate("/products")
    }
 
    const handleClickSubCategory = (e) => {

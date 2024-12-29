@@ -14,7 +14,7 @@ const Products = () => {
   const params = useParams()
   const [searchParams, setSearchParams] = useSearchParams()
   const [searchKeyword, setSearchKeyword] = useState(searchParams.get("ara") || "")
-  const [selectedCategory, setSelectedCategory] = useState(params.category)
+  const [selectedCategoryy, setSelectedCategory] = useState(params.category)
   const [selectedSubCategory, setSelectedSubCategory] = useState(params.subCategory)
   const [selectedTag, setSelectedTag] = useState(params.tag)
   const [moreData, setMoreData] = useState(false)
@@ -54,11 +54,11 @@ const Products = () => {
     // sorting değişince verileri temizliyoruz
     dispatch({ type: ActionTypes.SELECTED_SORT })
 
-    dispatch(getProducts(sorting, selectedCategory, selectedTag, lastVisible, searchKeyword, selectedSubCategory))
+    dispatch(getProducts(sorting, selectedCategoryy, selectedTag, lastVisible, searchKeyword, selectedSubCategory))
 
     // en üste konumlandır
     window.scrollTo(0, 0)
-  }, [sorting, selectedCategory, selectedTag, searchKeyword, selectedSubCategory, moreData])
+  }, [sorting, selectedCategoryy, selectedTag, searchKeyword, selectedSubCategory, moreData])
 
 
   return (
@@ -123,8 +123,8 @@ export default Products
         if (entry.isIntersecting) {
 
           //! BURASI SİLİNECEK
-          //console.log([lastVisible, sorting, selectedCategory, selectedTag, searchKeyword, selectedSubCategory])
-          dispatch(getProducts(sorting, selectedCategory, selectedTag, lastVisible, searchKeyword, selectedSubCategory))
+          //console.log([lastVisible, sorting, selectedCategoryy, selectedTag, searchKeyword, selectedSubCategory])
+          dispatch(getProducts(sorting, selectedCategoryy, selectedTag, lastVisible, searchKeyword, selectedSubCategory))
         }
       })
     },
@@ -139,6 +139,6 @@ export default Products
     // komponent ekrandan ayrılınca takibi bırak
     return () => observer.disconnect()
 
-  }, [lastVisible, sorting, selectedCategory, selectedTag, searchKeyword, selectedSubCategory])
+  }, [lastVisible, sorting, selectedCategoryy, selectedTag, searchKeyword, selectedSubCategory])
   
   */}
