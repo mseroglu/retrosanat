@@ -55,9 +55,9 @@ const Products = () => {
     dispatch({ type: ActionTypes.SELECTED_SORT })
 
     dispatch(getProducts(sorting, selectedCategory, selectedTag, lastVisible, searchKeyword, selectedSubCategory))
-    
+
     // en üste konumlandır
-    window.scrollTo(0,0)
+    window.scrollTo(0, 0)
   }, [sorting, selectedCategory, selectedTag, searchKeyword, selectedSubCategory, moreData])
 
 
@@ -73,21 +73,32 @@ const Products = () => {
         <option value="title-desc">Ürün Adı Z &gt; A</option>
       </select>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-3 gap-y-12 justify-center min-h-[400px] ">
+      <div className="grid place-items-center" >
+
         {
           isLoading
             ? <Loader />
             : error
               ? <Error err={error} />
-              : products.length == 0
-                ? <h2 className="mt-20 font-semibold">Ürün bulunamadı..</h2>
-                : products?.map((item, i) => <ProductCard key={i} product={item} />)
+              : <>
+                {
+                  products.length == 0
+                    ? <h2 className="mt-20 font-semibold">Ürün bulunamadı..</h2>
+                    :
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-3 gap-y-12 justify-center min-h-[400px] ">
+                      {
+                        products?.map((item, i) => <ProductCard key={i} product={item} />)
+                      }
+                    </div>
+                }
+              </>
+
         }
       </div>
 
       {
-        hasDoc && 
-        <div onClick={()=> setMoreData(prev => !prev)} className="border p-1 w-fit rounded-full px-3 cursor-pointer" >Daha Fazla Ürün</div>
+        hasDoc &&
+        <div onClick={() => setMoreData(prev => !prev)} className="border p-1 w-fit rounded-full px-3 cursor-pointer" >Daha Fazla Ürün</div>
       }
 
     </Container>
