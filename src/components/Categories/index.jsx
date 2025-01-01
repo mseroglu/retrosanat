@@ -23,11 +23,8 @@ const Categories = () => {
       } else {
          setCategory(cat)
       }
-
-      // Burası useEffect içine alınamaz, alınırsa anasayfa yerine sürekli products sayfası ilk gelir
-      if (!cat) {
-         setSubCategory(null)
-      }
+      // Burası useEffect içine alınamaz, alınırsa anasayfa yerine sürekli products sayfası ilk gelmekte
+      setSubCategory(null)
    }
 
    const handleClickSubCategory = (e) => {
